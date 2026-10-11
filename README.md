@@ -36,10 +36,16 @@ Lovește orașul, șmecheriile, comportamentele și instituțiile (taximetristul
 - Jocul e orizontal (16:9): pe telefon se ține în landscape.
 - **Minigame-urile** se proiectează pentru controlul de pe PC (mouse/tastatură; ținta e Steam). Pentru previzualizarea de pe telefon primesc controale tactile echivalente (atingere, tragere, butoane pe ecran), ca să poată fi testate, fără să se simplifice jocul de pe PC.
 
+## Ce e jucabil acum
+- **Prologul** (versiune de test pentru direcție, cu **schițe provizorii** în loc de artă): bucătăria, drumul prin sat, Birtul Unirea, baia cu oglinda, minigame-ul cu firele la frigider, gara satului, trenul de noapte, trezirea în Gara de Nord.
+- Povestea și deciziile: `docs/POVESTE.md`.
+
 ## Structura
-- `scenes/`: scenele Godot (.tscn)
-- `scripts/`: GDScript
-- `art/`: arta finală a jocului (doar ce a trecut prin pipeline)
+- `scenes/main.tscn`: punctul de intrare
+- `scripts/game.gd`: starea jocului, dialoguri, alegeri, tranziții, HUD (autoload `Game`)
+- `scripts/game_scene.gd`, `scripts/hotspot.gd`: baza scenelor și zonele pe care se dă tap
+- `scripts/scenes/`: câte un fișier pe scenă
+- `art/`: arta finală a jocului (doar ce a trecut prin pipeline); `art/fonts/`: Pixelify Sans (licență OFL)
 - `audio/`: muzică și sunete
 - `locale/`: traduceri RO/EN
 - `docs/`: povestea, fișele de realism, deciziile

@@ -3,9 +3,15 @@ config_version=5
 
 [application]
 
+run/main_scene="res://scenes/main.tscn"
+
 config/name="M-am trezit în București"
 config/description="I Woke Up in Bucharest — point-and-click la persoana întâi, pixel-art."
 config/features=PackedStringArray("4.5", "GL Compatibility")
+
+[autoload]
+
+Game="*res://scripts/game.gd"
 
 [display]
 
