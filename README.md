@@ -1,9 +1,15 @@
 # M-am trezit în București
-**I Woke Up in Bucharest.** Joc point-and-click la persoana întâi, pixel-art, în Godot 4. Română + engleză. Țintă: Steam (PC/Mac).
+**I Woke Up in Bucharest.** Joc la persoana întâi, pixel-art, în Godot 4: explorare point-and-click + minigame-uri arcade și puzzle-uri. Română + engleză. Țintă: Steam (PC/Mac).
 
 ## Premisa
 Un bețiv simpatic de la țară se îmbată la cârciumă și se trezește (din somn și din beție) cu trenul în Gara de Nord.
 Câștigi când faci rost de bani pentru biletul de întoarcere. Orașul te trimite mereu un pas înainte și doi înapoi.
+
+## Structura jocului
+- **Explorare point-and-click** la persoana întâi: scene detaliate, personaje care vin în fața jucătorului, elemente amuzante ascunse pe care dai click/tap.
+- **Minigame-uri arcade și puzzle-uri** integrate în poveste (de exemplu modalitățile eroului de a face rost de bani), cu control propriu fiecare.
+- **Dialoguri cu ramificații** și scenarii care duc la **2–3 finaluri**.
+- Durată: **cel puțin 2–3 ore**.
 
 ## Reguli de proiect (obligatorii pentru oricine lucrează aici, om sau AI)
 
@@ -28,6 +34,7 @@ Lovește orașul, șmecheriile, comportamentele și instituțiile (taximetristul
 - Renderer: Compatibility (merge identic pe desktop și pe web pentru 2D).
 - Interacțiunea e prin click/tap, deci trebuie să meargă la fel cu mouse și cu degetul. Tap-ul e convertit automat în click (`emulate_mouse_from_touch`), deci în cod se tratează **doar** `InputEventMouseButton`; dacă se tratează și `InputEventScreenTouch`, fiecare tap se numără de două ori (verificat în testul tehnic din 11.10.2026).
 - Jocul e orizontal (16:9): pe telefon se ține în landscape.
+- **Minigame-urile** se proiectează pentru controlul de pe PC (mouse/tastatură; ținta e Steam). Pentru previzualizarea de pe telefon primesc controale tactile echivalente (atingere, tragere, butoane pe ecran), ca să poată fi testate, fără să se simplifice jocul de pe PC.
 
 ## Structura
 - `scenes/`: scenele Godot (.tscn)
