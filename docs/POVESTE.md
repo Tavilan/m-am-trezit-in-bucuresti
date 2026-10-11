@@ -14,3 +14,9 @@
 - **Cârciuma: „Birtul Unirea”.** Fost magazin sătesc de la CAP: rafturi cu conserve expirate, tejghea de formică, televizor cu manele.
 - **Altercația:** un nepot venit din Germania îi spune „meșter de sârmă”; Romică i-o întoarce cu o demonstrație care distruge jumătate din cârciumă.
 - **Trenul:** ca să scape de el după bătaie, doi „prieteni” îl duc la gară și îl urcă în primul tren, „să se răcorească”.
+
+### Runda 3 (11.10.2026)
+- **Trezirea în București:** îl trezește bliț-ul unui turist străin care îl fotografiază ca pe o atracție locală.
+- **Inventarul de start:** **7 lei** și **un borcan de zacuscă** cu care voia să ajungă acasă. Borcanul rămâne tot jocul în mâna lui, nedesprins, din reflex (realist și nostalgic).
+- **Ținta jocului:** **biletul real de tren până acasă + datoriile față de alți oameni** pe care le face în București. Romică le ia în serios, pentru că e „om de bună-credință și cu frica lui Dumnezeu”, chiar dacă mai încalcă uneori principii în moduri foarte „românești”.
+- **Nevasta:** apare la final, în Gara de Nord, după ce Romică se chinuie o grămadă să strângă banii, și îi spune că l-a căutat peste tot.
