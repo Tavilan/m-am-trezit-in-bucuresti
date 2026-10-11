@@ -1,0 +1,76 @@
+# Previzualizare web pentru teste de pe telefon (GitHub Pages).
+# NU e build-ul final: ținta e Steam (PC/Mac). Vezi README, „Regula de calitate”.
+name: Previzualizare web
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+env:
+  GODOT_VERSION: "4.5"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalează Godot și șabloanele web
+        run: |
+          set -e
+          base="https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable"
+          curl -sSL -o godot.zip "$base/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip"
+          unzip -q godot.zip && mv "Godot_v${GODOT_VERSION}-stable_linux.x86_64" godot && chmod +x godot
+          curl -sSL -o tpl.tpz "$base/Godot_v${GODOT_VERSION}-stable_export_templates.tpz"
+          dest="$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable"
+          mkdir -p "$dest"
+          unzip -q -j tpl.tpz 'templates/web_*' 'templates/version.txt' -d "$dest"
+          rm tpl.tpz godot.zip
+
+      - name: Verifică dacă există o scenă principală
+        id: check
+        run: |
+          if grep -q '^run/main_scene=' project.godot; then echo "ready=true" >> "$GITHUB_OUTPUT"; else echo "ready=false" >> "$GITHUB_OUTPUT"; fi
+
+      - name: Export web
+        if: steps.check.outputs.ready == 'true'
+        run: |
+          mkdir -p build/web
+          ./godot --headless --path . --import || true
+          ./godot --headless --path . --export-release "Web (previzualizare)" build/web/index.html
+          touch build/web/.nojekyll
+
+      - name: Pagină de așteptare (încă nu există scene)
+        if: steps.check.outputs.ready != 'true'
+        run: |
+          mkdir -p build/web
+          cat > build/web/index.html <<'HTML'
+          <!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+          <title>M-am trezit în București</title>
+          <body style="margin:0;height:100vh;display:grid;place-items:center;background:#0b0d16;color:#e8e2d0;font-family:monospace;text-align:center">
+          <div><h1 style="font-size:20px">M-am trezit în București</h1><p>Proiectul e pregătit. Prima scenă apare aici după ce e construită.</p></div>
+          HTML
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/web
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
