@@ -8,3 +8,9 @@
 - **Oglinda (baia cârciumii):** prima dată când jucătorul își vede fața. Imagine **originală** cu Romică, **alb-negru, aproape pe tot ecranul**, privire fixă și seacă spre jucător, cu un moment de tăcere. Contrastul cu restul jocului colorat face gluma.
   - Nu se folosește poza din „Old Man Stare Meme”: e fotografia unui om real, cu drepturi de autor; pixelizată tot e recunoscută (risc juridic pe Steam).
 - **Altercația** în cârciumă, apoi Romică ajunge foarte beat, fără voia lui, într-un tren care oprește după multe ore în București. Acolo îl trezește nașul.
+
+### Runda 2 (11.10.2026)
+- **Cearta:** Romică i-a „reparat” nevestei mașina de spălat cu sârmă; acum centrifughează și se plimbă prin bucătărie ca un tanc.
+- **Cârciuma: „Birtul Unirea”.** Fost magazin sătesc de la CAP: rafturi cu conserve expirate, tejghea de formică, televizor cu manele.
+- **Altercația:** un nepot venit din Germania îi spune „meșter de sârmă”; Romică i-o întoarce cu o demonstrație care distruge jumătate din cârciumă.
+- **Trenul:** ca să scape de el după bătaie, doi „prieteni” îl duc la gară și îl urcă în primul tren, „să se răcorească”.
