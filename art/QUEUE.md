@@ -20,4 +20,5 @@
 
 ## Runda 3 (Tavi a ales ChatGPT; Veta devine Mioara; Marius cu mai mult sat în el)
 - [ ] mioara_foaie
+  - Nereușită după două generări: capul rămâne prea mare față de corp pentru proporția cerută de aproximativ șapte capete înălțime. A doua variantă are eticheta goală corectă, dar nu trece verificarea proporțiilor. Imaginea a fost eliminată din art/inbox; rândul rămâne nebifat. Am continuat cu următorul personaj conform docs/CODEX_ARTA.md, punctul 5.
 - [ ] marius_foaie
