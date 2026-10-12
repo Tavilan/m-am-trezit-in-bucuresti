@@ -3,7 +3,7 @@
 - [x] romica_foaie
 - [x] romica_oglinda
 - [x] gina_foaie
-- [ ] marius_foaie
+- [x] marius_foaie
 - [ ] gemeni_foaie
 - [ ] costel_foaie
 - [ ] veta_foaie
