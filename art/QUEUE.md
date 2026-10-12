@@ -10,7 +10,7 @@
 - [x] turist_foaie
 
 ## Refacere: personaje distincte (prompturi noi, fără referința lui Romică)
-- [ ] gina_foaie
+- [x] gina_foaie
 - [ ] marius_foaie
 - [ ] gemeni_foaie
 - [ ] costel_foaie
