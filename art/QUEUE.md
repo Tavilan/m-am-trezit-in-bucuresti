@@ -4,7 +4,7 @@
 - [x] romica_oglinda
 - [x] gina_foaie
 - [x] marius_foaie
-- [ ] gemeni_foaie
+- [x] gemeni_foaie
 - [ ] costel_foaie
 - [ ] veta_foaie
 - [ ] turist_foaie
