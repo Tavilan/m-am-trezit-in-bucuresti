@@ -33,4 +33,4 @@
 
 ## Portrete de dialog (16:9, bust, cu loc deasupra capului; referința = foaia aceluiași personaj)
 - [x] romica_portret
-- [ ] gina_portret
+- [x] gina_portret
