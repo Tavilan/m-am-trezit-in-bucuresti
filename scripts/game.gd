@@ -8,7 +8,7 @@ const FONT_PATH := "res://art/fonts/Jersey15.ttf"   # lizibil, cu diacritice (OF
 const FS := 20   # mărimea textului peste tot
 
 # ---- starea jocului
-var money := 7
+var money := 0
 var has_zacusca := false
 var flags := {}
 
@@ -49,7 +49,7 @@ func _apply_grade(s: CanvasItem) -> void:
 	s.material = m
 ## numele din dialog -> numele animației/portretului (art/anim/<x>_vorbit, art/final/<x>_portret.png)
 const PORTRAITS := {"Romică": "romica", "Gina": "gina", "Marius": "marius", "Costel": "costel",
-	"Tanti Mioara": "mioara", "Nelu": "nelu", "Gelu": "gelu", "Turistul": "turist"}
+	"Tanti Mioara": "mioara", "Nea Ilie": "ilie", "Nelu": "nelu", "Gelu": "gelu", "Turistul": "turist"}
 ## cine apare în stânga (Romică, eroul); ceilalți în dreapta
 const PORTRAIT_LEFT := ["Romică"]
 ## Romică e jucătorul (persoana întâi): portretul lui apare DOAR când o scenă-cheie îl cere explicit
@@ -57,7 +57,7 @@ const PORTRAIT_LEFT := ["Romică"]
 var hero_portrait := false
 ## vocea fiecăruia la derularea textului (înălțimea sunetului)
 const VOICE := {"Romică": 0.82, "Gina": 1.32, "Marius": 1.08, "Costel": 0.92, "Tanti Mioara": 1.45,
-	"Nelu": 0.72, "Gelu": 0.74, "Turistul": 1.18}
+	"Nelu": 0.72, "Gelu": 0.74, "Turistul": 1.18, "Nea Ilie": 0.95}
 var _blip: AudioStreamPlayer
 var _blip_last := 0
 var _voice := 1.0
@@ -397,7 +397,9 @@ func shake(strength := 6.0, seconds := 0.5) -> void:
 
 # ================================================================ scene
 func start(first_scene := "title") -> void:
-	money = 7
+	# Romică pleacă de acasă cu 0 lei și își adună cei 7 lei prin bucătărie; dacă testul sare direct
+	# la altă scenă (#road, #pub...), îi are deja
+	money = 0 if first_scene in ["title", "kitchen"] else 7
 	has_zacusca = false
 	flags = {}
 	update_hud()
