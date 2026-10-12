@@ -79,8 +79,12 @@ def call(endpoint, payload, key):
         with urllib.request.urlopen(req, timeout=900) as r:
             return json.load(r)
     except urllib.error.HTTPError as e:
-        body = e.read().decode(errors="replace")[:2000]
-        raise SystemExit(f"Eroare de la API ({e.code}): {body}")
+        body = e.read().decode(errors="replace")[:1500].replace("\n", " ")
+        print(f"::error title=Eroare de la API OpenAI ({e.code})::{body}", flush=True)
+        raise SystemExit(1)
+    except urllib.error.URLError as e:
+        print(f"::error title=Nu pot contacta API-ul OpenAI::{e}", flush=True)
+        raise SystemExit(1)
 
 
 def estimate_cost(model, usage):
@@ -123,7 +127,8 @@ def generate(asset_id, key, quality_override=""):
     refs = [os.path.join(ROOT, r) for r in spec.get("refs", [])]
     missing = [r for r in refs if not os.path.exists(r)]
     if missing:
-        raise SystemExit(f"{asset_id}: lipsesc referințele {missing}. Generează-le întâi.")
+        print(f"::error title=Lipsesc referințe::{asset_id}: {missing}. Generează-le întâi.", flush=True)
+        raise SystemExit(1)
     log(f"→ {asset_id}: {model}, {quality}, {size}, {len(refs)} referințe")
     if refs:
         payload["images"] = [{"image_url": data_url(r)} for r in refs]
