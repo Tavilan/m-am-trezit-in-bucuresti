@@ -30,6 +30,9 @@ func _ready() -> void:
 		"light1_pos": Vector2(320, 20), "light1_color": Vector3(1.0, 0.82, 0.55), "light1_radius": 330.0, "light1_strength": 0.6,
 		"light2_pos": Vector2(430, 120), "light2_color": Vector3(0.45, 0.55, 0.9), "light2_radius": 150.0, "light2_strength": 0.28}
 	grade = {"tint": Vector3(0.9, 0.82, 0.74), "saturation": 0.72}
+	music = "res://audio/lautareasca_radio.ogg"   # vine de la radioul de pe raft
+	radio = true
+	ambience = "res://audio/ploaie_inauntru.ogg"
 	background("res://art/final/bucatarie_fundal.png")
 	_under = Node2D.new()
 	_under.draw.connect(_draw_under)

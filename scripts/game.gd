@@ -60,6 +60,11 @@ var hero_portrait := false
 const VOICE := {"Romică": 0.82, "Gina": 1.32, "Marius": 1.08, "Costel": 0.92, "Tanti Mioara": 1.45,
 	"Nelu": 0.72, "Gelu": 0.74, "Turistul": 1.18, "Nea Ilie": 0.95}
 var _blip: AudioStreamPlayer
+## sunetul de fond: muzica (opțional „la radio”, înfundată) și ambianța locului (ploaie, sat, birt)
+var _music: AudioStreamPlayer
+var _amb: AudioStreamPlayer
+var _music_path := ""
+var _amb_path := ""
 var _blip_last := 0
 var _voice := 1.0
 var hud_on := true
@@ -78,6 +83,7 @@ func _ready() -> void:
 	world.name = "World"
 	add_child(world)
 	_build_ui()
+	_setup_audio()
 	_blip = AudioStreamPlayer.new()
 	_blip.stream = load("res://audio/text_blip.wav")
 	_blip.volume_db = -8.0
@@ -400,6 +406,62 @@ func shake(strength := 6.0, seconds := 0.5) -> void:
 	world.position = Vector2.ZERO
 
 
+# ================================================================ sunet
+func _setup_audio() -> void:
+	# magistrala „Radio”: muzica pare că vine dintr-un radio vechi din bucătărie
+	AudioServer.add_bus()
+	var i := AudioServer.bus_count - 1
+	AudioServer.set_bus_name(i, "Radio")
+	var bp := AudioEffectBandPassFilter.new()
+	bp.cutoff_hz = 1400.0
+	bp.resonance = 0.6
+	AudioServer.add_bus_effect(i, bp)
+	var dist := AudioEffectDistortion.new()
+	dist.mode = AudioEffectDistortion.MODE_LOFI
+	dist.drive = 0.15
+	dist.post_gain = -2.0
+	AudioServer.add_bus_effect(i, dist)
+	_music = AudioStreamPlayer.new()
+	_amb = AudioStreamPlayer.new()
+	add_child(_music)
+	add_child(_amb)
+
+
+func _loop_stream(path: String) -> AudioStream:
+	var st: AudioStream = load(path)
+	if st is AudioStreamOggVorbis:
+		(st as AudioStreamOggVorbis).loop = true
+	elif st is AudioStreamWAV:
+		(st as AudioStreamWAV).loop_mode = AudioStreamWAV.LOOP_FORWARD
+		(st as AudioStreamWAV).loop_end = int((st as AudioStreamWAV).get_length() * (st as AudioStreamWAV).mix_rate)
+	return st
+
+
+## Schimbă lin muzica și ambianța când se schimbă scena (calea goală = liniște).
+func set_audio(music: String, ambience: String, radio := false, music_db := -10.0, amb_db := -8.0) -> void:
+	_crossfade(_music, music, "_music_path", music_db, "Radio" if radio else "Master")
+	_crossfade(_amb, ambience, "_amb_path", amb_db, "Master")
+
+
+func _crossfade(pl: AudioStreamPlayer, path: String, key: String, db: float, bus: String) -> void:
+	if get(key) == path:
+		pl.bus = bus
+		create_tween().tween_property(pl, "volume_db", db, 0.6)
+		return
+	set(key, path)
+	var t := create_tween()
+	if pl.playing:
+		t.tween_property(pl, "volume_db", -60.0, 0.5)
+	t.tween_callback(func():
+		pl.stop()
+		if path != "" and ResourceLoader.exists(path):
+			pl.stream = _loop_stream(path)
+			pl.bus = bus
+			pl.volume_db = -60.0
+			pl.play()
+			create_tween().tween_property(pl, "volume_db", db, 1.0))
+
+
 # ================================================================ scene
 func start(first_scene := "title") -> void:
 	# Romică pleacă de acasă cu 0 lei și își adună cei 7 lei prin bucătărie; dacă testul sare direct
@@ -425,6 +487,9 @@ func goto(scene: String, fade_seconds := 0.45) -> void:
 	hud_on = s.get("show_hud") != false
 	var g = s.get("grade")
 	grade = g if g is Dictionary else {}
+	var mu = s.get("music")
+	var am = s.get("ambience")
+	set_audio(mu if mu is String else "", am if am is String else "", s.get("radio") == true)
 	_hud.visible = hud_on
 	_hint_btn.visible = hud_on
 	t = create_tween()

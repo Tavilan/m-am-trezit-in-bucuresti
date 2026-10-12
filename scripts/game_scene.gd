@@ -19,6 +19,10 @@ var horizon := 0.0
 var lighting := {}
 ## Gradarea pentru portretele/prim-planurile din dialog în scena asta: {"tint": Vector3, "saturation": float}
 var grade := {}
+## Sunetul scenei: muzica (res://audio/...), dacă se aude „la radio”, și ambianța.
+var music := ""
+var radio := false
+var ambience := ""
 const LIGHT_SHADER := preload("res://shaders/scene_light.gdshader")
 
 
