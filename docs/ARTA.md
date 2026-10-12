@@ -36,3 +36,9 @@ Test orb pe variantele pixelizate (realism / lizibilitate / impresie):
 - **Mai bine fără animație decât cu una care arată ieftin.** Testul cu animație „decupată” (o imagine tăiată în părți și rotită din cod) a fost respins de Tavi: arată ca o glumă. Scos din joc.
 - **Metoda aprobată (12.10.2026): video → pixel-art.** Tavi generează în Gemini (Veo, inclus în abonament) un video scurt pornind de la imaginea exactă a personajului, pe fundal verde, cu cameră fixă. `tools/art/video_to_sprite.py` îl transformă: scoate verdele, ancorează tălpile, pixelizează toate cadrele pe aceeași grilă, stabilizează tremuratul față de cadrul median și alege bucla care se leagă cel mai bine. Ieșire în `art/anim/<nume>/` (cadre, sheet, anim.json, preview.gif). Prima animație: `romica_idle_beat` (60 de cadre, 12 fps), acceptată de Tavi.
 - Rezervă: fără mișcare, doar schimbări de expresie (portrete generate cu referință) și efecte de ambianță din cod.
+
+## Decizii globale fixate (12.10.2026)
+- **Personaje:** stau în scenă la mărime reală; la dialog apare și un **portret mare**, detaliat, cu expresie și animație. Deci fiecare personaj important are: foaie de personaj (întreg, fundal verde) + portret de dialog.
+- **Cameră:** **un cadru fix 16:9 pe fiecare loc**, ca un tablou. Fără panorame și fără mai multe unghiuri pe același loc.
+- **Stil global:** lumină realistă proprie fiecărei scene, apoi **aceeași gradare de culoare** pentru tot jocul (aplicată din cod la pixelizare), ca să pară unitar.
+- **Animații Veo:** personajele principale au două bucle, **așteptare** și **vorbit**; cele secundare doar **așteptare**.
