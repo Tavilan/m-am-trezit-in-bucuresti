@@ -44,4 +44,4 @@
 
 ## Drumul regândit: poarta cu streașină și banca la adăpost; câinele ghemuit sub bancă (va fi animat cu Veo)
 - [x] drum_fundal
-- [ ] caine_ilie
+- [x] caine_ilie
