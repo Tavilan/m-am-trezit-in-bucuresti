@@ -31,3 +31,7 @@ Test orb pe variantele pixelizate (realism / lizibilitate / impresie):
 - **ChatGPT:** foaie 8/6/7, oglindă 8/7/8. Câștigă la realism și atmosferă: proporții reale, oglinda arată camera reflectată. Minusuri: fața din oglindă pare că plânge (strică gluma), colacul de sârmă se citește ca un cârnat, textura e zgomotoasă.
 - **Gemini:** foaie 6/9/7, oglindă 6/8/6. Câștigă la lizibilitate (contur curat, clar ca sprite). Minusuri: proporții de desen animat (cap mare); oglinda arată ca un portret înrămat, nu ca o reflexie.
 - **Decizie:** ChatGPT, pentru că realismul primează. Corecturile (privire seacă fără lacrimi, sârmă subțire, rola de bandă mai mare, mai puțin zgomot) sunt trecute în prompturi (versiunea 4).
+
+## Animații: regula de calitate (12.10.2026)
+- **Mai bine fără animație decât cu una care arată ieftin.** Testul cu animație „decupată” (o imagine tăiată în părți și rotită din cod) a fost respins de Tavi: arată ca o glumă. Scos din joc.
+- Variante rămase: (1) video generat din imaginea exactă a personajului (Veo în Gemini / Sora), convertit din cod în cadre pixel-art stabile; (2) fără mișcare, doar schimbări de expresie (portrete generate cu referință) și efecte de ambianță din cod (lumină, fum, ploaie, tranziții).
