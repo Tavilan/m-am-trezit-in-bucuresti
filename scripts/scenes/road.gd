@@ -33,8 +33,8 @@ func _ready() -> void:
 	title = "Drumul prin sat, noaptea"
 	horizon = 200   # punctul de fugă al drumului
 	# lumina: noapte albastră, felinarul (portocaliu) și vitrina birtului (caldă)
-	lighting = {"ambient": Vector3(0.56, 0.6, 0.8), "saturation": 0.85,
-		"light1_pos": LAMP, "light1_color": Vector3(1.0, 0.7, 0.35), "light1_radius": 300.0, "light1_strength": 0.75,
+	lighting = {"ambient": Vector3(0.7, 0.72, 0.9), "saturation": 0.9,
+		"light1_pos": LAMP, "light1_color": Vector3(1.0, 0.7, 0.35), "light1_radius": 400.0, "light1_strength": 0.9,
 		"light2_pos": Vector2(485, 190), "light2_color": Vector3(1.0, 0.8, 0.45), "light2_radius": 120.0, "light2_strength": 0.3}
 	background("res://art/final/drum_fundal.png")
 	# fundalul = varianta stinsă + lumina felinarului înmulțită cu intensitatea (shaders/light_mix.gdshader)
@@ -42,8 +42,12 @@ func _ready() -> void:
 	_lamp_mat.shader = preload("res://shaders/light_mix.gdshader")
 	_lamp_mat.set_shader_parameter("off_tex", load("res://art/final/drum_fundal_felinar_stins.png"))
 	_bg.material = _lamp_mat
-	var dog := layer("res://art/final/caine_ilie_drum.png", Vector2(236, 335))
+	var dog := layer("res://art/final/caine_ilie_drum.png", Vector2(122, 355))
 	_dog_sprite = dog
+	# câinele are blana închisă la culoare: îl luminăm puțin mai tare ca să se vadă (stă în lumina felinarului)
+	var dm := dog.material as ShaderMaterial
+	dm.set_shader_parameter("ambient", Vector3(0.95, 0.92, 1.0))
+	dm.set_shader_parameter("saturation", 1.0)
 	_over = Node2D.new()
 	_over.draw.connect(_draw_over)
 	add_child(_over)
@@ -78,9 +82,10 @@ func _process(d: float) -> void:
 	for r in _ripples:
 		r[1] += d
 	_ripples = _ripples.filter(func(r): return r[1] < 0.8)
-	_update_lamp(d)
+	# pâlpâitul e oprit până găsim o variantă realistă (vezi docs/ARTA.md)
+	_lamp_on = 1.0
 	_lamp_mat.set_shader_parameter("intensity", _lamp_on)
-	(_dog_sprite.material as ShaderMaterial).set_shader_parameter("light1_strength", 0.75 * _lamp_on)
+	(_dog_sprite.material as ShaderMaterial).set_shader_parameter("light1_strength", 1.1 * _lamp_on)
 	_over.queue_redraw()
 
 
