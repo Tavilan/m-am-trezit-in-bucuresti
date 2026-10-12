@@ -319,12 +319,12 @@ func shake(strength := 6.0, seconds := 0.5) -> void:
 
 
 # ================================================================ scene
-func start() -> void:
+func start(first_scene := "title") -> void:
 	money = 7
 	has_zacusca = false
 	flags = {}
 	update_hud()
-	goto("title")
+	goto(first_scene)
 
 
 func goto(scene: String, fade_seconds := 0.45) -> void:
