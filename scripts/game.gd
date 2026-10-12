@@ -35,6 +35,9 @@ const PORTRAITS := {"Romică": "romica", "Gina": "gina", "Marius": "marius", "Co
 	"Tanti Mioara": "mioara", "Nelu": "nelu", "Gelu": "gelu", "Turistul": "turist"}
 ## cine apare în stânga (Romică, eroul); ceilalți în dreapta
 const PORTRAIT_LEFT := ["Romică"]
+## Romică e jucătorul (persoana întâi): portretul lui apare DOAR când o scenă-cheie îl cere explicit
+## (decizia lui Tavi: oglinda + aproximativ 5 apariții în tot jocul). Scena pune hero_portrait = true și îl stinge după.
+var hero_portrait := false
 var hud_on := true
 var _transitioning := false
 
@@ -235,6 +238,8 @@ func interact(cb: Callable) -> void:
 
 func _show_portrait(who: String) -> void:
 	var key: String = PORTRAITS.get(who, "")
+	if who == "Romică" and not hero_portrait:
+		key = ""
 	if key == "" or not AnimSprite.exists(key + "_vorbit"):
 		_portrait_root.visible = false
 		return

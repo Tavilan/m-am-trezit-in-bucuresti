@@ -46,7 +46,7 @@
 - **Turistul** (Gara de Nord): bărbat de ~35 de ani, 1,90 m, lung, roșcat și pistruiat, foarte palid; rucsac mare, sandale cu șosete, aparat foto profesional, entuziasmat de „authentic Romania”.
 
 ## Prezentare pe ecran (12.10.2026)
-- **Romică** apare: în oglindă, ca **portret animat la replicile lui** și în **câteva cadre scurte din afară** la momentele-cheie (cărat la tren, trezirea în gară).
+- **Romică** e jucătorul (persoana întâi), deci de regulă **nu se vede**: replicile lui apar fără portret. Se vede doar în oglindă și în **aproximativ 5 momente-cheie** din tot jocul (portret sau cadru scurt din afară: ex. cărat la tren, trezirea în gară). În cod: `Game.hero_portrait = true` doar în acele momente.
 - **Dialogurile:** casetă de text jos + **portretul mare, animat**, al celui care vorbește, în stânga sau în dreapta, peste scenă.
 - **Gara satului:** cadru din afară (excepție de la persoana întâi): Romică cărat între Nelu și Gelu, cu Marius în față și trenul în spate.
 
