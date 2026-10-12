@@ -148,7 +148,7 @@ func _build_ui() -> void:
 	v.add_child(_dlg_text)
 	root.add_child(_dlg)
 	_dlg_more = Label.new()
-	_dlg_more.text = "▼"
+	_dlg_more.text = ">"
 	_dlg_more.position = Vector2(W - 30, H - 26)
 	_dlg_more.visible = false
 	root.add_child(_dlg_more)

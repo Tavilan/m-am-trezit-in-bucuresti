@@ -10,7 +10,7 @@ Pași:
  4. stabilizare temporală: pixelii care se schimbă foarte puțin rămân ca în cadrul anterior
     (taie tremuratul de la compresia video, păstrează mișcarea reală);
  5. alege bucla care se leagă cel mai bine (primul și ultimul cadru aproape identice).
-Ieșire: art/anim/<nume>/frame_XX.png, sheet.png (toate cadrele pe un rând), anim.json, preview.gif (×3).
+Ieșire: art/anim/<nume>/frame_XX.png, sheet.png (cadrele în grilă, max 4096 px lățime), anim.json, preview.gif (×3).
 """
 import argparse
 import glob
@@ -35,6 +35,25 @@ def key_green(rgb):
     out = rgb.copy()
     out[..., 1] = np.where(spill, ((r + b) // 2).clip(0, 255), g).astype(np.uint8)
     return out, alpha
+
+
+MAX_TEX = 4096  # lățimea maximă a unei texturi (telefoanele vechi nu trec de 4096)
+
+
+def sheet_cols(w, n):
+    return max(1, min(n, MAX_TEX // w))
+
+
+def write_sheet(out, frames):
+    """Toate cadrele într-o grilă (rânduri de câte `cols`), ca textura să nu depășească MAX_TEX."""
+    w, h = frames[0].size
+    cols = sheet_cols(w, len(frames))
+    rows = (len(frames) + cols - 1) // cols
+    sheet = Image.new("RGBA", (w * cols, h * rows), (0, 0, 0, 0))
+    for k, f in enumerate(frames):
+        sheet.alpha_composite(f, ((k % cols) * w, (k // cols) * h))
+    sheet.save(os.path.join(out, "sheet.png"))
+    return cols
 
 
 def main():
@@ -125,11 +144,9 @@ def main():
         os.remove(f)
     for k, f in enumerate(loop):
         Image.fromarray(f, "RGBA").save(os.path.join(out, f"frame_{k:02d}.png"))
-    sheet = Image.new("RGBA", (cw * len(loop), ch), (0, 0, 0, 0))
-    for k, f in enumerate(loop):
-        sheet.alpha_composite(Image.fromarray(f, "RGBA"), (k * cw, 0))
-    sheet.save(os.path.join(out, "sheet.png"))
-    json.dump({"frames": len(loop), "fps": a.fps, "size": [cw, ch], "feet": [int(round(-L * scale)), int(round(-T * scale))],
+    write_sheet(out, [Image.fromarray(f, "RGBA") for f in loop])
+    cols = sheet_cols(cw, len(loop))
+    json.dump({"frames": len(loop), "fps": a.fps, "size": [cw, ch], "cols": cols, "feet": [int(round(-L * scale)), int(round(-T * scale))],
                "source_video": os.path.basename(a.video), "loop_from_to": [i0, i1], "pingpong": a.pingpong, "loop_error": round(float(best[0]), 2)},
               open(os.path.join(out, "anim.json"), "w"), indent=2)
     bg = (42, 42, 51, 255)

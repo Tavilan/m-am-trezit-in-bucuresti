@@ -36,7 +36,7 @@
 - [x] gina_portret
 
 ## Scene complete: bucătăria și drumul (fundaluri 16:9 fără personaje, obiecte pe verde)
-- [ ] bucatarie_fundal
+- [x] bucatarie_fundal (varianta „respins” acceptată: inscripțiile de pe icoană sunt firești și nu se citesc la 640×360)
   - Respins după două generări: ambele variante includ mici litere/inscripții pe icoana ortodoxă, contrar cerinței fără text. Am păstrat prima variantă, cu compoziția cea mai potrivită și inscripții mai discrete, nemodificată în art/inbox/bucatarie_fundal__respins.png pentru evaluarea lui Tavi. Rândul rămâne nebifat; procesarea continuă conform docs/CODEX_ARTA.md, punctul 5.
 - [x] masina_spalat
 - [x] drum_fundal

@@ -5,6 +5,7 @@ extends Sprite2D
 
 var fps := 12.0
 var frames := 1
+var cols := 1
 var playing := true
 var _t := 0.0
 
@@ -27,14 +28,16 @@ func load_anim(anim_name: String) -> void:
 		var j: Dictionary = JSON.parse_string(f.get_as_text())
 		frames = int(j.get("frames", 1))
 		fps = float(j.get("fps", 12))
-	hframes = max(1, frames)
+		cols = int(j.get("cols", frames))
+	hframes = max(1, cols)
+	vframes = max(1, int(ceil(frames / float(hframes))))
 	centered = false
 	frame = 0
 
 
 ## Dimensiunea unui cadru, în pixeli.
 func frame_size() -> Vector2:
-	return Vector2(texture.get_width() / float(hframes), texture.get_height())
+	return Vector2(texture.get_width() / float(hframes), texture.get_height() / float(vframes))
 
 
 func _process(d: float) -> void:

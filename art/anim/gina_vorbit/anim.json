@@ -15,5 +15,6 @@
     79
   ],
   "pingpong": true,
-  "loop_error": 0.0
+  "loop_error": 0.0,
+  "cols": 16
 }
