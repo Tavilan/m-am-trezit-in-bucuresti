@@ -45,6 +45,8 @@ def main():
     ap.add_argument("--fps", type=int, default=12)
     ap.add_argument("--min-loop", type=float, default=3.0, help="secunde")
     ap.add_argument("--stab", type=int, default=55, help="prag stabilizare (suma diferențelor RGB)")
+    ap.add_argument("--pingpong", action="store_true",
+                    help="buclă dus-întors: un segment, apoi același segment invers (fără tăietură; pentru video-uri care nu se leagă)")
     a = ap.parse_args()
 
     tmp = tempfile.mkdtemp()
@@ -95,7 +97,17 @@ def main():
             if dd < best[0]:
                 best = (dd, i, j)
     _, i0, i1 = best
-    raw = np.stack(frames[i0:i1]).astype(np.int16)
+    seq = frames[i0:i1]
+    if a.pingpong:
+        # segmentul ales are capete în care mișcarea e cea mai lentă, ca întoarcerea să nu se vadă
+        motion = [0.0] + [np.abs(small[k] - small[k - 1]).mean() for k in range(1, n)]
+        motion = [m + (motion[k + 1] if k + 1 < n else m) for k, m in enumerate(motion)]
+        cands = [(motion[i] + motion[i + need], i, i + need) for i in range(0, n - need)]
+        _, i0, i1 = min(cands)
+        best = (0.0, i0, i1)
+        seq = frames[i0:i1 + 1]
+        seq = seq + seq[-2:0:-1]
+    raw = np.stack(seq).astype(np.int16)
     # stabilizare temporală față de un cadru de referință (mediana buclei): pixelii aproape
     # neschimbați iau exact valoarea de referință, deci nu tremură și bucla se leagă perfect
     ref = np.median(raw, axis=0).astype(np.int16)
@@ -118,7 +130,7 @@ def main():
         sheet.alpha_composite(Image.fromarray(f, "RGBA"), (k * cw, 0))
     sheet.save(os.path.join(out, "sheet.png"))
     json.dump({"frames": len(loop), "fps": a.fps, "size": [cw, ch], "feet": [int(round(-L * scale)), int(round(-T * scale))],
-               "source_video": os.path.basename(a.video), "loop_from_to": [i0, i1], "loop_error": round(float(best[0]), 2)},
+               "source_video": os.path.basename(a.video), "loop_from_to": [i0, i1], "pingpong": a.pingpong, "loop_error": round(float(best[0]), 2)},
               open(os.path.join(out, "anim.json"), "w"), indent=2)
     bg = (42, 42, 51, 255)
     gif = []
