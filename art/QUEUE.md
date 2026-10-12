@@ -47,5 +47,5 @@
 - [x] caine_ilie
 
 ## Nea Ilie, vecinul de pe drum (stăpânul câinelui)
-- [ ] ilie_foaie
+- [x] ilie_foaie
 - [ ] ilie_portret
