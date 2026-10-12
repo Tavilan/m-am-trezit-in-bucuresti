@@ -3,18 +3,13 @@
   "quality": "high",
   "size": "1024x1536",
   "background": "transparent",
-  "pixelize": {
-    "height": 300
-  },
   "manual_key": [
     0,
     255,
     0
   ],
-  "versiune": 1,
+  "versiune": 2,
   "id": "gina_foaie",
-  "refs": [
-    "art/raw/romica_foaie.png"
-  ],
-  "prompt": "CHARACTER SHEET, single full-body figure, front view, neutral standing pose, arms slightly away from the body, realistic proportions (not cartoon, not chibi), detailed clean pixel art with larger flat colour areas and little texture noise. Background: one flat solid pure green colour (#00FF00) everywhere, no shadow, no floor, no gradient. Same art style and level of detail as the existing character Romică (attached reference if available). No text, no letters, no logos.\nGina, Romică's wife, about 50, a village 'lady' from rural Oltenia, Romania, who thinks she is finer than the whole village. Hair dyed burgundy-red, rolled in pink plastic curlers. A shiny flowered satin dressing gown, cheap but 'luxurious', tied at the waist; house slippers with fluffy pompoms; gold hoop earrings; reading glasses low on her nose. Hands on her hips, chin up, haughty and annoyed expression."
+  "prompt": "CHARACTER SHEET, single full-body figure, front view, standing, arms slightly away from the body, the whole figure visible from the top of the head to the shoes with empty space around it, realistic adult proportions (not cartoon, not chibi, normal-sized head), detailed clean pixel art with larger flat colour areas and little texture noise, soft light from the upper left. Background: one flat solid pure green colour (#00FF00) everywhere, no shadow, no floor, no gradient. No text, no letters, no logos.\nUNIQUE PERSON: a face and body type of their own, exactly as described below; natural skin-coloured nose unless described otherwise; do not give them a moustache unless described.\nGina, Romică's wife, about 50, a village 'lady' from rural Oltenia, Romania, who thinks she is finer than the whole village. BODY: tall, thin and angular, bony shoulders, long neck. FACE: narrow long face, high sharp cheekbones, a thin pointed nose, thin eyebrows plucked and redrawn high with a dark pencil, heavy blue eyeshadow, bright red lipstick on thin lips, a small beauty mark on one cheek. Hair dyed burgundy-red, rolled in pink plastic curlers. A shiny flowered satin dressing gown, cheap but 'luxurious', tied at the waist; house slippers with fluffy pompoms; gold hoop earrings; reading glasses low on her nose. Hands on her hips, chin up, haughty and annoyed expression.",
+  "height_cm": 168
 }

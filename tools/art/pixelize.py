@@ -8,6 +8,24 @@ Personaje/obiecte (cu transparență): redimensionare la înălțimea cerută, m
 import sys
 from PIL import Image, ImageEnhance, ImageFilter
 
+# Foile de personaj au toate aceeași scară, ca înălțimile să fie reale între ele: 195 cm = 300 px.
+CHAR_PX_PER_CM = 300 / 195
+
+
+def pixelize_args(spec):
+    """Parametrii de pixelizare pentru un fișier art/prompts/<id>.json."""
+    if spec.get("pixelize"):
+        pix = dict(spec["pixelize"])
+    elif spec.get("type") == "scene":
+        pix = {"width": 640, "height": 360}
+    elif spec.get("height_cm"):
+        pix = {"height": round(spec["height_cm"] * CHAR_PX_PER_CM)}
+    else:
+        pix = {"height": 300}
+    if spec.get("manual_key"):
+        pix["key"] = spec["manual_key"]
+    return pix
+
 
 def _crop_to(im, w, h):
     tw, th = im.size

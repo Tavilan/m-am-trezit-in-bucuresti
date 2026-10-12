@@ -4,9 +4,6 @@
   "quality": "high",
   "size": "1024x1536",
   "background": "transparent",
-  "pixelize": {
-    "height": 300
-  },
   "prompt": "CHARACTER SHEET, single full-body figure, front view, neutral standing pose, arms slightly away from the body (so the image can later be cut into parts for animation), transparent background, no shadow on the ground.\nRomică: a 55-year-old village handyman from rural Oltenia, Romania. Short and stocky, slight belly, broad strong hands. Sun-tanned, weathered face with deep wrinkles, thick grey-black moustache, two-day grey stubble, red drinker's nose, tired but kind eyes, bushy eyebrows. Worn dark grey flat cap. Faded navy blue work jacket, open, over a brown hand-knitted sweater; old dark trousers with shiny knees; scuffed black rubber-soled shoes. His trademarks, clearly visible: a loose coil of THIN shiny copper wire (many thin loops, clearly wire, not a thick tube) hanging from his belt, a big, clearly visible roll of black electrical tape sticking out of the jacket's chest pocket, and a torn elbow of the jacket patched with crossed strips of black electrical tape. Expression: neutral, slightly tipsy, stubborn, good-hearted, not smiling. Clean pixel art: larger flat colour areas, little texture noise on clothes. Realistic proportions (not chibi, not cartoon), detailed pixel art.",
   "versiune": 4,
   "manual_key": [
@@ -14,5 +11,6 @@
     255,
     0
   ],
-  "prompt_manual_note": "În aplicații (ChatGPT/Gemini) fundalul transparent nu e sigur: se cere fundal verde plin #00FF00, scos apoi automat."
+  "prompt_manual_note": "În aplicații (ChatGPT/Gemini) fundalul transparent nu e sigur: se cere fundal verde plin #00FF00, scos apoi automat.",
+  "height_cm": 165
 }

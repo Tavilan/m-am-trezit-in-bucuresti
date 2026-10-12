@@ -6,3 +6,4 @@ STYLE GUIDE for the game "M-am trezit în București" (I Woke Up in Bucharest), 
 - Tone: affectionate satire of Romanian everyday life. Mock situations, behaviours and institutions, never ethnic groups, poor people or the homeless.
 - NO TEXT, letters, numbers, logos or watermarks anywhere in the image unless the prompt explicitly asks for specific text. Signs, posters and screens must be left BLANK; the game adds text later.
 - No real brands, no real people, no famous characters.
+- PEOPLE: every character has their own face and body type, exactly as the prompt describes; never reuse another character's face.

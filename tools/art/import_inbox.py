@@ -20,7 +20,8 @@ for path in sorted(glob.glob(os.path.join(ROOT, "art", "inbox", "*"))):
     if not os.path.exists(os.path.join(ROOT, "art", "prompts", asset_id + ".json")):
         print(f"::warning::{name}: nu există art/prompts/{asset_id}.json, îl las în inbox.")
         continue
-    cmd = [sys.executable, os.path.join(ROOT, "tools", "art", "import_image.py"), asset_id, path, src]
+    source = variant if variant in ("chatgpt", "gemini") else src
+    cmd = [sys.executable, os.path.join(ROOT, "tools", "art", "import_image.py"), asset_id, path, source]
     if variant:
         cmd += ["--variant", variant]
     subprocess.check_call(cmd)

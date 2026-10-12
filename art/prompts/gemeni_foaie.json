@@ -3,18 +3,13 @@
   "quality": "high",
   "size": "1024x1536",
   "background": "transparent",
-  "pixelize": {
-    "height": 300
-  },
   "manual_key": [
     0,
     255,
     0
   ],
-  "versiune": 1,
+  "versiune": 2,
   "id": "gemeni_foaie",
-  "refs": [
-    "art/raw/romica_foaie.png"
-  ],
-  "prompt": "CHARACTER SHEET, single full-body figure, front view, neutral standing pose, arms slightly away from the body, realistic proportions (not cartoon, not chibi), detailed clean pixel art with larger flat colour areas and little texture noise. Background: one flat solid pure green colour (#00FF00) everywhere, no shadow, no floor, no gradient. Same art style and level of detail as the existing character Romică (attached reference if available). No text, no letters, no logos.\nTWO characters side by side with a clear gap between them, both full body, front view, same pose: the twins Nelu and Gelu, about 40, IDENTICAL faces, identical chubby bodies, identical thick black moustaches and identical short haircuts. The only difference: Nelu (left) wears a red tracksuit, Gelu (right) wears a blue tracksuit; both wear the same cheap sport shoes. Both slightly tipsy, the same goofy grin."
+  "prompt": "CHARACTER SHEET, single full-body figure, front view, standing, arms slightly away from the body, the whole figure visible from the top of the head to the shoes with empty space around it, realistic adult proportions (not cartoon, not chibi, normal-sized head), detailed clean pixel art with larger flat colour areas and little texture noise, soft light from the upper left. Background: one flat solid pure green colour (#00FF00) everywhere, no shadow, no floor, no gradient. No text, no letters, no logos.\nUNIQUE PERSON: a face and body type of their own, exactly as described below; natural skin-coloured nose unless described otherwise; do not give them a moustache unless described.\nTWO characters side by side with a clear gap between them, both full body, front view, same pose: the twins Nelu and Gelu, about 40. BODY: two huge men, very tall and massive, broad shoulders, thick necks, big heavy arms, solid bellies, like two wardrobes. FACE: completely shaved bald heads, clean-shaven faces with NO moustache and no beard, small eyes, heavy square jaws, wide flat noses, IDENTICAL faces and bodies. The only difference: Nelu (left) wears a plain red tracksuit, Gelu (right) a plain blue tracksuit, both jackets zipped up, no stripes, no logos; both wear the same plain grey sport shoes. Both slightly tipsy, the same slow, good-natured grin.",
+  "height_cm": 195
 }

@@ -22,7 +22,7 @@
 
 ## Reguli
 - Cheia API stă **doar** în secretul `OPENAI_API_KEY` al repository-ului. Nu se scrie niciodată în fișiere sau în chat.
-- **Referințe** (`refs`): doar imagini proprii (foi de personaj, scene generate deja), ca să rămână personajele identice între scene. Fotografiile reale de pe internet se folosesc doar ca sursă de fapte în prompt, nu ca imagini de intrare.
+- **Referințe** (`refs`): doar imagini proprii, și **doar ale aceluiași personaj** (foaia lui de personaj, când îi facem portretul sau o scenă cu el). Niciodată foaia altui personaj ca „referință de stil”: modelul îi copiază fața (vezi mai jos). Fotografiile reale de pe internet se folosesc doar ca sursă de fapte în prompt, nu ca imagini de intrare.
 - Plafon: maximum 4 imagini pe rulare, ca să nu apară facturi surpriză.
 - Arta pe straturi: fundaluri **fără personaje**, iar personajele și obiectele interactive ca imagini separate, cu fundal transparent.
 
@@ -42,3 +42,14 @@ Test orb pe variantele pixelizate (realism / lizibilitate / impresie):
 - **Cameră:** **un cadru fix 16:9 pe fiecare loc**, ca un tablou. Fără panorame și fără mai multe unghiuri pe același loc.
 - **Stil global:** lumină realistă proprie fiecărei scene, apoi **aceeași gradare de culoare** pentru tot jocul (aplicată din cod la pixelizare), ca să pară unitar.
 - **Animații Veo:** personajele principale au două bucle, **așteptare** și **vorbit**; cele secundare doar **așteptare**.
+
+## Personaje distincte (12.10.2026)
+- **Problema:** prima serie de personaje secundare semăna prea mult cu Romică (aceeași mustață, nas roșu, sprâncene, aceeași înălțime). Cauze: foaia lui Romică dată ca referință tuturor, fețe nedescrise în prompt și toate personajele aduse la 300 px.
+- **Regula:** fiecare prompt de personaj descrie explicit **CORPUL** (înălțime, constituție, postură) și **FAȚA** (formă, nas, ochi, păr, barbă/mustață sau lipsa lor). Doar băutorii au nas roșu. Siluetele trebuie să se deosebească și în umbră.
+- **Înălțimi reale:** câmpul `height_cm` din `art/prompts/<id>.json`; toate foile de personaj au aceeași scară, **195 cm = 300 px** (`CHAR_PX_PER_CM` în `pixelize.py`). Romică 165, Gina 168, Marius 186, Nelu și Gelu 195, Costel 182, Tanti Veta 150, turistul 190.
+- **Verificare:** `tools/art/lineup.py` pune personajele unul lângă altul, la scara reală.
+
+## Animații Veo automate (12.10.2026)
+- Claude face singur pașii din Gemini (prin Claude in Chrome, pe Mac-ul lui Tavi): încarcă imaginea, scrie promptul, așteaptă, descarcă video-ul în Downloads, apoi îl convertește cu `video_to_sprite.py`. Cost zero (inclus în abonamentul Gemini Pro).
+- Imaginea de pornire trebuie să fie **16:9**, cu loc deasupra capului: Veo face video 16:9 și taie ce nu încape (la primul test, cu o imagine 4:3, i-a tăiat șapca lui Romică).
+- Imaginile de încărcat trebuie să fie în folderul de lucru al sesiunii (căile de pe Mac nu sunt acceptate de încărcarea din Chrome).

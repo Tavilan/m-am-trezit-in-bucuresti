@@ -14,7 +14,7 @@ import shutil
 import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
-from pixelize import pixelize  # noqa: E402
+from pixelize import pixelize, pixelize_args  # noqa: E402
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
@@ -32,10 +32,7 @@ os.makedirs(os.path.join(ROOT, "art", "final"), exist_ok=True)
 raw = os.path.join(ROOT, "art", "raw", name + ".png")
 from PIL import Image
 Image.open(a.image).save(raw)
-pix = dict(spec.get("pixelize", {"width": 640, "height": 360} if spec.get("type") == "scene" else {"height": 300}))
-if spec.get("manual_key"):
-    pix["key"] = spec["manual_key"]
-pixelize(raw, os.path.join(ROOT, "art", "final", name + ".png"), **pix)
+pixelize(raw, os.path.join(ROOT, "art", "final", name + ".png"), **pixelize_args(spec))
 log = os.path.join(ROOT, "art", "LOG.md")
 new = not os.path.exists(log)
 with open(log, "a", encoding="utf-8") as f:

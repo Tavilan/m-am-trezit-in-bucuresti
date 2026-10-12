@@ -31,7 +31,7 @@ import urllib.error
 import urllib.request
 
 sys.path.insert(0, os.path.dirname(__file__))
-from pixelize import pixelize  # noqa: E402
+from pixelize import pixelize, pixelize_args  # noqa: E402
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 PROMPTS = os.path.join(ROOT, "art", "prompts")
@@ -141,9 +141,8 @@ def generate(asset_id, key, quality_override=""):
     raw_path = os.path.join(RAW, asset_id + ".png")
     with open(raw_path, "wb") as f:
         f.write(png)
-    pix = spec.get("pixelize", {"width": 640, "height": 360} if spec.get("type") == "scene" else {"height": 300})
     final_path = os.path.join(FINAL, asset_id + ".png")
-    pixelize(raw_path, final_path, **pix)
+    pixelize(raw_path, final_path, **pixelize_args(spec))
     cost = estimate_cost(model, res.get("usage", {}) or {})
     stamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     new = not os.path.exists(LOG)

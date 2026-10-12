@@ -5,3 +5,4 @@ export_credentials.cfg
 # sistem
 .DS_Store
 __pycache__/
+art/veo_in/
