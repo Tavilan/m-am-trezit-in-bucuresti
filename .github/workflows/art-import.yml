@@ -1,0 +1,35 @@
+# Când apar imagini noi în art/inbox/ (de la ChatGPT/Codex sau urcate manual),
+# le pixelizează în art/final/, le notează în art/LOG.md și le scoate din inbox.
+name: Importă artă
+
+on:
+  push:
+    branches: [main]
+    paths: ["art/inbox/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: art
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install --quiet pillow
+      - name: Pixelizează imaginile din inbox
+        run: python tools/art/import_inbox.py
+      - name: Salvează
+        run: |
+          git config user.name "art-bot"
+          git config user.email "art-bot@users.noreply.github.com"
+          git add -A art
+          if git diff --cached --quiet; then echo "Nimic nou."; else
+            git commit -m "Artă importată din inbox"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi

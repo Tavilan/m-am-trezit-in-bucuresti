@@ -7,7 +7,7 @@ on:
     branches: [main]
   workflow_dispatch:
   workflow_run:
-    workflows: ["Generează artă"]
+    workflows: ["Generează artă", "Importă artă"]
     types: [completed]
 
 permissions:
