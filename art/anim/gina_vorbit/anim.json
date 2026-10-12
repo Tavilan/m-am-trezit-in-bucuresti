@@ -1,0 +1,18 @@
+{
+  "frames": 40,
+  "fps": 12,
+  "size": [
+    248,
+    225
+  ],
+  "feet": [
+    124,
+    224
+  ],
+  "source_video": "gina_vorbit.mp4",
+  "loop_from_to": [
+    48,
+    88
+  ],
+  "loop_error": 4.82
+}

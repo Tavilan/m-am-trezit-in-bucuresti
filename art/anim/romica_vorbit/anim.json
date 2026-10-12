@@ -1,0 +1,18 @@
+{
+  "frames": 43,
+  "fps": 12,
+  "size": [
+    316,
+    224
+  ],
+  "feet": [
+    158,
+    224
+  ],
+  "source_video": "romica_vorbit.mp4",
+  "loop_from_to": [
+    60,
+    103
+  ],
+  "loop_error": 1.58
+}
