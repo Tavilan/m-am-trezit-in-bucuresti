@@ -1,0 +1,20 @@
+{
+  "type": "character",
+  "quality": "high",
+  "size": "1024x1536",
+  "background": "transparent",
+  "pixelize": {
+    "height": 300
+  },
+  "manual_key": [
+    0,
+    255,
+    0
+  ],
+  "versiune": 1,
+  "id": "gina_foaie",
+  "refs": [
+    "art/raw/romica_foaie.png"
+  ],
+  "prompt": "CHARACTER SHEET, single full-body figure, front view, neutral standing pose, arms slightly away from the body, realistic proportions (not cartoon, not chibi), detailed clean pixel art with larger flat colour areas and little texture noise. Background: one flat solid pure green colour (#00FF00) everywhere, no shadow, no floor, no gradient. Same art style and level of detail as the existing character Romică (attached reference if available). No text, no letters, no logos.\nGina, Romică's wife, about 50, a village 'lady' from rural Oltenia, Romania, who thinks she is finer than the whole village. Hair dyed burgundy-red, rolled in pink plastic curlers. A shiny flowered satin dressing gown, cheap but 'luxurious', tied at the waist; house slippers with fluffy pompoms; gold hoop earrings; reading glasses low on her nose. Hands on her hips, chin up, haughty and annoyed expression."
+}

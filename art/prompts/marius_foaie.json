@@ -1,0 +1,20 @@
+{
+  "type": "character",
+  "quality": "high",
+  "size": "1024x1536",
+  "background": "transparent",
+  "pixelize": {
+    "height": 300
+  },
+  "manual_key": [
+    0,
+    255,
+    0
+  ],
+  "versiune": 1,
+  "id": "marius_foaie",
+  "refs": [
+    "art/raw/romica_foaie.png"
+  ],
+  "prompt": "CHARACTER SHEET, single full-body figure, front view, neutral standing pose, arms slightly away from the body, realistic proportions (not cartoon, not chibi), detailed clean pixel art with larger flat colour areas and little texture noise. Background: one flat solid pure green colour (#00FF00) everywhere, no shadow, no floor, no gradient. Same art style and level of detail as the existing character Romică (attached reference if available). No text, no letters, no logos.\nMarius, Romică's nephew, about 30, back for a visit from Germany. He used to be Romică's apprentice in the village; now he acts superior. Neat short haircut, trimmed beard, clean grey softshell jacket over a polo shirt, beige chinos, brand-new spotless white sneakers. He proudly holds his smartphone toward the viewer (the screen shows only a blank framed document, no text). Smug, slightly condescending smile."
+}

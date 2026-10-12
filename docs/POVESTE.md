@@ -49,3 +49,7 @@
 - **Romică** apare: în oglindă, ca **portret animat la replicile lui** și în **câteva cadre scurte din afară** la momentele-cheie (cărat la tren, trezirea în gară).
 - **Dialogurile:** casetă de text jos + **portretul mare, animat**, al celui care vorbește, în stânga sau în dreapta, peste scenă.
 - **Gara satului:** cadru din afară (excepție de la persoana întâi): Romică cărat între Nelu și Gelu, cu Marius în față și trenul în spate.
+
+## Timp și anotimp (12.10.2026)
+- **Toamnă târzie, ploioasă:** asfalt ud, frunze, ceață, lumini reflectate.
+- **Durata în București:** dimineața sosirii → ziua → seara → o **noapte nedormită** → finalul, după ce răsare soarele din nou. Fiecare loc se vede de regulă o singură dată, la ora lui; **Gara de Nord apare de două ori** (dimineața sosirii și răsăritul de la final, cu Gina), deci are două variante de lumină.

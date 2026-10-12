@@ -1,0 +1,20 @@
+{
+  "type": "character",
+  "quality": "high",
+  "size": "1024x1536",
+  "background": "transparent",
+  "pixelize": {
+    "height": 300
+  },
+  "manual_key": [
+    0,
+    255,
+    0
+  ],
+  "versiune": 1,
+  "id": "veta_foaie",
+  "refs": [
+    "art/raw/romica_foaie.png"
+  ],
+  "prompt": "CHARACTER SHEET, single full-body figure, front view, neutral standing pose, arms slightly away from the body, realistic proportions (not cartoon, not chibi), detailed clean pixel art with larger flat colour areas and little texture noise. Background: one flat solid pure green colour (#00FF00) everywhere, no shadow, no floor, no gradient. Same art style and level of detail as the existing character Romică (attached reference if available). No text, no letters, no logos.\nTanti Veta, about 70, the village neighbour who knows everything that happens in the village. Short grey permed hair, thick-rimmed glasses, a beige knitted cardigan over a flowered dress, thick tights, comfortable old shoes. She holds a glass jar of homemade zacuscă (vegetable spread, orange-red, blank label, cloth tied over the lid) in both hands. Curious, squinting, gossipy expression."
+}

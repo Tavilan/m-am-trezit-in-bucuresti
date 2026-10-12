@@ -1,0 +1,20 @@
+{
+  "type": "character",
+  "quality": "high",
+  "size": "1024x1536",
+  "background": "transparent",
+  "pixelize": {
+    "height": 300
+  },
+  "manual_key": [
+    0,
+    255,
+    0
+  ],
+  "versiune": 1,
+  "id": "gemeni_foaie",
+  "refs": [
+    "art/raw/romica_foaie.png"
+  ],
+  "prompt": "CHARACTER SHEET, single full-body figure, front view, neutral standing pose, arms slightly away from the body, realistic proportions (not cartoon, not chibi), detailed clean pixel art with larger flat colour areas and little texture noise. Background: one flat solid pure green colour (#00FF00) everywhere, no shadow, no floor, no gradient. Same art style and level of detail as the existing character Romică (attached reference if available). No text, no letters, no logos.\nTWO characters side by side with a clear gap between them, both full body, front view, same pose: the twins Nelu and Gelu, about 40, IDENTICAL faces, identical chubby bodies, identical thick black moustaches and identical short haircuts. The only difference: Nelu (left) wears a red tracksuit, Gelu (right) wears a blue tracksuit; both wear the same cheap sport shoes. Both slightly tipsy, the same goofy grin."
+}

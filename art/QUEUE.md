@@ -2,3 +2,9 @@
 
 - [x] romica_foaie
 - [x] romica_oglinda
+- [ ] gina_foaie
+- [ ] marius_foaie
+- [ ] gemeni_foaie
+- [ ] costel_foaie
+- [ ] veta_foaie
+- [ ] turist_foaie
