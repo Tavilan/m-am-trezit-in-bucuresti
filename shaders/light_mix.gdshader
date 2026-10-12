@@ -5,7 +5,7 @@ shader_type canvas_item;
 // nu ca o imagine care se estompează.
 uniform sampler2D off_tex : filter_nearest;
 uniform float intensity : hint_range(0.0, 1.2) = 1.0;
-uniform vec3 cool_tint = vec3(1.0, 0.55, 0.3);   // culoarea luminii la intensitate mică
+uniform vec3 cool_tint = vec3(1.0, 0.75, 0.55);   // culoarea luminii la intensitate mică
 
 void fragment() {
 	vec3 on = texture(TEXTURE, UV).rgb;

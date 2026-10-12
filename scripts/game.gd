@@ -31,6 +31,7 @@ var _typing: Tween
 var _portrait_root: Control
 var _portrait: AnimSprite
 var _portrait_who := ""
+var _closeup_root: Control
 ## numele din dialog -> numele animației/portretului (art/anim/<x>_vorbit, art/final/<x>_portret.png)
 const PORTRAITS := {"Romică": "romica", "Gina": "gina", "Marius": "marius", "Costel": "costel",
 	"Tanti Mioara": "mioara", "Nelu": "nelu", "Gelu": "gelu", "Turistul": "turist"}
@@ -155,6 +156,12 @@ func _build_ui() -> void:
 	_portrait_root.visible = false
 	root.add_child(_portrait_root)
 
+	# prim-plan cu un lucru sau un animal din scenă (ex. câinele), cât timp Romică vorbește despre el
+	_closeup_root = Control.new()
+	_closeup_root.size = Vector2(W, H)
+	_closeup_root.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	root.add_child(_closeup_root)
+
 	_dlg = PanelContainer.new()
 	_dlg.position = Vector2(12, H - 98)
 	_dlg.size = Vector2(W - 24, 90)
@@ -253,6 +260,7 @@ func interact(cb: Callable) -> void:
 	_hint_btn.visible = false
 	await cb.call()
 	_hide_portrait()
+	hide_closeup()
 	busy = false
 	_hint_btn.visible = hud_on
 
@@ -278,6 +286,25 @@ func _show_portrait(who: String) -> void:
 	# același om nu poate fi în două locuri: îl scoatem din scenă cât timp e în prim-plan
 	for f in get_tree().get_nodes_in_group("figures"):
 		f.visible = f.get_meta("who", "") != who
+
+
+## Arată în prim-plan o animație din art/anim (centrată, deasupra casetei de dialog), cu o umbră discretă în spate.
+func show_closeup(anim_name: String) -> void:
+	hide_closeup()
+	var dim := ColorRect.new()
+	dim.color = Color(0, 0, 0, 0.45)
+	dim.size = Vector2(W, H)
+	dim.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_closeup_root.add_child(dim)
+	var a := AnimSprite.make(anim_name)
+	var fs := a.frame_size()
+	a.position = Vector2((W - fs.x) / 2.0, H - 96 - fs.y).round()
+	_closeup_root.add_child(a)
+
+
+func hide_closeup() -> void:
+	for c in _closeup_root.get_children():
+		c.queue_free()
 
 
 func _hide_portrait() -> void:

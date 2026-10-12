@@ -21,12 +21,14 @@ const GLOWS := [[Vector2(485, 188), 70.0, 0.5], [Vector2(298, 126), 30.0, 0.35],
 var _ripples: Array = []   # [poziție, vârstă]
 var _lamp_on := 1.0       # 0 = stins, 1 = aprins (trecerea e o clipă, ca la un bec real)
 var _lamp_target := 1.0
-var _lamp_plan: Array = []  # [durată, stare] pași de pâlpâit rămași
-var _lamp_wait := 4.0
+var _curve: Array = []      # intensitatea felinarului, cadru cu cadru, din video-ul Veo
+var _curve_fps := 24.0
+var _curve_t := 0.0
+var _hold := 2.0
 var _lamp_mat: ShaderMaterial
 var _hum := 0.0
 var _over: Node2D
-var _dog_sprite: Sprite2D
+var _dog_sprite: AnimSprite
 
 
 func _ready() -> void:
@@ -42,12 +44,17 @@ func _ready() -> void:
 	_lamp_mat.shader = preload("res://shaders/light_mix.gdshader")
 	_lamp_mat.set_shader_parameter("off_tex", load("res://art/final/drum_fundal_felinar_stins.png"))
 	_bg.material = _lamp_mat
-	var dog := layer("res://art/final/caine_ilie_drum.png", Vector2(122, 355))
+	var cf := FileAccess.open("res://art/anim/felinar/curve.json", FileAccess.READ)
+	if cf:
+		var j: Dictionary = JSON.parse_string(cf.get_as_text())
+		_curve = j.get("intensity", [])
+		_curve_fps = float(j.get("fps", 24))
+	# câinele lui Ilie stă ghemuit la uscat sub banca de la poartă (sub streașină) și tremură de frig
+	var dog := anim("caine_tremura_mic", Vector2(84, 263))
 	_dog_sprite = dog
-	# câinele are blana închisă la culoare: îl luminăm puțin mai tare ca să se vadă (stă în lumina felinarului)
+	# sub bancă e umbră: câinele trăiește aproape numai din lumina felinarului
 	var dm := dog.material as ShaderMaterial
-	dm.set_shader_parameter("ambient", Vector3(0.95, 0.92, 1.0))
-	dm.set_shader_parameter("saturation", 1.0)
+	dm.set_shader_parameter("ambient", Vector3(0.38, 0.4, 0.58))
 	_over = Node2D.new()
 	_over.draw.connect(_draw_over)
 	add_child(_over)
@@ -55,7 +62,7 @@ func _ready() -> void:
 		for i in RAIN_LAYERS[li]["n"]:
 			_rain.append(_new_drop(li, randf_range(-20, Game.H)))
 	hotspot("Felinarul", Rect2(104, 0, 40, 265), _lamp)
-	hotspot("Câinele lui Ilie", Rect2(dog.position, dog.texture.get_size()), _dog)
+	hotspot("Câinele lui Ilie", Rect2(46, 214, 76, 52), _dog)
 	hotspot("Birtul Unirea", Rect2(412, 120, 140, 92), _pub)
 
 
@@ -82,10 +89,9 @@ func _process(d: float) -> void:
 	for r in _ripples:
 		r[1] += d
 	_ripples = _ripples.filter(func(r): return r[1] < 0.8)
-	# pâlpâitul e oprit până găsim o variantă realistă (vezi docs/ARTA.md)
-	_lamp_on = 1.0
+	_update_lamp(d)
 	_lamp_mat.set_shader_parameter("intensity", _lamp_on)
-	(_dog_sprite.material as ShaderMaterial).set_shader_parameter("light1_strength", 1.1 * _lamp_on)
+	(_dog_sprite.material as ShaderMaterial).set_shader_parameter("light1_strength", 1.3 * _lamp_on)
 	_over.queue_redraw()
 
 
@@ -119,33 +125,25 @@ func _draw_over() -> void:
 		_over.draw_rect(Rect2(q + Vector2(0, -2 - k * 3.0), Vector2.ONE), c)
 
 
-## Felinarul (reparat de Romică acum trei ani) are contactul slab. Ca la becurile reale de stradă:
-## lumina nu se stinge brusc la negru, ci „cade” la 30–60% și revine, în serii neregulate; rar se
-## stinge aproape de tot o fracțiune de secundă și se reaprinde roșiatic, apoi se încălzește la galben.
-## Între serii are un tremur fin, abia vizibil (rețeaua de la țară).
+## Felinarul (reparat de Romică acum trei ani) are contactul slab. Ritmul pâlpâitului e cel filmat de Veo
+## (art/anim/felinar/curve.json, scos cu tools/art/light_from_video.py), iar imaginea stinsă e tot din video.
+## După o serie, felinarul arde liniștit câteva secunde, apoi seria se reia.
 func _update_lamp(d: float) -> void:
-	if _lamp_plan.is_empty():
-		_lamp_wait -= d
-		if _lamp_wait <= 0.0:
-			_lamp_wait = randf_range(3.0, 8.0)
-			for i in randi_range(2, 6):
-				_lamp_plan.append([randf_range(0.03, 0.09), randf_range(0.3, 0.6)])
-				_lamp_plan.append([randf_range(0.04, 0.16), randf_range(0.85, 1.0)])
-			if randf() < 0.3:
-				_lamp_plan.append([randf_range(0.12, 0.35), 0.08])
-				_lamp_plan.append([0.35, 0.3])
-				_lamp_plan.append([0.5, 0.65])
-				_lamp_plan.append([0.6, 0.9])
-		_hum += d * 7.0
-		_lamp_target = 0.97 + 0.03 * sin(_hum) * sin(_hum * 0.37)
-	else:
-		_lamp_plan[0][0] -= d
-		_lamp_target = _lamp_plan[0][1]
-		if _lamp_plan[0][0] <= 0.0:
-			_lamp_plan.pop_front()
-	# lumina scade repede și crește puțin mai lent (filamentul are inerție termică)
-	var rate := 1.0 / 0.04 if _lamp_target < _lamp_on else 1.0 / 0.12
-	_lamp_on = move_toward(_lamp_on, _lamp_target, d * rate)
+	if _curve.is_empty():
+		_lamp_on = 1.0
+		return
+	if _hold > 0.0:
+		_hold -= d
+		_lamp_on = 1.0
+		return
+	_curve_t += d
+	var k := int(_curve_t * _curve_fps)
+	if k >= _curve.size():
+		_curve_t = 0.0
+		_hold = randf_range(4.0, 11.0)
+		_lamp_on = 1.0
+		return
+	_lamp_on = float(_curve[k])
 
 
 func _new_drop(layer_i: int, y: float) -> Array:
@@ -169,7 +167,9 @@ func _lamp() -> void:
 
 
 func _dog() -> void:
-	await say("Romică", "Câinele lui Ilie. Latră la toată lumea, numai la mine nu. Ne înțelegem: suntem amândoi certați cu nevasta.")
+	Game.show_closeup("caine_tremura")
+	await say("Romică", "Câinele lui Ilie. S-a băgat sub bancă, la uscat, și tremură ca varga.")
+	await say("Romică", "Ne înțelegem noi doi: amândoi suntem dați afară din casă pe ploaie.")
 
 
 func _pub() -> void:

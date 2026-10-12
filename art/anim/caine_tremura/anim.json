@@ -1,0 +1,20 @@
+{
+  "frames": 68,
+  "fps": 12,
+  "size": [
+    305,
+    184
+  ],
+  "cols": 13,
+  "feet": [
+    222,
+    183
+  ],
+  "source_video": "dog.mp4",
+  "loop_from_to": [
+    40,
+    108
+  ],
+  "pingpong": false,
+  "loop_error": 2.04
+}
