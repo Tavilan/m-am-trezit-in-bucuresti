@@ -22,3 +22,4 @@
 - [ ] mioara_foaie
   - Nereușită după două generări: capul rămâne prea mare față de corp pentru proporția cerută de aproximativ șapte capete înălțime. A doua variantă are eticheta goală corectă, dar nu trece verificarea proporțiilor. Imaginea a fost eliminată din art/inbox; rândul rămâne nebifat. Am continuat cu următorul personaj conform docs/CODEX_ARTA.md, punctul 5.
 - [ ] marius_foaie
+  - Nereușită după două generări: prima variantă include mustață și barbă prea extinsă, în locul feței bărbierite cu o linie scurtă de barbă pe mandibulă; a doua corectează mustața, dar include logo-uri recognoscibile pe adidași, contrar cerinței „NO logos, NO stripes, NO brand marks anywhere”. Imaginea a fost eliminată din art/inbox; rândul rămâne nebifat conform docs/CODEX_ARTA.md, punctul 5.
