@@ -11,7 +11,7 @@
 
 ## Refacere: personaje distincte (prompturi noi, fără referința lui Romică)
 - [x] gina_foaie
-- [ ] marius_foaie
+- [x] marius_foaie
 - [ ] gemeni_foaie
 - [ ] costel_foaie
 - [ ] veta_foaie
