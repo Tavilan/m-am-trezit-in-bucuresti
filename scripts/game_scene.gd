@@ -17,6 +17,8 @@ const EYE_CM := 155.0
 var horizon := 0.0
 ## Lumina scenei pentru personaje/obiecte (vezi shaders/scene_light.gdshader). Gol = fără.
 var lighting := {}
+## Gradarea pentru portretele/prim-planurile din dialog în scena asta: {"tint": Vector3, "saturation": float}
+var grade := {}
 const LIGHT_SHADER := preload("res://shaders/scene_light.gdshader")
 
 

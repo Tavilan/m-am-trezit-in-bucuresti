@@ -32,6 +32,21 @@ var _portrait_root: Control
 var _portrait: AnimSprite
 var _portrait_who := ""
 var _closeup_root: Control
+## „Gradarea” scenei curente pentru portrete și prim-planuri (lumina locului: ton și saturație),
+## ca portretul să se potrivească cu personajul din scenă. O setează scena în `grade`.
+var grade := {}
+const LIGHT_SHADER := preload("res://shaders/scene_light.gdshader")
+
+
+func _apply_grade(s: CanvasItem) -> void:
+	if grade.is_empty():
+		s.material = null
+		return
+	var m := ShaderMaterial.new()
+	m.shader = LIGHT_SHADER
+	m.set_shader_parameter("ambient", grade.get("tint", Vector3.ONE))
+	m.set_shader_parameter("saturation", grade.get("saturation", 1.0))
+	s.material = m
 ## numele din dialog -> numele animației/portretului (art/anim/<x>_vorbit, art/final/<x>_portret.png)
 const PORTRAITS := {"Romică": "romica", "Gina": "gina", "Marius": "marius", "Costel": "costel",
 	"Tanti Mioara": "mioara", "Nelu": "nelu", "Gelu": "gelu", "Turistul": "turist"}
@@ -281,6 +296,7 @@ func _show_portrait(who: String) -> void:
 		_portrait.position = Vector2(x, H - 76 - fs.y).round()
 		_portrait_root.add_child(_portrait)
 		_portrait_who = who
+	_apply_grade(_portrait)
 	_portrait.playing = true
 	_portrait_root.visible = true
 	# același om nu poate fi în două locuri: îl scoatem din scenă cât timp e în prim-plan
@@ -292,13 +308,14 @@ func _show_portrait(who: String) -> void:
 func show_closeup(anim_name: String) -> void:
 	hide_closeup()
 	var dim := ColorRect.new()
-	dim.color = Color(0, 0, 0, 0.45)
+	dim.color = Color(0, 0, 0, 0.3)
 	dim.size = Vector2(W, H)
 	dim.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_closeup_root.add_child(dim)
 	var a := AnimSprite.make(anim_name)
 	var fs := a.frame_size()
-	a.position = Vector2((W - fs.x) / 2.0, H - 96 - fs.y).round()
+	a.position = Vector2((W - fs.x) / 2.0, H - 100 - fs.y).round()
+	_apply_grade(a)
 	_closeup_root.add_child(a)
 
 
@@ -399,6 +416,8 @@ func goto(scene: String, fade_seconds := 0.45) -> void:
 	s.name = scene
 	world.add_child(s)
 	hud_on = s.get("show_hud") != false
+	var g = s.get("grade")
+	grade = g if g is Dictionary else {}
 	_hud.visible = hud_on
 	_hint_btn.visible = hud_on
 	t = create_tween()
