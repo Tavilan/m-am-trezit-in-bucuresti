@@ -1,12 +1,12 @@
 {
   "id": "caine_ilie",
-  "versiune": 1,
+  "versiune": 2,
   "type": "object",
-  "height_cm": 55,
+  "height_cm": 40,
   "manual_key": [
     0,
     255,
     0
   ],
-  "prompt": "ANIMAL SPRITE, single animal, side view facing left, whole body visible with empty space around it. Background: one flat solid pure green colour (#00FF00) everywhere, no shadow, no floor. Detailed clean pixel art, realistic proportions, larger flat colour areas. No text.\nA typical Romanian village yard dog: medium size, mixed breed, short rough brown-and-black fur, one ear up and one down, an old red collar, wet from the rain, sitting and looking bored but alert."
+  "prompt": "ANIMAL SPRITE, single animal, whole body visible with empty space around it. Background: one flat solid pure green colour (#00FF00) everywhere, no shadow, no floor. Detailed clean pixel art, realistic proportions, larger flat colour areas, same style as a detailed night scene. No text.\nA typical Romanian village yard dog lying curled up on the ground, seen from the front and slightly from the side (three-quarter view), as if hiding under a bench from the rain: medium size, mixed breed, short rough fur in warm light brown and tan with a darker back (not black, so it reads well at night), one ear up and one folded, an old red collar. Wet fur in spikes, cold and miserable, head resting on the front paws, eyes open and looking at the viewer, slightly hunched, shivering."
 }

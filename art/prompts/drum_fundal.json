@@ -1,6 +1,9 @@
 {
   "id": "drum_fundal",
-  "versiune": 1,
+  "versiune": 2,
   "type": "scene",
-  "prompt": "GAME BACKGROUND, WIDE 16:9 LANDSCAPE, seen in FIRST PERSON from the eyes of a short man standing (camera at about 1.55 m, looking straight ahead, natural perspective, no fisheye). NO people and NO animals anywhere in the image (characters are added later as separate layers). Detailed clean pixel art, larger flat colour areas, little texture noise. No text, no letters, no logos.\nA muddy dirt road through a village in rural Oltenia, Romania, at night in light autumn rain. The road leads straight ahead, with puddles reflecting the lights. LEFT foreground: a concrete electricity pole with a single old street lamp giving weak orange light, tangled wires going to the houses. Both sides: low village houses with tall wooden or metal fences and gates, bare walnut trees, a wooden bench by a gate. RIGHT, at the end of the road (middle distance): a small single-storey village pub, the old collective-farm shop, with a big lit shop window glowing warm yellow and a BLANK sign above the door (no letters). Dark blue cloudy sky, cold moonlight, wet surfaces. Empty area on the road in the left-middle ground (a dog will be added there later)."
+  "prompt": "EDIT OF THE ATTACHED IMAGE: keep the whole picture exactly the same (same composition, camera, road, houses, pub, sky, moon, rain, light and pixel-art style), change ONLY the area of the red metal gate and the wooden bench on the left:\n- the gate gets a small traditional Romanian village gate roof above it (a narrow pitched roof of old clay tiles on wooden beams), wet and dripping;\n- the wooden bench is moved right under that small roof, next to the gate, so the ground under the bench stays DRY and darker than the wet mud around it;\n- under the bench there is an EMPTY, dry, shadowed space with a bit of straw and an old rag (a dog will be added there later as a separate layer, do NOT draw any animal);\n- the street lamp on the concrete pole still lights the gate, the bench and the puddles in front of them with warm orange light.\nWide 16:9, no people, no animals, no text, no logos.",
+  "refs": [
+    "art/raw/drum_fundal.png"
+  ]
 }
