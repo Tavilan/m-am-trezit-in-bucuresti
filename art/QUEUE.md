@@ -45,3 +45,7 @@
 ## Drumul regândit: poarta cu streașină și banca la adăpost; câinele ghemuit sub bancă (va fi animat cu Veo)
 - [x] drum_fundal
 - [x] caine_ilie
+
+## Nea Ilie, vecinul de pe drum (stăpânul câinelui)
+- [ ] ilie_foaie
+- [ ] ilie_portret

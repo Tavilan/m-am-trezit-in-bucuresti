@@ -1,0 +1,18 @@
+{
+  "id": "ilie_portret",
+  "type": "character",
+  "refs": [
+    "art/raw/ilie_foaie.png"
+  ],
+  "pixelize": {
+    "height": 220
+  },
+  "manual_key": [
+    0,
+    255,
+    0
+  ],
+  "versiune": 1,
+  "nota": "Portret de dialog; imaginea brută (16:9) e și intrarea pentru animația Veo de vorbit.",
+  "prompt": "DIALOGUE PORTRAIT, WIDE 16:9 LANDSCAPE IMAGE: head and shoulders (bust down to mid-chest) of ONE person, centred, facing the viewer, with generous empty space above the head (at least one fifth of the image height) and on both sides; the bust is cut by the bottom edge of the image. Exactly the same person, face, hair, clothes and colours as in the attached character sheet; same detailed clean pixel art style, larger flat colour areas, little texture noise, soft light from the upper left. Neutral, closed mouth, relaxed face, looking at the viewer (the image will be animated as talking later). Background: one flat solid pure green colour (#00FF00) everywhere, no shadow, no gradient. No text, no letters, no logos.\nNea Ilie, about 65: round weathered face, white stubble, thick white bushy eyebrows, small lively eyes, big ears, grey wool hat with ear flaps, dark green quilted jacket, clear plastic sheet over his shoulders wet with rain. Expression: curious, talkative, friendly, a bit nosy."
+}
