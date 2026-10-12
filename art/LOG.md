@@ -25,3 +25,4 @@
 | 2026-10-12 12:15 UTC | costel_foaie__gemini | gemini | import manual | 0 |
 | 2026-10-12 12:15 UTC | veta_foaie__gemini | gemini | import manual | 0 |
 | 2026-10-12 12:15 UTC | turist_foaie__gemini | gemini | import manual | 0 |
+| 2026-10-12 12:36 UTC | mioara_foaie | chatgpt | import manual | 0 |
