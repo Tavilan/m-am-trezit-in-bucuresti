@@ -1,0 +1,18 @@
+{
+  "id": "romica_portret",
+  "type": "character",
+  "refs": [
+    "art/raw/romica_foaie.png"
+  ],
+  "pixelize": {
+    "height": 220
+  },
+  "manual_key": [
+    0,
+    255,
+    0
+  ],
+  "versiune": 1,
+  "nota": "Portret de dialog. Imaginea brută (16:9, cu loc deasupra capului) e și intrarea pentru animația Veo de vorbit.",
+  "prompt": "DIALOGUE PORTRAIT, WIDE 16:9 LANDSCAPE IMAGE: head and shoulders (bust down to mid-chest) of ONE person, centred, facing the viewer, with generous empty space above the head (at least one fifth of the image height) and on both sides; the bust is cut by the bottom edge of the image. Exactly the same person, face, hair, clothes and colours as in the attached character sheet; same detailed clean pixel art style, larger flat colour areas, little texture noise, soft light from the upper left. Neutral, closed mouth, relaxed face, looking at the viewer (the image will be animated as talking later). Background: one flat solid pure green colour (#00FF00) everywhere, no shadow, no gradient. No text, no letters, no logos.\nRomică: 55-year-old village handyman from rural Oltenia: weathered sun-tanned face, thick grey-black moustache, grey stubble, red drinker's nose, bushy eyebrows, tired but kind eyes, worn dark grey flat cap, faded navy work jacket open over a brown knitted sweater, big roll of black electrical tape in the chest pocket. Expression: deadpan, slightly tipsy, stubborn, good-hearted."
+}

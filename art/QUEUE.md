@@ -30,3 +30,7 @@
 
 ## Runda 3c (Marius mai puțin macho: corp obișnuit, puțin moale, față rotundă de băiat, poză țeapănă)
 - [x] marius_foaie
+
+## Portrete de dialog (16:9, bust, cu loc deasupra capului; referința = foaia aceluiași personaj)
+- [ ] romica_portret
+- [ ] gina_portret

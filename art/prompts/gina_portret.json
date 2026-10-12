@@ -1,0 +1,18 @@
+{
+  "id": "gina_portret",
+  "type": "character",
+  "refs": [
+    "art/raw/gina_foaie.png"
+  ],
+  "pixelize": {
+    "height": 220
+  },
+  "manual_key": [
+    0,
+    255,
+    0
+  ],
+  "versiune": 1,
+  "nota": "Portret de dialog. Imaginea brută (16:9, cu loc deasupra capului) e și intrarea pentru animația Veo de vorbit.",
+  "prompt": "DIALOGUE PORTRAIT, WIDE 16:9 LANDSCAPE IMAGE: head and shoulders (bust down to mid-chest) of ONE person, centred, facing the viewer, with generous empty space above the head (at least one fifth of the image height) and on both sides; the bust is cut by the bottom edge of the image. Exactly the same person, face, hair, clothes and colours as in the attached character sheet; same detailed clean pixel art style, larger flat colour areas, little texture noise, soft light from the upper left. Neutral, closed mouth, relaxed face, looking at the viewer (the image will be animated as talking later). Background: one flat solid pure green colour (#00FF00) everywhere, no shadow, no gradient. No text, no letters, no logos.\nGina, Romică's wife, about 50: narrow long face, high sharp cheekbones, thin pointed nose, pencilled high eyebrows, blue eyeshadow, bright red lipstick, beauty mark, burgundy-red dyed hair in pink plastic curlers, gold hoop earrings, reading glasses low on her nose, shiny flowered satin dressing gown. Expression: haughty, annoyed, chin slightly up."
+}
