@@ -3,7 +3,13 @@
   "type": "scene",
   "quality": "high",
   "size": "1920x1088",
-  "refs": ["art/raw/romica_foaie.png"],
-  "pixelize": {"width": 640, "height": 360},
-  "prompt": "Use the attached character sheet: this is the SAME man, Romică, with exactly the same face, moustache, cap, jacket and sweater.\nFirst-person view into the cracked, stained mirror above the sink of a shabby village pub bathroom in rural Romania, at night. The mirror fills almost the whole frame. In it: a tight close-up of Romică's face and shoulders, looking straight into the camera with a long, blank, deadpan stare, completely expressionless and a little too long, like a man who just saw himself for the first time in years. Water drops on his face, he just washed it after a quarrel with his wife. Slightly drunk: watery eyes, red nose. Harsh light from a single bare bulb above, greenish old tiles at the edges of the mirror, a rusty tap at the very bottom edge. In colour. Comic through stillness and stare, not through exaggeration. No text."
+  "refs": [
+    "art/raw/romica_foaie.png"
+  ],
+  "pixelize": {
+    "width": 640,
+    "height": 360
+  },
+  "prompt": "Use the attached character sheet: this is the SAME man, Romică, with exactly the same face, moustache, cap, jacket and sweater.\nFirst-person view into the cracked, stained mirror above the sink of a shabby village pub bathroom in rural Romania, at night. The mirror fills almost the whole frame. In it: a tight close-up of Romică's face and shoulders, looking straight into the camera with a long, blank, deadpan stare, completely expressionless and a little too long, like a man who just saw himself for the first time in years. Water drops on his face, he just washed it after a quarrel with his wife. Slightly drunk: watery eyes, red nose. Harsh light from a single bare bulb above, greenish old tiles at the edges of the mirror, a rusty tap at the very bottom edge. In colour. Comic through stillness and stare, not through exaggeration. No text.",
+  "versiune": 1
 }
