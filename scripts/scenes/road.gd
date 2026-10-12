@@ -35,7 +35,7 @@ var _stones: Array = []
 var _stone_i := 0          # următoarea piatră pe care trebuie să calci
 var _crossing := false     # minijocul e pornit
 var _splashes: Array = []  # [poziție, vârstă, mare]
-const STONE_PATH := [Vector2(300, 350), Vector2(336, 318), Vector2(372, 293), Vector2(410, 272), Vector2(448, 254), Vector2(486, 238)]
+const STONE_PATH := [Vector2(440, 326), Vector2(461, 298), Vector2(479, 273), Vector2(498, 253), Vector2(516, 237)]   # prin băltoacele din dreapta, spre ușa birtului
 
 
 func _ready() -> void:
@@ -82,7 +82,10 @@ func _ready() -> void:
 	for k in STONE_PATH.size():
 		var c: Vector2 = STONE_PATH[k]
 		var w: float = (c.y - horizon) * 0.2
-		_stones.append([c, w, randf_range(0, TAU)])
+		var spr := layer("res://art/final/piatra_drum_%d.png" % int(c.y), c + Vector2(0, w * 0.15))
+		# pietrele ude prind lumina lunii și a vitrinei: le luminăm ca să se vadă pe întuneric
+		(spr.material as ShaderMaterial).set_shader_parameter("ambient", Vector3(0.95, 0.95, 1.1))
+		_stones.append([c, w, randf_range(0, TAU), spr])
 		hotspot("Piatra", Rect2(c - Vector2(w * 0.8, w * 0.45), Vector2(w * 1.6, w * 0.9)), _stone.bind(k))
 
 
@@ -112,6 +115,11 @@ func _process(d: float) -> void:
 	_update_lamp(d)
 	_lamp_mat.set_shader_parameter("intensity", _lamp_on)
 	(_dog_sprite.material as ShaderMaterial).set_shader_parameter("light1_strength", 1.3 * _lamp_on)
+	for k in _stones.size():
+		# apa urcă și coboară pe fiecare piatră: deasupra apei = se poate călca
+		var up := _stone_up(k)
+		var spr: Sprite2D = _stones[k][3]
+		(spr.material as ShaderMaterial).set_shader_parameter("water_level", clampf(0.45 - up * 0.6, 0.0, 1.0))
 	for sp in _splashes:
 		sp[1] += d
 	_splashes = _splashes.filter(func(sp): return sp[1] < 0.5)
@@ -125,26 +133,14 @@ func _stone_up(k: int) -> float:
 
 
 func _draw_stones() -> void:
+	# pietrele sunt sprite-uri (art/final/piatra_drum_*.png); aici doar cercurile din apă
 	for k in _stones.size():
 		var c: Vector2 = _stones[k][0]
 		var w: float = _stones[k][1]
-		var up := _stone_up(k)
-		var lit := clampf(_light_at(c) * 1.4, 0.0, 1.0)
-		if up > -0.15:
-			var h: float = clampf(up + 0.15, 0.0, 1.0)
-			var stone := Color(0.24, 0.23, 0.24).lerp(Color(0.5, 0.38, 0.25), lit * 0.6)
-			_over.draw_set_transform(c, 0, Vector2(1, 0.42))
-			_over.draw_circle(Vector2.ZERO, w * (0.55 + 0.25 * h), Color(0.06, 0.06, 0.08, 0.6))   # umbra în apă
-			_over.draw_circle(Vector2(0, -w * 0.25 * h), w * (0.45 + 0.2 * h), stone)
-			_over.draw_circle(Vector2(-w * 0.15, -w * 0.38 * h), w * 0.18, stone.lightened(0.35 + 0.3 * lit))  # luciul ud
-			_over.draw_set_transform(Vector2.ZERO)
-		else:
-			_over.draw_set_transform(c, 0, Vector2(1, 0.35))
-			_over.draw_arc(Vector2.ZERO, w * 0.5, 0, TAU, 14, Color(0.75, 0.8, 0.95, 0.35), 1.0)
-			_over.draw_set_transform(Vector2.ZERO)
-		if _crossing and k == _stone_i:
-			_over.draw_set_transform(c, 0, Vector2(1, 0.42))
-			_over.draw_arc(Vector2.ZERO, w * 0.85, 0, TAU, 18, Color(1.0, 0.85, 0.5, 0.35 + 0.25 * sin(_t * 6.0)), 1.0)
+		if _stone_up(k) < 0.15:
+			_over.draw_set_transform(c, 0, Vector2(1, 0.32))
+			var r := w * (0.55 + 0.15 * sin(_t * 3.0 + k))
+			_over.draw_arc(Vector2.ZERO, r, 0, TAU, 16, Color(0.75, 0.8, 0.95, 0.3), 1.0)
 			_over.draw_set_transform(Vector2.ZERO)
 	for sp in _splashes:
 		var p: Vector2 = sp[0]
@@ -273,7 +269,7 @@ func _stone(k: int) -> void:
 	if k != _stone_i:
 		return
 	var c: Vector2 = _stones[k][0]
-	if _stone_up(k) < 0.0:
+	if _stone_up(k) < 0.15:
 		_splashes.append([c, 0.0, 1.0])
 		Game.shake(3.0, 0.25)
 		await say("Romică", ["Mi-am umplut cizma!", "Aoleu, până la genunchi!", "Asta nu era piatră, era băltoaca."].pick_random())

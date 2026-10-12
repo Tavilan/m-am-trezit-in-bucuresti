@@ -15,6 +15,8 @@ uniform float light2_radius = 300.0;
 uniform float light2_strength = 0.0;
 uniform float saturation = 1.0;
 uniform float ground_shade = 0.22;
+// cât din obiect e sub apă, de jos în sus (0 = nimic); folosit la pietrele din băltoacă
+uniform float water_level = 0.0;
 
 varying vec2 world_pos;
 
@@ -35,5 +37,11 @@ void fragment() {
 	vec3 rgb = c.rgb * light;
 	float g = dot(rgb, vec3(0.299, 0.587, 0.114));
 	rgb = mix(vec3(g), rgb, saturation);
-	COLOR = vec4(rgb, c.a) * vec4(COLOR.rgb, 1.0);
+	float a = c.a;
+	if (water_level > 0.0) {
+		float line = 1.0 - water_level;
+		if (UV.y > line) { a = 0.0; }
+		else if (UV.y > line - 0.06) { rgb = mix(rgb, vec3(0.75, 0.8, 0.95), 0.5); }
+	}
+	COLOR = vec4(rgb, a) * vec4(COLOR.rgb, 1.0);
 }
