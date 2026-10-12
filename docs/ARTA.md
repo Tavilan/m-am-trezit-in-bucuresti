@@ -60,3 +60,4 @@ Test orb pe variantele pixelizate (realism / lizibilitate / impresie):
 - **Un singur loc o dată:** cât timp portretul cuiva e în prim-plan la dialog, figura lui din scenă dispare (`figure()` în scenă).
 - **Romică** nu are portret la dialog (persoana întâi), doar în oglindă și ~5 momente-cheie (`Game.hero_portrait`).
 - **Text:** fontul Jersey 15 (OFL), mărimea 20; la derulare, un sunet scurt, cu „voce” diferită pentru fiecare personaj (`audio/text_blip.wav`, înălțimi în `Game.VOICE`).
+- **Lumini care se aprind și se sting** (felinare, becuri): nu se desenează cu forme peste imagine. Din același fundal se face varianta „stinsă” cu `tools/art/light_off.py` (scoate lumina caldă a becului de pe stâlp, pereți, gard și băltoace, plus aura din cer; becul devine sticlă stinsă), iar jocul trece între cele două imagini. Felinarul de pe drum pâlpâie în serii scurte și uneori se stinge de tot și se reaprinde încet, ca becurile de stradă reale.
