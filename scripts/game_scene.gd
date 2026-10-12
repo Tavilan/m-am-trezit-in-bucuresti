@@ -23,6 +23,28 @@ func background(path: String) -> void:
 	queue_redraw()
 
 
+## Un strat de imagine (obiect, personaj static) cu marginea de jos-stânga sau centrul jos la `feet`.
+## `scale_` e scara scenei: foile de personaj/obiecte au 195 cm = 300 px (vezi docs/ARTA.md).
+func layer(path: String, feet: Vector2, scale_ := 1.0) -> Sprite2D:
+	var s := Sprite2D.new()
+	s.texture = load(path)
+	s.centered = false
+	s.scale = Vector2(scale_, scale_)
+	s.position = (feet - Vector2(s.texture.get_width() * scale_ / 2.0, s.texture.get_height() * scale_)).round()
+	add_child(s)
+	return s
+
+
+## Animație din art/anim/<nume>, așezată cu centrul de jos la `feet`.
+func anim(anim_name: String, feet: Vector2, scale_ := 1.0) -> AnimSprite:
+	var s := AnimSprite.make(anim_name)
+	s.scale = Vector2(scale_, scale_)
+	var fs := s.frame_size()
+	s.position = (feet - Vector2(fs.x * scale_ / 2.0, fs.y * scale_)).round()
+	add_child(s)
+	return s
+
+
 func hotspot(label: String, rect: Rect2, action: Callable) -> Control:
 	var h: Control = HOTSPOT.new()
 	h.label = label

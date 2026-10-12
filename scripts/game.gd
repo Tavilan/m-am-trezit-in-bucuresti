@@ -27,6 +27,14 @@ var _tip: Label
 var _rotate: Control
 var _hint_btn: Button
 var _typing: Tween
+var _portrait_root: Control
+var _portrait: AnimSprite
+var _portrait_who := ""
+## numele din dialog -> numele animației/portretului (art/anim/<x>_vorbit, art/final/<x>_portret.png)
+const PORTRAITS := {"Romică": "romica", "Gina": "gina", "Marius": "marius", "Costel": "costel",
+	"Tanti Mioara": "mioara", "Nelu": "nelu", "Gelu": "gelu", "Turistul": "turist"}
+## cine apare în stânga (Romică, eroul); ceilalți în dreapta
+const PORTRAIT_LEFT := ["Romică"]
 var hud_on := true
 var _transitioning := false
 
@@ -115,6 +123,13 @@ func _build_ui() -> void:
 	_blocker.visible = false
 	_blocker.gui_input.connect(_on_blocker_input)
 	root.add_child(_blocker)
+
+	# portretul mare al celui care vorbește, în spatele casetei de text
+	_portrait_root = Control.new()
+	_portrait_root.size = Vector2(W, H)
+	_portrait_root.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_portrait_root.visible = false
+	root.add_child(_portrait_root)
 
 	_dlg = PanelContainer.new()
 	_dlg.position = Vector2(12, H - 92)
@@ -213,11 +228,35 @@ func interact(cb: Callable) -> void:
 	hide_tip()
 	_hint_btn.visible = false
 	await cb.call()
+	_hide_portrait()
 	busy = false
 	_hint_btn.visible = hud_on
 
 
+func _show_portrait(who: String) -> void:
+	var key: String = PORTRAITS.get(who, "")
+	if key == "" or not AnimSprite.exists(key + "_vorbit"):
+		_portrait_root.visible = false
+		return
+	if who != _portrait_who:
+		if _portrait:
+			_portrait.queue_free()
+		_portrait = AnimSprite.make(key + "_vorbit")
+		var fs := _portrait.frame_size()
+		var x: float = 4.0 if who in PORTRAIT_LEFT else W - fs.x - 4.0
+		_portrait.position = Vector2(x, H - 70 - fs.y).round()
+		_portrait_root.add_child(_portrait)
+		_portrait_who = who
+	_portrait.playing = true
+	_portrait_root.visible = true
+
+
+func _hide_portrait() -> void:
+	_portrait_root.visible = false
+
+
 func say(who: String, text: String) -> void:
+	_show_portrait(who)
 	_blocker.visible = true
 	_dlg.visible = true
 	_dlg_more.visible = false
@@ -227,11 +266,16 @@ func say(who: String, text: String) -> void:
 	_dlg_text.visible_ratio = 0.0
 	_typing = create_tween()
 	_typing.tween_property(_dlg_text, "visible_ratio", 1.0, max(0.2, text.length() * 0.025))
-	_typing.finished.connect(func(): _dlg_more.visible = true)
+	_typing.finished.connect(func():
+		_dlg_more.visible = true
+		if _portrait:
+			_portrait.playing = false)
 	await advanced
 	if _dlg_text.visible_ratio < 1.0:
 		_typing.kill()
 		_dlg_text.visible_ratio = 1.0
+		if _portrait:
+			_portrait.playing = false
 		_dlg_more.visible = true
 		await advanced
 	_dlg.visible = false
