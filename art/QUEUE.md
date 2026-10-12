@@ -6,5 +6,5 @@
 - [x] marius_foaie
 - [x] gemeni_foaie
 - [x] costel_foaie
-- [ ] veta_foaie
+- [x] veta_foaie
 - [ ] turist_foaie
