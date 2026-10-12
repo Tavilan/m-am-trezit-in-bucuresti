@@ -16,4 +16,4 @@
 - [x] costel_foaie
 - [ ] veta_foaie
   - Refacere nereușită după două generări: ambele variante au capul disproporționat de mare și aspect prea caricatural, contrar proporțiilor realiste de adult și cerinței „normal-sized head, not cartoon, not chibi”. Imaginea a fost eliminată din art/inbox; rândul rămâne nebifat. Am continuat cu următorul personaj conform docs/CODEX_ARTA.md, punctul 5.
-- [ ] turist_foaie
+- [x] turist_foaie
