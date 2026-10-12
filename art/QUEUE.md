@@ -26,4 +26,4 @@
 
 ## Runda 3b (prompturi corectate: Mioara șase capete, Marius complet ras, adidași albi fără nimic)
 - [x] mioara_foaie
-- [ ] marius_foaie
+- [x] marius_foaie
