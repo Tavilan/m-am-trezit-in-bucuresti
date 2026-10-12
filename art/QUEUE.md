@@ -25,5 +25,5 @@
   - Nereușită după două generări: prima variantă include mustață și barbă prea extinsă, în locul feței bărbierite cu o linie scurtă de barbă pe mandibulă; a doua corectează mustața, dar include logo-uri recognoscibile pe adidași, contrar cerinței „NO logos, NO stripes, NO brand marks anywhere”. Imaginea a fost eliminată din art/inbox; rândul rămâne nebifat conform docs/CODEX_ARTA.md, punctul 5.
 
 ## Runda 3b (prompturi corectate: Mioara șase capete, Marius complet ras, adidași albi fără nimic)
-- [ ] mioara_foaie
+- [x] mioara_foaie
 - [ ] marius_foaie
