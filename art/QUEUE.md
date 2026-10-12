@@ -38,6 +38,6 @@
 ## Scene complete: bucătăria și drumul (fundaluri 16:9 fără personaje, obiecte pe verde)
 - [ ] bucatarie_fundal
   - Respins după două generări: ambele variante includ mici litere/inscripții pe icoana ortodoxă, contrar cerinței fără text. Am păstrat prima variantă, cu compoziția cea mai potrivită și inscripții mai discrete, nemodificată în art/inbox/bucatarie_fundal__respins.png pentru evaluarea lui Tavi. Rândul rămâne nebifat; procesarea continuă conform docs/CODEX_ARTA.md, punctul 5.
-- [ ] masina_spalat
+- [x] masina_spalat
 - [ ] drum_fundal
 - [ ] caine_ilie
