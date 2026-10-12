@@ -36,3 +36,10 @@
 6. **Gara satului, noaptea târziu.** Romică, beat criță, sprijinit între Nelu și Gelu, cu nepotul în frunte. Îl urcă în primul tren, „să se răcorească”. Borcanul de zacuscă nu-i iese din mână.
 7. **Negru. Sunetul trenului, ore întregi.**
 8. **Gara de Nord, dimineața.** Un bliț. Un turist străin îl fotografiază ca pe o atracție locală. Romică deschide ochii: „…am ajuns în București.” Are 7 lei și un borcan de zacuscă. Începe jocul.
+
+## Personajele prologului: aspect fixat (12.10.2026)
+- **Gina** (nevasta lui Romică), ~50: „doamnă” de sat. Păr vopsit roșu-vișiniu, bigudiuri, halat de satin cu flori, ochelari pe nas; se crede mai fină decât tot satul.
+- **Marius** (nepotul venit din Germania), ~30: în sat fusese ucenicul lui Romică, „bun la toate”. Acum face pe superiorul cu un certificat de electrician nemțesc, înrămat, pe care îl arată pe telefon.
+- **Nelu și Gelu** (gemenii), ~40: identici, grăsuți, aceeași mustață; treninguri de culori diferite (Nelu roșu, Gelu albastru) ca să-i deosebești. Vorbesc mereu în ecou.
+- **Costel** (birtașul): fost gestionar la magazinul CAP-ului, halat albastru de magazin, creion după ureche.
+- **Tanti Veta**: vecina care știe tot ce mișcă în sat; cardigan, ochelari cu ramă groasă.
