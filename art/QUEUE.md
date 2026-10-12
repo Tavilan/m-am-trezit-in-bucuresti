@@ -34,3 +34,9 @@
 ## Portrete de dialog (16:9, bust, cu loc deasupra capului; referința = foaia aceluiași personaj)
 - [x] romica_portret
 - [x] gina_portret
+
+## Scene complete: bucătăria și drumul (fundaluri 16:9 fără personaje, obiecte pe verde)
+- [ ] bucatarie_fundal
+- [ ] masina_spalat
+- [ ] drum_fundal
+- [ ] caine_ilie

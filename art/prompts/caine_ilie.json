@@ -1,0 +1,12 @@
+{
+  "id": "caine_ilie",
+  "versiune": 1,
+  "type": "object",
+  "height_cm": 55,
+  "manual_key": [
+    0,
+    255,
+    0
+  ],
+  "prompt": "ANIMAL SPRITE, single animal, side view facing left, whole body visible with empty space around it. Background: one flat solid pure green colour (#00FF00) everywhere, no shadow, no floor. Detailed clean pixel art, realistic proportions, larger flat colour areas. No text.\nA typical Romanian village yard dog: medium size, mixed breed, short rough brown-and-black fur, one ear up and one down, an old red collar, wet from the rain, sitting and looking bored but alert."
+}

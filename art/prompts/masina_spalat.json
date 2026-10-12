@@ -1,0 +1,12 @@
+{
+  "id": "masina_spalat",
+  "versiune": 1,
+  "type": "object",
+  "height_cm": 85,
+  "manual_key": [
+    0,
+    255,
+    0
+  ],
+  "prompt": "OBJECT SPRITE, single object, front view, slightly from above, whole object visible with empty space around it. Background: one flat solid pure green colour (#00FF00) everywhere, no shadow, no floor. Detailed clean pixel art, larger flat colour areas. No text, no letters, no logos.\nAn old Romanian front-loading washing machine from the 1990s, off-white enamel, slightly yellowed and scratched, round glass door with soapy water inside, a few knobs (blank, no numbers). It was 'repaired' by a village handyman: wrapped twice around the body with THIN shiny copper wire twisted tight at the front, a strip of black electrical tape across the door hinge, a wooden wedge under one foot. Funny but realistic."
+}
