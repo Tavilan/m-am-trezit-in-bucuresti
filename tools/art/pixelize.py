@@ -21,8 +21,25 @@ def _crop_to(im, w, h):
     return im.crop((0, y, tw, y + nh))
 
 
-def pixelize(src, dst, width=None, height=None, sharpen=60):
+def key_out(im, key=(0, 255, 0), tol=110):
+    """Fundal de culoare plină (green screen) -> transparent, cu reducerea reflexelor verzi pe contur."""
+    im = im.convert("RGBA")
+    px = im.load()
+    kr, kg, kb = key
+    for y in range(im.height):
+        for x in range(im.width):
+            r, g, b, a = px[x, y]
+            if abs(r - kr) + abs(g - kg) + abs(b - kb) < tol:
+                px[x, y] = (0, 0, 0, 0)
+            elif g > r + 25 and g > b + 25:          # reflex verde pe margine
+                px[x, y] = (r, (r + b) // 2, b, a)
+    return im
+
+
+def pixelize(src, dst, width=None, height=None, sharpen=60, key=None):
     im = Image.open(src)
+    if key:
+        im = key_out(im, tuple(key))
     has_alpha = im.mode in ("RGBA", "LA") or (im.mode == "P" and "transparency" in im.info)
     if width and height:                    # scenele sunt mereu opace
         has_alpha = False

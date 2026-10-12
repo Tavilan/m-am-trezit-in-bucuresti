@@ -3,10 +3,8 @@
 # Cheia API stă DOAR în secretul OPENAI_API_KEY al repository-ului.
 name: Generează artă
 
+# Momentan doar manual: generarea prin API e oprită (fără card). Arta se importă manual, vezi docs/ARTA.md.
 on:
-  push:
-    branches: [main]
-    paths: ["art/prompts/**"]
   workflow_dispatch:
     inputs:
       ids:
