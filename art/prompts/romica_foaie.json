@@ -1,0 +1,9 @@
+{
+  "id": "romica_foaie",
+  "type": "character",
+  "quality": "high",
+  "size": "1024x1536",
+  "background": "transparent",
+  "pixelize": {"height": 300},
+  "prompt": "CHARACTER SHEET, single full-body figure, front view, neutral standing pose, arms slightly away from the body (so the image can later be cut into parts for animation), transparent background, no shadow on the ground.\nRomică: a 55-year-old village handyman from rural Oltenia, Romania. Short and stocky, slight belly, broad strong hands. Sun-tanned, weathered face with deep wrinkles, thick grey-black moustache, two-day grey stubble, red drinker's nose, tired but kind eyes, bushy eyebrows. Worn dark grey flat cap. Faded navy blue work jacket, open, over a brown hand-knitted sweater; old dark trousers with shiny knees; scuffed black rubber-soled shoes. His trademarks, clearly visible: a coil of copper wire hanging from his belt and a roll of black electrical tape worn on his left wrist like a bracelet. Expression: slightly tipsy, stubborn, good-hearted. Realistic proportions (not chibi, not cartoon), detailed pixel art."
+}

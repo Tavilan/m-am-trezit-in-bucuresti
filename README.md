@@ -48,7 +48,8 @@ Lovește orașul, șmecheriile, comportamentele și instituțiile (taximetristul
 - `art/`: arta finală a jocului (doar ce a trecut prin pipeline); `art/fonts/`: Pixelify Sans (licență OFL)
 - `audio/`: muzică și sunete
 - `locale/`: traduceri RO/EN
-- `docs/`: povestea, fișele de realism, deciziile
+- `docs/`: povestea (`POVESTE.md`), cum se face arta (`ARTA.md`), deciziile
+- `art/prompts/`: prompturile pentru arta generată; `tools/art/`: generarea prin API și pixelizarea
 
 ## Previzualizare pe telefon
 La fiecare push pe `main`, GitHub Actions exportă jocul pe web și îl publică pe GitHub Pages

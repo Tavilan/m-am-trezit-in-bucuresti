@@ -1,0 +1,59 @@
+# Generează arta jocului prin API-ul de imagini OpenAI, apoi o aduce la pixel-art (640×360).
+# Se pornește singur când se modifică un fișier din art/prompts/, sau manual din tab-ul Actions.
+# Cheia API stă DOAR în secretul OPENAI_API_KEY al repository-ului.
+name: Generează artă
+
+on:
+  push:
+    branches: [main]
+    paths: ["art/prompts/**"]
+  workflow_dispatch:
+    inputs:
+      ids:
+        description: "ID-uri de generat, separate prin virgulă (gol = cele modificate în ultimul commit)"
+        required: false
+        default: ""
+      quality:
+        description: "Calitate: low / medium / high / xhigh (gol = cea din fișierul de prompt)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: art
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Instalează Pillow
+        run: pip install --quiet pillow
+
+      - name: Generează și pixelizează
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          IDS: ${{ inputs.ids }}
+          QUALITY: ${{ inputs.quality }}
+          BEFORE: ${{ github.event.before }}
+          MAX_IMAGES: "4"
+        run: python tools/art/generate.py
+
+      - name: Salvează rezultatele în repository
+        run: |
+          git config user.name "art-bot"
+          git config user.email "art-bot@users.noreply.github.com"
+          git add art/raw art/final art/LOG.md 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Nimic nou de salvat."
+          else
+            git commit -m "Artă generată automat"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
