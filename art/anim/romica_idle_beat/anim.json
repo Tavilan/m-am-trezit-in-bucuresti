@@ -1,0 +1,19 @@
+{
+  "frames": 60,
+  "fps": 12,
+  "size": [
+    171,
+    302
+  ],
+  "feet": [
+    87,
+    301
+  ],
+  "source_video": "fce2ce0d-gemini_generated_video_77A04F53.mp4",
+  "loop_from_to": [
+    44,
+    104
+  ],
+  "loop_error": 0.97,
+  "stab": 55
+}
