@@ -13,6 +13,6 @@
 - [x] gina_foaie
 - [x] marius_foaie
 - [x] gemeni_foaie
-- [ ] costel_foaie
+- [x] costel_foaie
 - [ ] veta_foaie
 - [ ] turist_foaie
