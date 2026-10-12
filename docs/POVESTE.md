@@ -43,3 +43,9 @@
 - **Nelu și Gelu** (gemenii), ~40: identici, grăsuți, aceeași mustață; treninguri de culori diferite (Nelu roșu, Gelu albastru) ca să-i deosebești. Vorbesc mereu în ecou.
 - **Costel** (birtașul): fost gestionar la magazinul CAP-ului, halat albastru de magazin, creion după ureche.
 - **Tanti Veta**: vecina care știe tot ce mișcă în sat; cardigan, ochelari cu ramă groasă.
+- **Turistul** (Gara de Nord): bărbat de ~35 de ani, rucsac mare, sandale cu șosete, aparat foto profesional, entuziasmat de „authentic Romania”.
+
+## Prezentare pe ecran (12.10.2026)
+- **Romică** apare: în oglindă, ca **portret animat la replicile lui** și în **câteva cadre scurte din afară** la momentele-cheie (cărat la tren, trezirea în gară).
+- **Dialogurile:** casetă de text jos + **portretul mare, animat**, al celui care vorbește, în stânga sau în dreapta, peste scenă.
+- **Gara satului:** cadru din afară (excepție de la persoana întâi): Romică cărat între Nelu și Gelu, cu Marius în față și trenul în spate.
