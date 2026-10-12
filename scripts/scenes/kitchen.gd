@@ -2,7 +2,7 @@ extends GameScene
 ## 1. Bucătăria lui Romică, seara. Cearta cu Gina; mașina de spălat „reparată” se plimbă prin bucătărie.
 ## Artă: fundal + Gina + mașina de spălat (straturi separate); ploaia, becul și candela sunt animate din cod.
 
-const WARM := Color(1.0, 0.93, 0.82)      # lumina becului peste personaje și obiecte
+const GINA_FEET := Vector2(330, 318)
 const WINDOW := Rect2(366, 86, 128, 66)   # geamul (ploaia se vede doar aici)
 
 var _washer: Sprite2D
@@ -17,19 +17,23 @@ var _over: Node2D    # ploaia, lumina, peste fundal
 
 func _ready() -> void:
 	title = "Acasă la Romică, seara"
+	horizon = 108   # linia ochilor (1,55 m) pe peretele din fund: Gina 1,68 m, mașina 85 cm
+	# lumina: seară caldă și slabă, becul din tavan (cald) și geamul (rece, albastru)
+	lighting = {"ambient": Vector3(0.74, 0.66, 0.58), "saturation": 0.92,
+		"light1_pos": Vector2(320, 20), "light1_color": Vector3(1.0, 0.82, 0.55), "light1_radius": 330.0, "light1_strength": 0.6,
+		"light2_pos": Vector2(430, 120), "light2_color": Vector3(0.45, 0.55, 0.9), "light2_radius": 150.0, "light2_strength": 0.28}
 	background("res://art/final/bucatarie_fundal.png")
 	_under = Node2D.new()
 	_under.draw.connect(_draw_under)
 	add_child(_under)
-	_washer = layer("res://art/final/masina_spalat_bucatarie.png", Vector2(220, 322))
-	_washer.modulate = WARM
+	_washer = layer("res://art/final/masina_spalat_bucatarie.png", Vector2(196, 324))
 	_washer_home = _washer.position
-	_gina = layer("res://art/final/gina_bucatarie.png", Vector2(352, 330))
-	_gina.modulate = WARM
+	_gina = layer("res://art/final/gina_bucatarie.png", GINA_FEET)
+	figure(_gina, "Gina")
 	var h := hotspot("Mașina de spălat", Rect2(Vector2.ZERO, _washer.texture.get_size()), _washer_talk)
 	remove_child(h)
 	_washer.add_child(h)
-	hotspot("Gina", Rect2(316, 134, 74, 196), _gina_talk)
+	hotspot("Gina", Rect2(_gina.position, _gina.texture.get_size()), _gina_talk)
 	hotspot("Icoana", Rect2(540, 10, 46, 56), _icon)
 	hotspot("Ușa", Rect2(14, 4, 86, 320), _door)
 	_over = Node2D.new()
@@ -63,8 +67,9 @@ func _process(d: float) -> void:
 
 func _draw_under() -> void:
 	# umbre de contact sub Gina și sub mașină
-	_under.draw_set_transform(Vector2(352, 330), 0, Vector2(1, 0.25))
-	_under.draw_circle(Vector2.ZERO, 30, Color(0, 0, 0, 0.28))
+	if _gina.visible:
+		_under.draw_set_transform(GINA_FEET, 0, Vector2(1, 0.25))
+		_under.draw_circle(Vector2.ZERO, 34, Color(0, 0, 0, 0.3))
 	_under.draw_set_transform(_washer.position + Vector2(_washer.texture.get_width() / 2.0, _washer.texture.get_height() - 1), 0, Vector2(1, 0.22))
 	_under.draw_circle(Vector2.ZERO, 50, Color(0, 0, 0, 0.3))
 	_under.draw_set_transform(Vector2.ZERO)

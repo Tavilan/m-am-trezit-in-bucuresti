@@ -4,7 +4,8 @@ extends Node
 
 const W := 640
 const H := 360
-const FONT_PATH := "res://art/fonts/PixelifySans.ttf"
+const FONT_PATH := "res://art/fonts/Jersey15.ttf"   # lizibil, cu diacritice (OFL)
+const FS := 20   # mărimea textului peste tot
 
 # ---- starea jocului
 var money := 7
@@ -38,6 +39,12 @@ const PORTRAIT_LEFT := ["Romică"]
 ## Romică e jucătorul (persoana întâi): portretul lui apare DOAR când o scenă-cheie îl cere explicit
 ## (decizia lui Tavi: oglinda + aproximativ 5 apariții în tot jocul). Scena pune hero_portrait = true și îl stinge după.
 var hero_portrait := false
+## vocea fiecăruia la derularea textului (înălțimea sunetului)
+const VOICE := {"Romică": 0.82, "Gina": 1.32, "Marius": 1.08, "Costel": 0.92, "Tanti Mioara": 1.45,
+	"Nelu": 0.72, "Gelu": 0.74, "Turistul": 1.18}
+var _blip: AudioStreamPlayer
+var _blip_last := 0
+var _voice := 1.0
 var hud_on := true
 var _transitioning := false
 
@@ -54,18 +61,32 @@ func _ready() -> void:
 	world.name = "World"
 	add_child(world)
 	_build_ui()
+	_blip = AudioStreamPlayer.new()
+	_blip.stream = load("res://audio/text_blip.wav")
+	_blip.volume_db = -8.0
+	_blip.max_polyphony = 3
+	add_child(_blip)
 
 
 func _process(_d: float) -> void:
 	var s := DisplayServer.window_get_size()
 	_rotate.visible = s.y > s.x
+	# sunetul de derulare: un „blip” la fiecare a doua literă care apare
+	if _dlg.visible and _typing and _typing.is_running():
+		var n := _dlg_text.visible_characters
+		if n >= _blip_last + 2:
+			_blip_last = n
+			var ch := _dlg_text.text.substr(max(0, n - 1), 1)
+			if ch != " ":
+				_blip.pitch_scale = _voice * randf_range(0.94, 1.06)
+				_blip.play()
 
 
 # ================================================================ UI
 func _theme() -> Theme:
 	var t := Theme.new()
 	t.default_font = font
-	t.default_font_size = 16
+	t.default_font_size = FS
 	var box := StyleBoxFlat.new()
 	box.bg_color = Color("#0c0a12e8")
 	box.border_color = Color("#e8d9a8")
@@ -135,8 +156,8 @@ func _build_ui() -> void:
 	root.add_child(_portrait_root)
 
 	_dlg = PanelContainer.new()
-	_dlg.position = Vector2(12, H - 92)
-	_dlg.size = Vector2(W - 24, 82)
+	_dlg.position = Vector2(12, H - 98)
+	_dlg.size = Vector2(W - 24, 90)
 	_dlg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_dlg.visible = false
 	var v := VBoxContainer.new()
@@ -241,7 +262,7 @@ func _show_portrait(who: String) -> void:
 	if who == "Romică" and not hero_portrait:
 		key = ""
 	if key == "" or not AnimSprite.exists(key + "_vorbit"):
-		_portrait_root.visible = false
+		_hide_portrait()
 		return
 	if who != _portrait_who:
 		if _portrait:
@@ -249,15 +270,20 @@ func _show_portrait(who: String) -> void:
 		_portrait = AnimSprite.make(key + "_vorbit")
 		var fs := _portrait.frame_size()
 		var x: float = 4.0 if who in PORTRAIT_LEFT else W - fs.x - 4.0
-		_portrait.position = Vector2(x, H - 70 - fs.y).round()
+		_portrait.position = Vector2(x, H - 76 - fs.y).round()
 		_portrait_root.add_child(_portrait)
 		_portrait_who = who
 	_portrait.playing = true
 	_portrait_root.visible = true
+	# același om nu poate fi în două locuri: îl scoatem din scenă cât timp e în prim-plan
+	for f in get_tree().get_nodes_in_group("figures"):
+		f.visible = f.get_meta("who", "") != who
 
 
 func _hide_portrait() -> void:
 	_portrait_root.visible = false
+	for f in get_tree().get_nodes_in_group("figures"):
+		f.visible = true
 
 
 func say(who: String, text: String) -> void:
@@ -269,6 +295,8 @@ func say(who: String, text: String) -> void:
 	_dlg_name.visible = who != ""
 	_dlg_text.text = text
 	_dlg_text.visible_ratio = 0.0
+	_blip_last = 0
+	_voice = VOICE.get(who, 1.0)
 	_typing = create_tween()
 	_typing.tween_property(_dlg_text, "visible_ratio", 1.0, max(0.2, text.length() * 0.025))
 	_typing.finished.connect(func():

@@ -79,4 +79,4 @@ func _draw() -> void:
 		draw_rect(Rect2(240 + (i * 37) % 160, 236 + (i * 17) % 50, 2, 2), Color("#8a6a5a"))
 	draw_rect(Rect2(200, 290, 240, 60), Color("#6a5a7a"))                # puloverul pe dos (cusătura)
 	draw_line(Vector2(320, 290), Vector2(320, 350), Color("#9a8aaa"), 2.0)
-	draw_string(Game.font, Vector2(170, 344), "PORTRET PROVIZORIU", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color(1, 1, 1, 0.3))
+	draw_string(Game.font, Vector2(170, 344), "PORTRET PROVIZORIU", HORIZONTAL_ALIGNMENT_LEFT, -1, Game.FS, Color(1, 1, 1, 0.3))

@@ -78,15 +78,15 @@ func _process(d: float) -> void:
 func _draw() -> void:
 	super._draw()
 	draw_rect(Rect2(130, 60, 60, 230), Color("#b8c0c4"))
-	draw_string(Game.font, Vector2(20, 80), "FRIGIDER BERE", HORIZONTAL_ALIGNMENT_LEFT, 160, 16, Color("#ddd"))
+	draw_string(Game.font, Vector2(20, 80), "FRIGIDER BERE", HORIZONTAL_ALIGNMENT_LEFT, 160, Game.FS, Color("#ddd"))
 	draw_rect(Rect2(420, 60, 210, 230), Color("#3a3428"))
-	draw_string(Game.font, Vector2(424, 80), "TABLOU", HORIZONTAL_ALIGNMENT_LEFT, 166, 16, Color("#ddd"))
+	draw_string(Game.font, Vector2(424, 80), "TABLOU", HORIZONTAL_ALIGNMENT_LEFT, 166, Game.FS, Color("#ddd"))
 	for i in _from.size():
 		draw_circle(_from[i], 9, WIRES[i][1])
-		draw_string(Game.font, _from[i] + Vector2(-140, 5), WIRES[i][0], HORIZONTAL_ALIGNMENT_RIGHT, 125, 16, Color.WHITE)
+		draw_string(Game.font, _from[i] + Vector2(-140, 5), WIRES[i][0], HORIZONTAL_ALIGNMENT_RIGHT, 125, Game.FS, Color.WHITE)
 	for j in _to.size():
 		draw_circle(_to[j], 9, Color("#c8a040") if j < 3 else Color("#d84040"))
-		draw_string(Game.font, _to[j] + Vector2(14, 5), TERMINALS[j], HORIZONTAL_ALIGNMENT_LEFT, 190, 16, Color.WHITE)
+		draw_string(Game.font, _to[j] + Vector2(14, 5), TERMINALS[j], HORIZONTAL_ALIGNMENT_LEFT, 190, Game.FS, Color.WHITE)
 	for i in _links:
 		var start: Vector2 = _from[i] if i < _from.size() else Vector2(190, 280)
 		var col: Color = WIRES[i][1] if i < WIRES.size() else Color("#b07a3a")

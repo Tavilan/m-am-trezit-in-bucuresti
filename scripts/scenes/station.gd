@@ -42,4 +42,4 @@ func _draw() -> void:
 		draw_rect(Rect2(_train_x, 170, 640, 22), Color("#c8ccd2"))
 		for k in 8:
 			draw_rect(Rect2(_train_x + 20 + k * 80, 172, 40, 18), Color("#e8d080"))
-		draw_string(Game.font, Vector2(_train_x + 10, 230), "trenul personal", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color.WHITE)
+		draw_string(Game.font, Vector2(_train_x + 10, 230), "trenul personal", HORIZONTAL_ALIGNMENT_LEFT, -1, Game.FS, Color.WHITE)

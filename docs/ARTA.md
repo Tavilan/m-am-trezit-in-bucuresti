@@ -53,3 +53,10 @@ Test orb pe variantele pixelizate (realism / lizibilitate / impresie):
 - Claude face singur pașii din Gemini (prin Claude in Chrome, pe Mac-ul lui Tavi): încarcă imaginea, scrie promptul, așteaptă, descarcă video-ul în Downloads, apoi îl convertește cu `video_to_sprite.py`. Cost zero (inclus în abonamentul Gemini Pro).
 - Imaginea de pornire trebuie să fie **16:9**, cu loc deasupra capului: Veo face video 16:9 și taie ce nu încape (la primul test, cu o imagine 4:3, i-a tăiat șapca lui Romică).
 - Imaginile de încărcat trebuie să fie în folderul de lucru al sesiunii (căile de pe Mac nu sunt acceptate de încărcarea din Chrome).
+
+## Personajele în scenă: lumină și perspectivă (12.10.2026)
+- **Lumina scenei** (`shaders/scene_light.gdshader`): fiecare scenă își descrie lumina în `lighting` (culoare ambientală, două surse punctuale, saturație). Personajele și obiectele primesc automat lumina locului: mai calde și mai slabe seara în bucătărie, albăstrui noaptea pe drum, mai luminate lângă bec/felinar. Calculul e pe fiecare pixel al grilei 640×360, deci pixelii rămân curați.
+- **Perspectivă:** fiecare fundal are `horizon` (linia ochilor lui Romică, 1,55 m). Un personaj cu tălpile la y are înălțimea `(y − horizon) × cm / 155` pixeli (`height_px()` în `game_scene.gd`). Varianta pentru scenă se face din imaginea brută, la mărimea exactă: `tools/art/scene_sprite.py <id> <px> <nume>` (nu scalăm în joc).
+- **Un singur loc o dată:** cât timp portretul cuiva e în prim-plan la dialog, figura lui din scenă dispare (`figure()` în scenă).
+- **Romică** nu are portret la dialog (persoana întâi), doar în oglindă și ~5 momente-cheie (`Game.hero_portrait`).
+- **Text:** fontul Jersey 15 (OFL), mărimea 20; la derulare, un sunet scurt, cu „voce” diferită pentru fiecare personaj (`audio/text_blip.wav`, înălțimi în `Game.VOICE`).

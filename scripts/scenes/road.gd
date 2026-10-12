@@ -11,13 +11,19 @@ var _rain: Array = []
 var _ripples: Array = []   # [poziție, vârstă]
 var _lamp_on := 1.0
 var _over: Node2D
+var _dog_sprite: Sprite2D
 
 
 func _ready() -> void:
 	title = "Drumul prin sat, noaptea"
+	horizon = 200   # punctul de fugă al drumului
+	# lumina: noapte albastră, felinarul (portocaliu) și vitrina birtului (caldă)
+	lighting = {"ambient": Vector3(0.56, 0.6, 0.8), "saturation": 0.85,
+		"light1_pos": LAMP, "light1_color": Vector3(1.0, 0.7, 0.35), "light1_radius": 300.0, "light1_strength": 0.75,
+		"light2_pos": Vector2(485, 190), "light2_color": Vector3(1.0, 0.8, 0.45), "light2_radius": 120.0, "light2_strength": 0.3}
 	background("res://art/final/drum_fundal.png")
-	var dog := layer("res://art/final/caine_ilie_drum.png", Vector2(232, 318))
-	dog.modulate = Color(0.92, 0.9, 1.0)
+	var dog := layer("res://art/final/caine_ilie_drum.png", Vector2(236, 335))
+	_dog_sprite = dog
 	_over = Node2D.new()
 	_over.draw.connect(_draw_over)
 	add_child(_over)
@@ -50,6 +56,7 @@ func _process(d: float) -> void:
 		_lamp_on = 0.0
 	elif _lamp_on < 0.5 and randf() < d * 8.0:
 		_lamp_on = 1.0
+	(_dog_sprite.material as ShaderMaterial).set_shader_parameter("light1_strength", 0.75 * _lamp_on)
 	_over.queue_redraw()
 
 
