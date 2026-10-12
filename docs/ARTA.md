@@ -34,4 +34,5 @@ Test orb pe variantele pixelizate (realism / lizibilitate / impresie):
 
 ## Animații: regula de calitate (12.10.2026)
 - **Mai bine fără animație decât cu una care arată ieftin.** Testul cu animație „decupată” (o imagine tăiată în părți și rotită din cod) a fost respins de Tavi: arată ca o glumă. Scos din joc.
-- Variante rămase: (1) video generat din imaginea exactă a personajului (Veo în Gemini / Sora), convertit din cod în cadre pixel-art stabile; (2) fără mișcare, doar schimbări de expresie (portrete generate cu referință) și efecte de ambianță din cod (lumină, fum, ploaie, tranziții).
+- **Metoda aprobată (12.10.2026): video → pixel-art.** Tavi generează în Gemini (Veo, inclus în abonament) un video scurt pornind de la imaginea exactă a personajului, pe fundal verde, cu cameră fixă. `tools/art/video_to_sprite.py` îl transformă: scoate verdele, ancorează tălpile, pixelizează toate cadrele pe aceeași grilă, stabilizează tremuratul față de cadrul median și alege bucla care se leagă cel mai bine. Ieșire în `art/anim/<nume>/` (cadre, sheet, anim.json, preview.gif). Prima animație: `romica_idle_beat` (60 de cadre, 12 fps), acceptată de Tavi.
+- Rezervă: fără mișcare, doar schimbări de expresie (portrete generate cu referință) și efecte de ambianță din cod.
