@@ -1,0 +1,18 @@
+{
+  "source": "art/final/romica_foaie.png",
+  "neck_y": 48,
+  "overlap": 4,
+  "jaw_rect": [70, 40, 92, 48],
+  "mouth_color": [42, 18, 14],
+  "elbow_y": 118,
+  "forearm_l_max_x": 29,
+  "forearm_r_min_x": 125,
+  "eyes": [[67, 22, 74, 26], [83, 22, 90, 26]],
+  "pivots": {
+    "feet": [77, 299],
+    "neck": [77, 47],
+    "jaw": [81, 40],
+    "elbow_l": [16, 118],
+    "elbow_r": [139, 118]
+  }
+}

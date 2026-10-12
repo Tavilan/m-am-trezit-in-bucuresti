@@ -1,0 +1,73 @@
+{
+  "source": "art/final/romica_foaie.png",
+  "size": [
+    154,
+    300
+  ],
+  "pivots": {
+    "feet": [
+      77,
+      299
+    ],
+    "neck": [
+      77,
+      47
+    ],
+    "jaw": [
+      81,
+      40
+    ],
+    "elbow_l": [
+      16,
+      118
+    ],
+    "elbow_r": [
+      139,
+      118
+    ]
+  },
+  "parts": {
+    "head": {
+      "file": "art/rigs/romica/head.png",
+      "origin": [
+        52,
+        0
+      ]
+    },
+    "jaw": {
+      "file": "art/rigs/romica/jaw.png",
+      "origin": [
+        70,
+        40
+      ]
+    },
+    "body": {
+      "file": "art/rigs/romica/body.png",
+      "origin": [
+        3,
+        44
+      ]
+    },
+    "forearm_l": {
+      "file": "art/rigs/romica/forearm_l.png",
+      "origin": [
+        0,
+        118
+      ]
+    },
+    "forearm_r": {
+      "file": "art/rigs/romica/forearm_r.png",
+      "origin": [
+        125,
+        118
+      ]
+    },
+    "head_blink": {
+      "file": "art/rigs/romica/head_blink.png",
+      "origin": [
+        52,
+        0
+      ]
+    }
+  }
+}
