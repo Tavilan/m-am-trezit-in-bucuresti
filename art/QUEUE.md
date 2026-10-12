@@ -27,3 +27,6 @@
 ## Runda 3b (prompturi corectate: Mioara șase capete, Marius complet ras, adidași albi fără nimic)
 - [x] mioara_foaie
 - [x] marius_foaie
+
+## Runda 3c (Marius mai puțin macho: corp obișnuit, puțin moale, față rotundă de băiat, poză țeapănă)
+- [ ] marius_foaie
