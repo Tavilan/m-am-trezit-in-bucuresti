@@ -1,20 +1,20 @@
 {
-  "frames": 72,
+  "frames": 75,
   "fps": 12,
   "size": [
     248,
-    225
-  ],
-  "feet": [
-    124,
     224
   ],
-  "source_video": "gina_vorbit.mp4",
-  "loop_from_to": [
-    43,
-    79
+  "cols": 16,
+  "feet": [
+    124,
+    223
   ],
-  "pingpong": true,
-  "loop_error": 0.0,
-  "cols": 16
+  "source_video": "gina2.mp4",
+  "loop_from_to": [
+    29,
+    104
+  ],
+  "pingpong": false,
+  "loop_error": 2.64
 }
