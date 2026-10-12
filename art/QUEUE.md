@@ -29,4 +29,4 @@
 - [x] marius_foaie
 
 ## Runda 3c (Marius mai puțin macho: corp obișnuit, puțin moale, față rotundă de băiat, poză țeapănă)
-- [ ] marius_foaie
+- [x] marius_foaie
