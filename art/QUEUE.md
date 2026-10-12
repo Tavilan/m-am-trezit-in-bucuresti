@@ -7,4 +7,4 @@
 - [x] gemeni_foaie
 - [x] costel_foaie
 - [x] veta_foaie
-- [ ] turist_foaie
+- [x] turist_foaie
