@@ -14,7 +14,7 @@
 - [x] marius_foaie
 - [x] gemeni_foaie
 - [x] costel_foaie
-- [ ] veta_foaie
+- [x] veta_foaie (anulat: redenumită Mioara, vezi runda 3)
   - Refacere nereușită după două generări: ambele variante au capul disproporționat de mare și aspect prea caricatural, contrar proporțiilor realiste de adult și cerinței „normal-sized head, not cartoon, not chibi”. Imaginea a fost eliminată din art/inbox; rândul rămâne nebifat. Am continuat cu următorul personaj conform docs/CODEX_ARTA.md, punctul 5.
 - [x] turist_foaie
 
