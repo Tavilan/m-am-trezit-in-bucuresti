@@ -39,10 +39,10 @@
 
 ## Personajele prologului: aspect fixat (12.10.2026)
 - **Gina** (nevasta lui Romică), ~50, 1,68 m (mai înaltă decât el): „doamnă” de sat, slabă și colțuroasă, față îngustă, nas ascuțit, sprâncene trase cu creionul, ruj aprins. Păr vopsit roșu-vișiniu, bigudiuri, halat de satin cu flori, ochelari pe nas; se crede mai fină decât tot satul.
-- **Marius** (nepotul venit din Germania), ~30, 1,86 m: lung, slab, ras proaspăt, ochelari subțiri, păr cu gel, piele palidă de birou. În sat fusese ucenicul lui Romică, „bun la toate”. Acum face pe superiorul cu un certificat de electrician nemțesc, înrămat, pe care îl arată pe telefon.
+- **Marius** (nepotul venit din Germania), ~30, 1,82 m: băiat de la țară în corp și în față (lat în umeri, mâini mari, față lată și rumenă), dar cu „aere” de Germania: geacă tehnică nouă, borsetă pe piept, ochelari de soare pe cap, adidași albi, tunsoare undercut cu gel. În sat fusese ucenicul lui Romică, „bun la toate”. Acum face pe superiorul cu un certificat de electrician nemțesc, înrămat, pe care îl arată pe telefon.
 - **Nelu și Gelu** (gemenii), ~40, 1,95 m: identici, doi uriași cu capul ras, fără mustață, gât gros; treninguri de culori diferite (Nelu roșu, Gelu albastru) ca să-i deosebești. Vorbesc mereu în ecou.
 - **Costel** (birtașul), ~60, 1,82 m: fost gestionar la magazinul CAP-ului; uscat și gălbejit, obraji supți, chelie cu părul pieptănat peste, ochelari cu ramă metalică, fără mustață; halat albastru de magazin, creion după ureche.
-- **Tanti Veta**, ~70, 1,50 m: vecina care știe tot ce mișcă în sat; mică și gârbovă, față rotundă, ochi măriți de lentile groase; cardigan.
+- **Tanti Mioara**, ~70, 1,50 m: vecina care știe tot ce mișcă în sat; mică și gârbovă, față rotundă, ochi măriți de lentile groase; cardigan.
 - **Turistul** (Gara de Nord): bărbat de ~35 de ani, 1,90 m, lung, roșcat și pistruiat, foarte palid; rucsac mare, sandale cu șosete, aparat foto profesional, entuziasmat de „authentic Romania”.
 
 ## Prezentare pe ecran (12.10.2026)

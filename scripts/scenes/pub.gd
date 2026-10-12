@@ -1,6 +1,6 @@
 extends GameScene
 ## 3. Birtul Unirea. Fost magazin de la CAP: conserve expirate, tejghea de formică, manele la televizor.
-## Aici: borcanul de zacuscă (de la Tanti Veta), baia cu oglinda, apoi altercația cu nepotul.
+## Aici: borcanul de zacuscă (de la Tanti Mioara), baia cu oglinda, apoi altercația cu nepotul.
 
 var _fire := false
 
@@ -16,7 +16,7 @@ func _ready() -> void:
 		[Rect2(230, 40, 90, 64), Color("#22303a"), "televizorul (manele)"],
 		[Rect2(330, 150, 120, 110), Color("#4a5a3a"), "Nelu și Gelu"],
 		[Rect2(470, 130, 70, 130), Color("#3a4a6a"), "Marius, nepotul"],
-		[Rect2(250, 170, 60, 90), Color("#6a4a5a"), "Tanti Veta"],
+		[Rect2(250, 170, 60, 90), Color("#6a4a5a"), "Tanti Mioara"],
 		[Rect2(560, 40, 70, 210), Color("#3a3028"), "ușa băii"],
 		[Rect2(240, 115, 70, 40), Color("#9aa8b0"), "frigiderul de bere"],
 	]
@@ -25,7 +25,7 @@ func _ready() -> void:
 	hotspot("Televizorul", Rect2(230, 40, 90, 64), _tv)
 	hotspot("Nelu și Gelu", Rect2(330, 150, 120, 110), _twins)
 	hotspot("Marius, nepotul", Rect2(470, 130, 70, 130), _marius)
-	hotspot("Tanti Veta", Rect2(250, 170, 60, 90), _veta)
+	hotspot("Tanti Mioara", Rect2(250, 170, 60, 90), _mioara)
 	hotspot("Ușa băii", Rect2(560, 40, 70, 210), _bathroom)
 	hotspot("Frigiderul de bere", Rect2(240, 115, 70, 40), _fridge)
 	_fire = Game.flags.get("fire", false)
@@ -36,7 +36,7 @@ func enter() -> void:
 		await _after_fire()
 	elif Game.flags.get("mirror_done", false):
 		if not Game.has_zacusca:
-			await say("Tanti Veta", "Romică! Stai, maică, că era să uit.")
+			await say("Tanti Mioara", "Romică! Stai, maică, că era să uit.")
 			await _give_zacusca()
 	elif not Game.flags.get("pub_seen", false):
 		Game.flags["pub_seen"] = true
@@ -87,18 +87,18 @@ func _twins() -> void:
 	await say("Romică", "Așa e făcut, mă. Să prindă numai manele.")
 
 
-func _veta() -> void:
+func _mioara() -> void:
 	if Game.has_zacusca:
-		await say("Tanti Veta", "Ai grijă de borcan, Romică. E de la soră-mea, din Craiova.")
+		await say("Tanti Mioara", "Ai grijă de borcan, Romică. E de la soră-mea, din Craiova.")
 		return
 	await _give_zacusca()
 
 
 func _give_zacusca() -> void:
-	await say("Tanti Veta", "Romică, maică, ia zacusca asta de la mine și du-i-o Ginei. Cu zacuscă se împacă orice ceartă.")
+	await say("Tanti Mioara", "Romică, maică, ia zacusca asta de la mine și du-i-o Ginei. Cu zacuscă se împacă orice ceartă.")
 	Game.has_zacusca = true
 	Game.update_hud()
-	await say("Romică", "Mulțumesc, tanti Veta. O țin la mine ca pe ochii din cap.")
+	await say("Romică", "Mulțumesc, tanti Mioara. O țin la mine ca pe ochii din cap.")
 
 
 func _fridge() -> void:

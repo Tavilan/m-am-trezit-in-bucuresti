@@ -46,7 +46,7 @@ Test orb pe variantele pixelizate (realism / lizibilitate / impresie):
 ## Personaje distincte (12.10.2026)
 - **Problema:** prima serie de personaje secundare semăna prea mult cu Romică (aceeași mustață, nas roșu, sprâncene, aceeași înălțime). Cauze: foaia lui Romică dată ca referință tuturor, fețe nedescrise în prompt și toate personajele aduse la 300 px.
 - **Regula:** fiecare prompt de personaj descrie explicit **CORPUL** (înălțime, constituție, postură) și **FAȚA** (formă, nas, ochi, păr, barbă/mustață sau lipsa lor). Doar băutorii au nas roșu. Siluetele trebuie să se deosebească și în umbră.
-- **Înălțimi reale:** câmpul `height_cm` din `art/prompts/<id>.json`; toate foile de personaj au aceeași scară, **195 cm = 300 px** (`CHAR_PX_PER_CM` în `pixelize.py`). Romică 165, Gina 168, Marius 186, Nelu și Gelu 195, Costel 182, Tanti Veta 150, turistul 190.
+- **Înălțimi reale:** câmpul `height_cm` din `art/prompts/<id>.json`; toate foile de personaj au aceeași scară, **195 cm = 300 px** (`CHAR_PX_PER_CM` în `pixelize.py`). Romică 165, Gina 168, Marius 182, Nelu și Gelu 195, Costel 182, Tanti Mioara 150, turistul 190.
 - **Verificare:** `tools/art/lineup.py` pune personajele unul lângă altul, la scara reală.
 
 ## Animații Veo automate (12.10.2026)
