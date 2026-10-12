@@ -1,0 +1,12 @@
+{
+  "id": "piatra_balta",
+  "type": "object",
+  "height_cm": 25,
+  "manual_key": [
+    0,
+    255,
+    0
+  ],
+  "versiune": 1,
+  "prompt": "OBJECT SPRITE, single object, seen from a standing person's eye height at about 3 metres (looking down at a shallow angle), whole object visible with empty space around it. Background: one flat solid pure green colour (#00FF00) everywhere, no shadow, no floor, no water. Detailed clean pixel art, larger flat colour areas, realistic. No text.\nOne big flat river stone used as a stepping stone across a muddy village puddle at night: grey-brown, rounded, wider than tall, wet and shiny on top with a small reflection of warm orange street-lamp light, a bit of mud on the edges."
+}

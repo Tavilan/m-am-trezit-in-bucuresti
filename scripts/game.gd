@@ -32,6 +32,7 @@ var _portrait_root: Control
 var _portrait: AnimSprite
 var _portrait_who := ""
 var _closeup_root: Control
+var _hidden_figures: Array = []   # figurile scoase din scenă cât timp portretul lor e în prim-plan
 ## „Gradarea” scenei curente pentru portrete și prim-planuri (lumina locului: ton și saturație),
 ## ca portretul să se potrivească cu personajul din scenă. O setează scena în `grade`.
 var grade := {}
@@ -301,7 +302,9 @@ func _show_portrait(who: String) -> void:
 	_portrait_root.visible = true
 	# același om nu poate fi în două locuri: îl scoatem din scenă cât timp e în prim-plan
 	for f in get_tree().get_nodes_in_group("figures"):
-		f.visible = f.get_meta("who", "") != who
+		if f.get_meta("who", "") == who and f.visible:
+			f.visible = false
+			_hidden_figures.append(f)
 
 
 ## Arată în prim-plan o animație din art/anim (centrată, deasupra casetei de dialog), cu o umbră discretă în spate.
@@ -326,8 +329,10 @@ func hide_closeup() -> void:
 
 func _hide_portrait() -> void:
 	_portrait_root.visible = false
-	for f in get_tree().get_nodes_in_group("figures"):
-		f.visible = true
+	for f in _hidden_figures:
+		if is_instance_valid(f):
+			f.visible = true
+	_hidden_figures.clear()
 
 
 func say(who: String, text: String) -> void:

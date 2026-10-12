@@ -49,3 +49,6 @@
 ## Nea Ilie, vecinul de pe drum (stăpânul câinelui)
 - [x] ilie_foaie
 - [x] ilie_portret
+
+## Piatra de trecut băltoaca (minijocul de pe drum)
+- [ ] piatra_balta
