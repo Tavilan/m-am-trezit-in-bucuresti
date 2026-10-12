@@ -51,4 +51,4 @@
 - [x] ilie_portret
 
 ## Piatra de trecut băltoaca (minijocul de pe drum)
-- [ ] piatra_balta
+- [x] piatra_balta
