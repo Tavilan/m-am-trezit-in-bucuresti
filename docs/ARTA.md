@@ -25,3 +25,9 @@
 - **Referințe** (`refs`): doar imagini proprii (foi de personaj, scene generate deja), ca să rămână personajele identice între scene. Fotografiile reale de pe internet se folosesc doar ca sursă de fapte în prompt, nu ca imagini de intrare.
 - Plafon: maximum 4 imagini pe rulare, ca să nu apară facturi surpriză.
 - Arta pe straturi: fundaluri **fără personaje**, iar personajele și obiectele interactive ca imagini separate, cu fundal transparent.
+
+## Test ChatGPT vs Gemini (12.10.2026, Romică: foaia de personaj + oglinda)
+Test orb pe variantele pixelizate (realism / lizibilitate / impresie):
+- **ChatGPT:** foaie 8/6/7, oglindă 8/7/8. Câștigă la realism și atmosferă: proporții reale, oglinda arată camera reflectată. Minusuri: fața din oglindă pare că plânge (strică gluma), colacul de sârmă se citește ca un cârnat, textura e zgomotoasă.
+- **Gemini:** foaie 6/9/7, oglindă 6/8/6. Câștigă la lizibilitate (contur curat, clar ca sprite). Minusuri: proporții de desen animat (cap mare); oglinda arată ca un portret înrămat, nu ca o reflexie.
+- **Decizie:** ChatGPT, pentru că realismul primează. Corecturile (privire seacă fără lacrimi, sârmă subțire, rola de bandă mai mare, mai puțin zgomot) sunt trecute în prompturi (versiunea 4).
