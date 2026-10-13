@@ -73,6 +73,7 @@ Reguli scurte, adunate din toate corecturile de până acum (oct. 2026). Le cite
 - **Prologul nu se termină în 2 minute.** Fiecare scenă are: ceva de găsit (obiecte/bani), un minijoc scurt, un dialog cu alegeri care contează puțin mai târziu, și câteva obiecte cu glume. Ieșirea din scenă se deblochează după ce le faci.
 - Minijocurile au echivalent tactil (tap/tragere) și eșecul e comic, nu pedepsitor (o iei de la capăt).
 - **Minijocurile nu se trec din greșeală din prima.** Dificultatea crește pe parcurs (sârma tot mai țeapănă), au momente care cer atenție la scenă (sârma se agață în rugină: te oprești), iar reflexul „fac la fel până merge” nu ajunge. Test: un robot care face mereu la fel trebuie să piardă, unul atent trebuie să câștige în ~20–40 s.
+- **Minijocurile urmează pașii reali ai meseriei** (zăvorul: sârma prin gaura plăcuței și peste bară, apoi capetele răsucite cu cleștele până se strâng, fără să crape, apoi codița îndoită), nu un gest abstract. Întreabă: „așa ar face un meșter adevărat?”.
 - **Zonele de atins nu stau înghesuite:** două obiecte apropiate se confundă pe telefon (priza de lângă cizme a fost mutată în dreapta mașinii).
 - **Minijocurile vin din meseria și viața lui Romică** (scos ștecherul mașinii, legat zăvorul cu sârmă), nu sunt jocuri lipite peste scenă.
 - **Fără chenare/evidențieri peste lume** care să-ți arate pașii (chenarul de pe pietre a fost respins); ce ai de făcut se înțelege din scenă și din replici. O scurtă indicație de control („trage în cerc”) e acceptată.

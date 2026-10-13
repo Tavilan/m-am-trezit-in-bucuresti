@@ -264,7 +264,7 @@ func _ilie_calls() -> void:
 func _latch_game() -> void:
 	_latch = preload("res://scripts/scenes/latch_game.gd").new()
 	Game.world.get_parent().add_child(_latch)
-	await say("Romică", "Răsucesc sârma pe zăvor. Rotund și cu răbdare: dacă trag tare, se rupe; dacă mă opresc, se desface.")
+	await say("Romică", "Trec sârma prin gaura plăcuței și peste bară, tură după tură. Cu răbdare: dacă trag tare, se rupe; dacă mă opresc, se desface. Pe urmă răsucesc capetele cu cleștele.")
 	var res: String = await _latch.finished
 	_latch.queue_free()
 	_latch = null
