@@ -71,7 +71,7 @@
 - [x] birt_fundal
 
 ## Baia birtului, din nou (să fie aceeași baie cu cea din oglinda lui Romică: faianță verde)
-- [ ] baie_fundal
+- [x] baie_fundal
 
 ## Birtul: frigiderul pe dos (minijocul cu firele) și focul (după fundalul v2)
 - [ ] frigider_spate
