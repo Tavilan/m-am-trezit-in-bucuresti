@@ -1,3 +1,6 @@
-Sursa muzicii: Gemini (Create music), 13.10.2026, prompt lăutărească oltenească instrumentală
+Surse sunet (toate din abonamente; Suno: plan Pro activ la generare, cont octavsch, drepturi comerciale)
 
-manele_tv.ogg — Suno Pro (cont octavsch, plan Pro activ la generare: drepturi comerciale), „Balulunga Fiestă”, v6, instrumental, 13 oct. 2026; secțiunea 4–152 s, buclă cu fade de 4 s.
+lautareasca_radio.ogg — Suno Pro, „Noptea de Oltenia”, v6, instrumental, 13 oct. 2026; secțiunea 4–169 s, buclă cu fade de 4 s.
+manele_tv.ogg — Suno Pro, „Balulunga Fiestă”, v6, instrumental, 13 oct. 2026; secțiunea 4–152 s, buclă cu fade de 4 s.
+drum_sat.ogg — ploaie_afara.ogg (sintetizat) + Suno Pro Sounds „Night Ambience In A Romanian Village” (câini departe, filtrați și atenuați, de două ori în bucla de 66 s).
+masina_spalat.ogg, ploaie_afara.ogg, ploaie_inauntru.ogg, tv_purici.ogg, text_blip.wav — sintetizate în cod (tools / scripturi Python).

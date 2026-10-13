@@ -41,7 +41,7 @@ func _ready() -> void:
 		"light1_pos": LAMP, "light1_color": Vector3(1.0, 0.7, 0.35), "light1_radius": 400.0, "light1_strength": 0.9,
 		"light2_pos": Vector2(485, 190), "light2_color": Vector3(1.0, 0.8, 0.45), "light2_radius": 120.0, "light2_strength": 0.3}
 	grade = {"tint": Vector3(0.66, 0.66, 0.8), "saturation": 0.68}
-	ambience = "res://audio/ploaie_afara.ogg"
+	ambience = "res://audio/drum_sat.ogg"   # ploaie + câini care latră departe, prin curți
 	background("res://art/final/drum_fundal.png")
 	# fundalul = varianta stinsă + lumina felinarului înmulțită cu intensitatea (shaders/light_mix.gdshader)
 	_lamp_mat = ShaderMaterial.new()
