@@ -78,8 +78,12 @@ func _build_art() -> void:
 	if FileAccess.file_exists(LAYOUT):
 		L = JSON.parse_string(FileAccess.open(LAYOUT, FileAccess.READ).get_as_text())
 	# de la spate în față: Marius (în picioare, în spatele mesei), gemenii la table, Mioara la tejghea
-	for who in [["costel", "Costel"], ["marius", "Marius"], ["gemeni", "Nelu"], ["mioara", "Tanti Mioara"]]:
+	for who in [["costel", "Costel"], ["marius", "Marius"], ["mioara", "Tanti Mioara"], ["gemeni", "Nelu"]]:
 		var path := "res://art/final/%s_birt.png" % who[0]
+		# variante: Costel speriat când arde birtul; Mioara cu sacoșa (borcanul îl scoate abia când i-l dă)
+		var alt := {"costel": "costel_foc_birt", "mioara": "mioara_ulei_birt"}
+		if alt.has(who[0]) and (who[0] != "costel" or _fire) and ResourceLoader.exists("res://art/final/%s.png" % alt[who[0]]):
+			path = "res://art/final/%s.png" % alt[who[0]]
 		if _fire and who[0] != "costel":   # în foc au sărit toți în picioare, spre ușă; rămâne doar Costel la tejghea
 			continue
 		if ResourceLoader.exists(path) and L.has(who[0]):

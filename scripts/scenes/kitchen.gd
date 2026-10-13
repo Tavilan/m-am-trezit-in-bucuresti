@@ -14,10 +14,10 @@ var _drops: Array = []      # picături lipite de geam: [poziție, viteză de al
 var _trails: Array = []     # urme lăsate de picăturile care alunecă: [poziție, vârstă]
 var _glass: Image           # masca geamului (alb = sticlă), ca ploaia să nu treacă peste ghiveci sau ramă
 var _shake := 1.0
-var _walk_amp := 26.0
+var _walk_amp := 24.0
 var _stopped := false        # mașina oprită (minijocul cu ștecherul)
 var _plug_game := false      # minijocul e pornit
-const SOCKET := Rect2(262, 218, 8, 10)   # priza de pe perete, în dreapta mașinii (departe de cizme)
+const SOCKET := Rect2(280, 218, 8, 10)   # priza de pe perete, în dreapta mașinii (departe de cizme)
 var _under: Node2D   # umbrele, sub personaje
 var _over: Node2D    # ploaia, lumina, peste fundal
 
@@ -50,7 +50,7 @@ func _ready() -> void:
 	var h := hotspot("Mașina de spălat", Rect2(Vector2.ZERO, _washer.texture.get_size()), _washer_talk)
 	remove_child(h)
 	_washer.add_child(h)
-	hotspot("Gina", Rect2(_gina.position, _gina.texture.get_size()), _gina_talk)
+	hotspot("Gina", Rect2(_gina.position + Vector2(24, 0), Vector2(56, _gina.texture.get_height())), _gina_talk)   # doar corpul, nu marginile goale
 	hotspot("Icoana", Rect2(540, 10, 46, 56), _icon)
 	hotspot("Geaca de pe cuier", Rect2(102, 42, 50, 165), _coat)
 	hotspot("Cizmele", Rect2(120, 222, 52, 50), _boots)
@@ -239,7 +239,7 @@ func _washer_talk() -> void:
 		_shake = 1.0
 		await say("Romică", "Ștecheru' e-n priza din dreapta ei. Trebe să-l smulg când pleacă de lângă perete.")
 		_plug_game = true
-		_walk_amp = 46.0
+		_walk_amp = 24.0
 		return
 	await cycle("washer_on", [
 		"Merge, fă! Ziceai că nu merge. Uite cum merge.",
@@ -262,7 +262,7 @@ func _socket() -> void:
 		Game.shake(4.0, 0.35)
 		await say("Romică", ["Au! Mă pocni-n deget, fir-ar a dracu' de mașină!", "Stai, fă, că nu-ți fur nimic!", "Futu-i... Așteaptă să plece de lângă perete, Romică."].pick_random())
 		_plug_game = true
-		_walk_amp = 46.0
+		_walk_amp = 24.0
 		return
 	_stopped = true
 	_shake = 0.0

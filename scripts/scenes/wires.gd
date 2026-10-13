@@ -58,16 +58,19 @@ func _input(e: InputEvent) -> void:
 	if e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_LEFT:
 		var p: Vector2 = get_global_mouse_position()
 		if e.pressed:
+			var near := -1   # capătul de fir cel mai apropiat (zonă largă, ca să se nimerească și pe telefon)
 			for i in _from.size():
-				if p.distance_to(_from[i]) < 14:
-					_drag = i
-					_links.erase(i)
-					_mouse = p
+				if p.distance_to(_from[i]) < 24 and (near < 0 or p.distance_to(_from[i]) < p.distance_to(_from[near])):
+					near = i
+			if near >= 0:
+				_drag = near
+				_links.erase(near)
+				_mouse = p
 		elif _drag >= 0:
 			# cea mai apropiată bornă liberă (borna de la stâlp n-o legi tu; o leagă Romică singur, la final)
 			var best := -1
 			for j in 3:
-				if not _links.values().has(j) and p.distance_to(_to[j]) < 12 and (best < 0 or p.distance_to(_to[j]) < p.distance_to(_to[best])):
+				if not _links.values().has(j) and p.distance_to(_to[j]) < 20 and (best < 0 or p.distance_to(_to[j]) < p.distance_to(_to[best])):
 					best = j
 			if best >= 0:
 				_links[_drag] = best

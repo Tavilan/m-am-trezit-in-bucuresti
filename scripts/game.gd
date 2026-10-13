@@ -380,6 +380,10 @@ func say(who: String, text: String) -> void:
 
 
 func choose(options: Array) -> int:
+	# caseta rămâne cu ultima replică: portretul nu plutește tăiat în aer, iar jucătorul vede la ce răspunde
+	_dlg.visible = true
+	_dlg_more.visible = false
+	_dlg_text.visible_ratio = 1.0
 	for c in _choices.get_children():
 		c.queue_free()
 	for i in options.size():
@@ -391,6 +395,7 @@ func choose(options: Array) -> int:
 	_choices.visible = true
 	var i: int = await chosen
 	_choices.visible = false
+	_dlg.visible = false
 	return i
 
 
