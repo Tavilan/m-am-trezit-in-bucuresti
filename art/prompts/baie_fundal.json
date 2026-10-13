@@ -2,5 +2,8 @@
   "id": "baie_fundal",
   "versiune": 1,
   "type": "scene",
-  "prompt": "GAME BACKGROUND, WIDE 16:9 LANDSCAPE, FIRST PERSON from a man standing in front of a sink (camera at about 1.55 m, looking straight ahead). NO people anywhere, NO reflection of any person in the mirror (the mirror shows only the opposite wall, dimly). Detailed clean pixel art, larger flat colour areas. No text, no letters, no logos.\nThe tiny toilet of a village pub in rural Oltenia, Romania: a cracked white ceramic sink in the CENTRE with one old tap and a sliver of soap, above it a small stained mirror with a black-spotted edge in a thin frame; a single bare bulb hanging from a wire; old pale-blue tiles up to mid-wall, some missing; peeling paint above; a bucket and a mop in a corner; an old wooden door on the LEFT with a bent latch; a roll of rough newspaper instead of toilet paper on a nail. Cold, damp, shabby, a bit funny, real."
+  "prompt": "GAME BACKGROUND, WIDE 16:9 LANDSCAPE, FIRST PERSON from a man standing in front of the sink (camera at about 1.55 m, looking straight ahead), a step further back than in the attached image so we see the whole little room around the mirror. It is EXACTLY the same toilet as in the attached image: same old GREEN ceramic wall tiles with rust stains and cracks, same cracked mirror with a rusty black-spotted edge, same chrome tap and white sink, same bare bulb, same wooden door, same cold damp light and pixel-art style. NO people anywhere: the mirror reflects only the room behind (the bulb and the wooden door), NO person, NO face in the mirror. Mirror in the CENTRE above the sink; on the LEFT the old wooden door with a bent latch; a bucket and a mop in a corner; a roll of rough newspaper on a nail instead of toilet paper. Detailed clean pixel art, larger flat colour areas. No text, no letters, no logos.",
+  "refs": [
+    "art/raw/romica_oglinda.png"
+  ]
 }
