@@ -57,7 +57,7 @@
 - [x] zavor_prim_plan
 
 ## Birtul Unirea (fundal, gemenii la masă, televizorul și antena pentru minijoc, baia)
-- [ ] birt_fundal
+- [x] birt_fundal (prima rundă; vezi versiunea 2 mai jos)
   - Respins după două generări: prima are etichete/inscripții pe rafturi și casa de marcat; a doua păstrează cifre pe afișajul casei de marcat și un mic însemn, contrar cerinței fără text, numere sau logo-uri. A doua variantă, cea mai bună, este păstrată nemodificată în art/inbox/birt_fundal__respins.png pentru evaluarea lui Tavi. Rândul rămâne nebifat; coada continuă conform docs/CODEX_ARTA.md, punctul 5.
 - [x] gemeni_masa
 - [x] televizor_perete
@@ -65,3 +65,6 @@
 - [ ] antena_camera
 - [ ] tv_ecran
 - [ ] baie_fundal
+
+## Birtul, fundalul v2 (editare: fără masa înaltă, casa de marcat goală)
+- [ ] birt_fundal
