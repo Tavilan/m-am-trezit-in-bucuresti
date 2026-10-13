@@ -81,7 +81,7 @@
 - [x] costel_portret
 - [x] marius_portret
 - [x] mioara_portret
-- [ ] nelu_portret
+- [x] nelu_portret
 - [ ] gelu_portret
 - [ ] costel_foc
 - [ ] mioara_ulei
