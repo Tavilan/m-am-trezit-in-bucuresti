@@ -8,7 +8,7 @@ extends CanvasLayer
 
 signal finished(result: String)
 
-const TURNS := 4.0
+const TURNS := 4.0  # 8 jumătăți de tură pe lățimea barei
 ## zăvorul în prim-plan (de reglat după desen): centrul în jurul căruia răsucești și bara pe care se strânge sârma
 var center := Vector2(320, 175)
 var bar := Rect2(286, 168, 70, 14)
@@ -135,10 +135,11 @@ func _on_draw() -> void:
 		var top := Vector2(x, bar.position.y - 2)
 		var bot := Vector2(x + step * 0.8, bar.end.y + 2)
 		if h % 2 == 0:
-			_draw.draw_line(top.round(), bot.round(), COPPER, 2.0)
+			_draw.draw_line(top.round() + Vector2(1, 2), bot.round() + Vector2(1, 2), Color(0, 0, 0, 0.35), 3.0)   # umbra pe bară
+			_draw.draw_line(top.round(), bot.round(), COPPER, 3.0)
 			_draw.draw_line(top.round() + Vector2(1, 0), (top + (bot - top) * 0.5).round() + Vector2(1, 0), COPPER_HI, 1.0)
 		else:
-			_draw.draw_line(bot.round(), (top + Vector2(step, 0)).round(), COPPER.darkened(0.45), 2.0)
+			_draw.draw_line(bot.round(), (top + Vector2(step, 0)).round(), COPPER.darkened(0.55), 3.0)
 	# capătul de sârmă tras cu degetul: întins drept când e strâns, lăsat în jos când e moale
 	var start := Vector2(bar.position.x + step * (half + 1), bar.position.y + (0.0 if half % 2 == 0 else bar.size.y))
 	var tight := clampf(_tension, 0.0, 1.0)
@@ -149,7 +150,7 @@ func _on_draw() -> void:
 	for k in 13:
 		var t := k / 12.0
 		pts.append(((1 - t) * (1 - t) * start + 2 * (1 - t) * t * mid + t * t * _finger).round())
-	_draw.draw_polyline(pts, col, 2.0)
+	_draw.draw_polyline(pts, col, 3.0)
 	_draw.draw_polyline(pts, Color(col.lightened(0.3), 0.6), 1.0)
 	if _tension > 0.85:   # sârma „cântă” când e aproape să se rupă
 		_draw.draw_circle(start, 2.0 + randf() * 1.5, Color(1, 1, 0.8, 0.5))
