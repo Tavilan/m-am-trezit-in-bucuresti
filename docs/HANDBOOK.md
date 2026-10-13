@@ -45,6 +45,7 @@ Reguli scurte, adunate din toate corecturile de până acum (oct. 2026). Le cite
 - Imaginea de intrare **16:9, cu loc deasupra capului** (altfel Veo taie capul/șapca).
 - **Bucla normală, nu dus-întors** (ping-pong respins). Dacă bucla nu se leagă, **o generare nouă**, cu promptul „revine exact la poza de început”.
 - Promptul **nu folosește „flicker”/„failing”** (refuz); scrie „lumina tremură și scade din cauza unui contact slab”.
+- Fundaluri care se mișcă (foc, fum): **Veo pe tot fundalul**, apoi `tools/art/scene_from_video.py --region x y w h`: doar zona care se mișcă devine animație, iar fundalul static e primul cadru din același video (fără cusături); bucla își caută singură începutul și se topește la capăt.
 - Lumini care pâlpâie: **Veo pe tot fundalul**, apoi `tools/art/light_from_video.py` scoate imaginea stinsă și ritmul; lucrurile din lumina ei se întunecă odată cu ea.
 - Gemini dă uneori erori/refuzuri și are limite pe zi: reîncearcă o dată cu alt prompt; nu insista.
 - Personajele principale: așteptare + vorbit; secundare: așteptare (sau portret static până vine animația).

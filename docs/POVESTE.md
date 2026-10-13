@@ -53,3 +53,10 @@
 ## Timp și anotimp (12.10.2026)
 - **Toamnă târzie, ploioasă:** asfalt ud, frunze, ceață, lumini reflectate.
 - **Durata în București:** dimineața sosirii → ziua → seara → o **noapte nedormită** → finalul, după ce răsare soarele din nou. Fiecare loc se vede de regulă o singură dată, la ora lui; **Gara de Nord apare de două ori** (dimineața sosirii și răsăritul de la final, cu Gina), deci are două variante de lumină.
+
+## Birtul Unirea, firul scenei (13.10.2026)
+1. Costel nu-i mai dă pe caiet (are două pagini numai el). Îi dă o bere doar dacă face televizorul să prindă: **minijocul cu antena de cameră** (cât o ții în mână prinde, când îi dai drumul revin purecii; trebuie găsit cuiul unde prinde singură, legată cu sârmă).
+2. Cu berea în mână, **Marius îl ia peste picior** cu certificatul de „Elektriker” („meșter de sârmă”). Romică se duce la baie să nu facă „moarte de om”.
+3. **Oglinda.** La întoarcere, Tanti Mioara îi dă zacusca pentru Gina (vrea borcanul înapoi).
+4. **Runda a doua:** frigiderul de bere nu răcește („l-ai reparat tu, nu?”). **Minijocul cu firele** pe spatele frigiderului (maro/albastru/galben-verde la L/N/PE; legat greșit te curentează). Legat corect, Romică trage din mândrie „un fir de la stâlp, să răcească ca-n Germania” și ia foc jumătate de birt.
+- Gemenii joacă table; Costel, rafturile, soba, geamul, televizorul au replici în plus pentru curioși.
