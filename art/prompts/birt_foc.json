@@ -1,0 +1,9 @@
+{
+  "id": "birt_foc",
+  "versiune": 1,
+  "type": "scene",
+  "refs": [
+    "art/raw/birt_fundal.png"
+  ],
+  "prompt": "EDIT OF THE ATTACHED IMAGE: exactly the same pub, camera and pixel-art style, NO people. A few seconds after an electrical short circuit at the beer fridge: the RIGHT HALF of the room is on fire (flames climbing the wall behind the fridge and the stove corner, burning wires along the ceiling, sparks), thick grey-black smoke under the ceiling spreading to the left, the fluorescent tube is off and everything is lit by the orange firelight, the left half (counter, shelves) is untouched but lit orange. Comic disaster, nobody hurt, realistic fire. No text, no logos."
+}

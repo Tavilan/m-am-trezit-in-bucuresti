@@ -38,7 +38,7 @@ func _sink() -> void:
 
 func _paper() -> void:
 	await cycle("paper", [
-		"Hârtie igienică adevărată. Costel s-a modernizat.",
+		"Un sul de hârtie. Unu' singur, pentru tot satu'.",
 		"E un singur sul și-i lipit cu scotch de suport. Să nu-l fure cineva.",
 	])
 

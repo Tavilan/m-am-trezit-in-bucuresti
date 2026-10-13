@@ -1,0 +1,9 @@
+{
+  "id": "frigider_spate",
+  "versiune": 1,
+  "type": "scene",
+  "refs": [
+    "art/raw/birt_fundal__respins.png"
+  ],
+  "prompt": "CLOSE-UP SHOT, wide 16:9, inside the same village pub as in the attached image (same light, same style): the tall glass-door beer fridge has been pulled away from the wall and we look at its BACK. On the LEFT HALF: the dusty black condenser grid and the round black compressor at the bottom, an old repair visible: thin copper wire wrapped around a pipe and a strip of black electrical tape. On the RIGHT HALF, on the wall behind: a small grey electrical junction box with its cover removed, an empty terminal block with four screw terminals in a row (keep the area around the terminals clear and readable), and on the far right an old wire going up the wall towards the ceiling (the line to the street pole). Three loose wire ends come out of the fridge in the middle of the image, not connected: one BROWN, one BLUE, one YELLOW-GREEN, hanging free. No people, no hands, no text, no numbers, no labels, no logos."
+}

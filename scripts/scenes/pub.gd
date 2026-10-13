@@ -13,6 +13,7 @@ const ART_OLD := "res://art/final/birt_fundal_v1.png"   # până vine varianta 2
 const LAYOUT := "res://art/final/birt_layout.json"
 var _fire := false
 var _art := false
+var _fire_art := false
 
 
 func _ready() -> void:
@@ -24,6 +25,7 @@ func _ready() -> void:
 		ambience = "res://audio/tv_purici.ogg"   # televizorul nu prinde: purici, manelele abia se aud
 		ambience_db = -10.0
 	_art = ResourceLoader.exists(ART) or ResourceLoader.exists(ART_OLD)
+	_fire_art = _fire and ResourceLoader.exists("res://art/final/birt_foc.png")
 	if _art:
 		_build_art()
 	else:
@@ -54,7 +56,7 @@ func _build_sketch() -> void:
 
 ## Cu arta: fundal + personaje așezate după perspectivă. Pozițiile se reglează după desen.
 func _build_art() -> void:
-	background(ART if ResourceLoader.exists(ART) else ART_OLD)
+	background("res://art/final/birt_foc.png" if _fire_art else (ART if ResourceLoader.exists(ART) else ART_OLD))
 	horizon = 125   # ochii lui Romică (1,55 m): ușa de 2 m și frigiderul se potrivesc
 	lighting = {"ambient": Vector3(0.72, 0.74, 0.7), "saturation": 0.9,
 		"light1_pos": Vector2(320, 0), "light1_color": Vector3(0.85, 0.95, 0.9), "light1_radius": 360.0, "light1_strength": 0.45,
@@ -117,13 +119,9 @@ func _process(_d: float) -> void:
 
 func _draw() -> void:
 	super._draw()
-	if _fire:
-		# jumătatea din dreapta a birtului arde (provizoriu, până la arta cu focul)
-		for i in 26:
-			var x := 320.0 + randf() * 320.0
-			var h := 40.0 + randf() * 160.0
-			draw_rect(Rect2(x, 300 - h, 10 + randf() * 14, h), Color(1, 0.35 + randf() * 0.4, 0.05, 0.35))
-		draw_rect(Rect2(320, 0, 320, 360), Color(1, 0.4, 0.1, 0.12 + randf() * 0.06))
+	if _fire and not _fire_art:
+		# până vine arta cu focul: doar lumina portocalie care pâlpâie (fără flăcări desenate din cod)
+		draw_rect(Rect2(0, 0, Game.W, Game.H), Color(1, 0.45, 0.12, 0.22 + 0.06 * sin(Time.get_ticks_msec() * 0.02) + randf() * 0.03))
 
 
 # ---------------------------------------------------------------- Costel și berea
