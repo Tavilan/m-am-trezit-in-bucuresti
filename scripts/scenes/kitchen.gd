@@ -32,7 +32,8 @@ func _ready() -> void:
 	grade = {"tint": Vector3(0.9, 0.82, 0.74), "saturation": 0.72}
 	music = "res://audio/lautareasca_radio.ogg"   # vine de la radioul de pe raft
 	radio = true
-	ambience = "res://audio/ploaie_inauntru.ogg"
+	ambience_db = -16.0
+	ambience = "res://audio/masina_spalat.ogg"   # mașina se aude peste radio (sugestiv, nu realist); ploaia nu
 	background("res://art/final/bucatarie_fundal.png")
 	_under = Node2D.new()
 	_under.draw.connect(_draw_under)
@@ -237,6 +238,7 @@ func _socket() -> void:
 		return
 	_stopped = true
 	_shake = 0.0
+	Game.set_audio(music, "", true)   # mașina tace, rămâne radioul
 	Game.shake(2.0, 0.2)
 	await say("Romică", "Gata! Am oprit-o.")
 	await say("Gina", "Ai oprit-o scoțând-o din priză. Asta face și Mioara, și ea n-a făcut școală de electrician.")

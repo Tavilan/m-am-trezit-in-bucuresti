@@ -30,12 +30,7 @@ var _hum := 0.0
 var _over: Node2D
 var _dog_sprite: AnimSprite
 var _ilie: Sprite2D
-## pietrele peste băltoaca dinspre birt: [centru, lățime, fază]; se scufundă și ies pe rând (apa crește de la ploaie)
-var _stones: Array = []
-var _stone_i := 0          # următoarea piatră pe care trebuie să calci
-var _crossing := false     # minijocul e pornit
-var _splashes: Array = []  # [poziție, vârstă, mare]
-const STONE_PATH := [Vector2(440, 326), Vector2(461, 298), Vector2(479, 273), Vector2(498, 253), Vector2(516, 237)]   # prin băltoacele din dreapta, spre ușa birtului
+var _latch: Node            # minijocul cu zăvorul (prim-plan), cât timp e deschis
 
 
 func _ready() -> void:
@@ -79,14 +74,7 @@ func _ready() -> void:
 		_ilie = layer("res://art/final/ilie_drum.png", Vector2(168, 252))
 		figure(_ilie, "Nea Ilie")
 		_ilie.visible = false
-	for k in STONE_PATH.size():
-		var c: Vector2 = STONE_PATH[k]
-		var w: float = (c.y - horizon) * 0.2
-		var spr := layer("res://art/final/piatra_drum_%d.png" % int(c.y), c + Vector2(0, w * 0.15))
-		# pietrele ude prind lumina lunii și a vitrinei: le luminăm ca să se vadă pe întuneric
-		(spr.material as ShaderMaterial).set_shader_parameter("ambient", Vector3(0.95, 0.95, 1.1))
-		_stones.append([c, w, randf_range(0, TAU), spr])
-		hotspot("Piatra", Rect2(c - Vector2(w * 0.8, w * 0.45), Vector2(w * 1.6, w * 0.9)), _stone.bind(k))
+
 
 
 func enter() -> void:
@@ -115,45 +103,10 @@ func _process(d: float) -> void:
 	_update_lamp(d)
 	_lamp_mat.set_shader_parameter("intensity", _lamp_on)
 	(_dog_sprite.material as ShaderMaterial).set_shader_parameter("light1_strength", 1.3 * _lamp_on)
-	for k in _stones.size():
-		# apa urcă și coboară pe fiecare piatră: deasupra apei = se poate călca
-		var up := _stone_up(k)
-		var spr: Sprite2D = _stones[k][3]
-		(spr.material as ShaderMaterial).set_shader_parameter("water_level", clampf(0.45 - up * 0.6, 0.0, 1.0))
-	for sp in _splashes:
-		sp[1] += d
-	_splashes = _splashes.filter(func(sp): return sp[1] < 0.5)
 	_over.queue_redraw()
 
 
-func _stone_up(k: int) -> float:
-	# >0 = piatra e deasupra apei; ritmuri diferite, ca să trebuiască să alegi momentul
-	var st: Array = _stones[k]
-	return sin(_t * (0.9 + 0.17 * k) + st[2])
-
-
-func _draw_stones() -> void:
-	# pietrele sunt sprite-uri (art/final/piatra_drum_*.png); aici doar cercurile din apă
-	for k in _stones.size():
-		var c: Vector2 = _stones[k][0]
-		var w: float = _stones[k][1]
-		if _stone_up(k) < 0.15:
-			_over.draw_set_transform(c, 0, Vector2(1, 0.32))
-			var r := w * (0.55 + 0.15 * sin(_t * 3.0 + k))
-			_over.draw_arc(Vector2.ZERO, r, 0, TAU, 16, Color(0.75, 0.8, 0.95, 0.3), 1.0)
-			_over.draw_set_transform(Vector2.ZERO)
-	for sp in _splashes:
-		var p: Vector2 = sp[0]
-		var age: float = sp[1]
-		var big: float = sp[2]
-		for i in 6:
-			var ang := -PI * (0.15 + 0.7 * i / 5.0)
-			var q := p + Vector2(cos(ang), sin(ang)) * (4.0 + age * 40.0) * big + Vector2(0, age * age * 60.0)
-			_over.draw_rect(Rect2(q.round(), Vector2.ONE * (1 + int(big))), Color(0.8, 0.85, 1.0, 0.7 * (1.0 - age / 0.5)))
-
-
 func _draw_over() -> void:
-	_draw_stones()
 	# vitrina birtului: lumină caldă care respiră ușor (televizorul dinăuntru)
 	_over.draw_rect(PUB_WINDOW, Color(1.0, 0.85, 0.5, 0.06 + 0.05 * absf(sin(_t * 2.3))))
 	# cercuri de ploaie în băltoace
@@ -232,12 +185,17 @@ func _dog() -> void:
 
 func _gate() -> void:
 	if Game.flags.get("ilie_done", false):
-		await say("Nea Ilie", "Hai, du-te, Romică! Și pe pietre, nu prin apă!")
+		await say("Romică", "Zăvorul lui nea Ilie. Ține. Până la primăvară.")
 		return
-	await say("Romică", "Nea Ilieee! Ești treaz?")
+	await say("Romică", "Poarta lui nea Ilie. A pus streașină, să nu-i plouă câinele.")
+
+
+## Nea Ilie te strigă de la poartă când pornești spre birt (nu-l chemi tu).
+func _ilie_calls() -> void:
 	if _ilie:
 		_ilie.visible = true
-	await say("Nea Ilie", "Cine-i acolo la ora asta? A, tu ești, Romică. Te-a dat afară Gina?")
+	await say("Nea Ilie", "Romică! Romicăăă! Stai un pic!")
+	await say("Nea Ilie", "Tu ești? La ora asta, pe ploaia asta? Te-a dat afară Gina?")
 	var a := await Game.choose(["„Nu m-a dat afară. Am ieșit eu, demn.”", "„M-a dat. Din cauza mașinii de spălat.”"])
 	if a == 0:
 		await say("Romică", "Nu m-a dat afară. Am ieșit eu, demn.")
@@ -245,52 +203,34 @@ func _gate() -> void:
 	else:
 		await say("Romică", "M-a dat. Din cauza mașinii de spălat.")
 		await say("Nea Ilie", "Aia pe care ai legat-o cu sârmă? Am auzit-o de aici. Credeam că aterizează un elicopter.")
-	await say("Nea Ilie", "Bine că veniși. Mi s-a stricat zăvorul la poartă și câinele iese la drum. Că tot ești meșter...")
-	var b := await Game.choose(["Îi legi zăvorul cu sârmă.", "„Mâine, nea Ilie, că acum mă grăbesc.”"])
-	if b == 0:
-		await say("Romică", "Ia să vedem... O tură de sârmă, două de bandă... Gata. Ține până la primăvară.")
-		await say("Nea Ilie", "Până la primăvară sau până trântesc poarta?")
-		await say("Romică", "Până la primăvară, dacă n-o trântești.")
-		Game.flags["zavor_ilie"] = true
-	else:
+	await say("Nea Ilie", "Bine că treci pe-aici. Mi s-a rupt zăvorul de la poartă și câinele iese la drum. Mâine dimineață e la birt înaintea ta.")
+	var b := await Game.choose(["„Dă-mi zăvorul, că-l leg acum.”", "„Mâine, nea Ilie, că acum mă grăbesc.”"])
+	if b == 1:
 		await say("Romică", "Mâine, nea Ilie, că acum mă grăbesc.")
-		await say("Nea Ilie", "Te grăbești la birt. Bine, bine. Atunci leagă câinele de bancă, să nu te urmeze.")
-	await say("Nea Ilie", "Și ai grijă, că la birt e apă mare. Treci pe pietrele de la fântână, le-am pus eu. Dar calcă doar când ies din apă!")
+		await say("Nea Ilie", "Mâine? La noapte pleacă după cățelele din Dăneasa și nu-l mai văd o săptămână. Două minute, Romică!")
+	await say("Romică", "Bine, bine. Sârmă am la mine. Întotdeauna am.")
+	await _latch_game()
 	Game.flags["ilie_done"] = true
+	await say("Nea Ilie", "Ține? Ține! Dumnezeu să te țină, Romică. Hai, du-te la birt, că te așteaptă oamenii.")
 	if _ilie:
+		_ilie.set_meta("gone", true)   # a intrat în curte; nu-l mai readuce portretul
 		_ilie.visible = false
 
 
-## Minijocul: treci băltoaca din piatră în piatră; calci doar pe piatra următoare, când e deasupra apei.
-func _stone(k: int) -> void:
-	if not _crossing:
-		await _pub()
-		return
-	if k != _stone_i:
-		return
-	var c: Vector2 = _stones[k][0]
-	if _stone_up(k) < 0.15:
-		_splashes.append([c, 0.0, 1.0])
-		Game.shake(3.0, 0.25)
-		await say("Romică", ["Mi-am umplut cizma!", "Aoleu, până la genunchi!", "Asta nu era piatră, era băltoaca."].pick_random())
-		_stone_i = 0
-		await say("Romică", "Hai înapoi, de la început. Și calc doar când iese piatra din apă.")
-		return
-	_splashes.append([c, 0.0, 0.4])
-	_stone_i += 1
-	if _stone_i >= _stones.size():
-		_crossing = false
-		await say("Romică", "Am trecut! Uscat... aproape.")
-		Game.goto("pub")
+## Minijocul cu zăvorul: tragi cu degetul în cerc în jurul zăvorului, ca să răsucești sârma.
+## Prea repede: sârma se întinde prea tare și se rupe. Dacă te oprești: se desface. 4 ture și gata.
+func _latch_game() -> void:
+	_latch = preload("res://scripts/scenes/latch_game.gd").new()
+	Game.world.get_parent().add_child(_latch)
+	await say("Romică", "Răsucesc sârma în jurul zăvorului: ture rotunde, liniștite. Nici prea tare, că se rupe, nici prea moale, că se desface.")
+	var res: String = await _latch.finished
+	_latch.queue_free()
+	_latch = null
 
 
 func _pub() -> void:
 	if not Game.flags.get("ilie_done", false):
-		await say("Romică", "Între mine și birt e o băltoacă cât Dunărea. Poate știe nea Ilie pe unde se trece.")
+		await _ilie_calls()
 		return
-	if not _crossing:
-		_crossing = true
-		_stone_i = 0
-		await say("Romică", "Pietrele lui nea Ilie. Una câte una, și doar când ies din apă.")
-		return
-
+	await say("Romică", "Birtul Unirea. Lumină caldă, oameni calzi, bere rece. Hai.")
+	Game.goto("pub")

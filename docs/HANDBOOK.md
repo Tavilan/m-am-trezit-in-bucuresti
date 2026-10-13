@@ -7,7 +7,7 @@ Reguli scurte, adunate din toate corecturile de până acum (oct. 2026). Le cite
 2. **Arată-i rezultatul, nu procesul.** Pe scurt, în română, ce s-a schimbat și ce poate testa la linkul de previzualizare (`#nume_scena` sare direct la scenă).
 3. **Decizii creative = întrebări cu variante** (carusel de alegeri), cu o variantă recomandată. Tavi decide, Claude propune idei. Dă-i chestionarul întreg, nu amesteca subiecte (o dată un răspuns s-a amestecat cu chestionarul).
 4. **Ce costă mult mai târziu se fixează acum** (mărimi, perspectivă, lumină, structura scenelor).
-5. **Fără bani în plus:** ChatGPT (Codex), Gemini (Nano Banana, Veo, muzică) din abonamente. API-urile plătite rămân oprite. Cheile doar în secretele GitHub.
+5. **Fără bani în plus:** ChatGPT (Codex), Gemini (Nano Banana, Veo), **Suno Pro** (muzică) din abonamente. API-urile plătite rămân oprite. Cheile doar în secretele GitHub.
 6. **Pe Mac:** nu ștergem nimic (mutăm în `_to_delete/`); descărcările din Gemini în Downloads sunt permise.
 
 ## 1. Calitate
@@ -34,7 +34,9 @@ Reguli scurte, adunate din toate corecturile de până acum (oct. 2026). Le cite
 - **Lumina locului se aplică pe tot ce e pus peste fundal** (`lighting`, `shaders/scene_light.gdshader`): personajele trebuie să pară luminate ca obiectele din jur (Gina era prea roșie și saturată față de mașina de spălat → saturație și ambient pe figură).
 - **Portretele și prim-planurile iau tonul scenei** (`grade`): cald și stins în casă, albăstrui noaptea.
 - **Prim-planurile** (ex. câinele) sunt discrete: mai mici, nu stridente, cu fundalul puțin întunecat.
-- **Obiecte care apar în scenă** (pietre, unelte) se desenează ca artă (ChatGPT, fundal verde), la perspectiva corectă; nu forme din cod.
+- **Obiecte care apar în scenă** (unelte, obiecte de joc) se desenează ca artă (ChatGPT, fundal verde), la perspectiva corectă; nu forme din cod.
+- **Nimic care n-ar avea sens în viața reală.** Respinse: pietre care urcă și coboară alternativ în băltoacă; un vecin chemat „să-mi arate drumul până la birt”. Înainte de orice mecanică întreabă: „s-ar putea întâmpla așa, într-un sat, la 10 seara?”.
+- **Întâlnirile se întâmplă firesc:** personajele vin ele spre tine când ai motiv să treci pe acolo (Nea Ilie te strigă de la poartă când pornești spre birt), nu le chemi ca să-ți dea indicii.
 
 ## 5. Animație (Veo)
 - Metoda aprobată: **imaginea exactă → Veo (Gemini) → `video_to_sprite.py`.**
@@ -47,7 +49,8 @@ Reguli scurte, adunate din toate corecturile de până acum (oct. 2026). Le cite
 
 ## 6. Atmosferă
 - **Ploaia se vede peste tot unde e logic:** stropi care cad în aer (straturi de adâncime, luminați de felinare), stropi sparți pe jos, cercuri în băltoace, **picături pe geamuri** (doar pe sticlă, cu mască).
-- **Sunet:** acasă lăutărească de la radio (înfundată), afară ploaie și sunete de sat (câini în depărtare etc.), în birt manele la televizor. Muzica se schimbă lin între scene.
+- **Sunet:** acasă lăutărească de la radio (înfundată) **și mașina de spălat** (la volum sugestiv, nu realist), **fără ploaie** în casă; după ce oprești mașina rămâne doar radioul. Afară ploaie și sunete de sat (câini în depărtare etc.), în birt manele la televizor. Muzica se schimbă lin între scene.
+- **Sunetul promis trebuie să se audă:** nu anunța o muzică până nu e în joc și ai verificat-o (lăutăreasca lipsea, iar fișierul nu exista).
 
 ## 7. Text și dialog
 - Fontul **Jersey 15**, mărimea 20 (Pixelify era greu de citit). Verifică orice simbol nou în font (▼ lipsea → „>”).
@@ -57,6 +60,8 @@ Reguli scurte, adunate din toate corecturile de până acum (oct. 2026). Le cite
 ## 8. Ritm și gameplay
 - **Prologul nu se termină în 2 minute.** Fiecare scenă are: ceva de găsit (obiecte/bani), un minijoc scurt, un dialog cu alegeri care contează puțin mai târziu, și câteva obiecte cu glume. Ieșirea din scenă se deblochează după ce le faci.
 - Minijocurile au echivalent tactil (tap/tragere) și eșecul e comic, nu pedepsitor (o iei de la capăt).
+- **Minijocurile vin din meseria și viața lui Romică** (scos ștecherul mașinii, legat zăvorul cu sârmă), nu sunt jocuri lipite peste scenă.
+- **Fără chenare/evidențieri peste lume** care să-ți arate pașii (chenarul de pe pietre a fost respins); ce ai de făcut se înțelege din scenă și din replici. O scurtă indicație de control („trage în cerc”) e acceptată.
 - Indiciile vin din dialog (Gina îți spune unde ascunzi banii; Nea Ilie îți spune pe unde treci băltoaca).
 
 ## 9. Lecții tehnice

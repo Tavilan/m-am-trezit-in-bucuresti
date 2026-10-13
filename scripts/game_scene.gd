@@ -23,6 +23,7 @@ var grade := {}
 var music := ""
 var radio := false
 var ambience := ""
+var ambience_db := -8.0
 const LIGHT_SHADER := preload("res://shaders/scene_light.gdshader")
 
 

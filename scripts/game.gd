@@ -336,7 +336,7 @@ func hide_closeup() -> void:
 func _hide_portrait() -> void:
 	_portrait_root.visible = false
 	for f in _hidden_figures:
-		if is_instance_valid(f):
+		if is_instance_valid(f) and not f.get_meta("gone", false):
 			f.visible = true
 	_hidden_figures.clear()
 
@@ -421,6 +421,7 @@ func _setup_audio() -> void:
 	dist.drive = 0.15
 	dist.post_gain = -2.0
 	AudioServer.add_bus_effect(i, dist)
+	AudioServer.set_bus_volume_db(i, 6.0)   # filtrul de radio taie mult din volum; compensăm ca muzica să se audă clar
 	_music = AudioStreamPlayer.new()
 	_amb = AudioStreamPlayer.new()
 	add_child(_music)
@@ -489,7 +490,8 @@ func goto(scene: String, fade_seconds := 0.45) -> void:
 	grade = g if g is Dictionary else {}
 	var mu = s.get("music")
 	var am = s.get("ambience")
-	set_audio(mu if mu is String else "", am if am is String else "", s.get("radio") == true)
+	var amb_db = s.get("ambience_db")
+	set_audio(mu if mu is String else "", am if am is String else "", s.get("radio") == true, -10.0, amb_db if amb_db is float else -8.0)
 	_hud.visible = hud_on
 	_hint_btn.visible = hud_on
 	t = create_tween()
