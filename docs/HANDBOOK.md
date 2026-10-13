@@ -76,6 +76,7 @@ Reguli scurte, adunate din toate corecturile de până acum (oct. 2026). Le cite
 ## 9. Lecții tehnice
 - Tap pe telefon: tratează doar `InputEventMouseButton`.
 - Testele automate: deschide jocul cu `?test` în adresă (`index.html?test#pub`); `window.game` spune dacă e dialog/alegere și scena curentă, minijocurile își pun starea în `window.latch` / `window.ant`. Pe web jocul e la scară 1 (640×360) în viewportul de test 844×390, cu colțul la (102, 15).
+- Ce desenezi din cod peste un fundal desenat merge pe un nod copil (`_over`), nu în `_draw()` al scenei: fundalul e copil și acoperă desenul scenei (firele de la frigider nu se vedeau).
 - Texturile web: max **4096 px** (sheet-urile de animație sunt grile).
 - Exportul web: JSON-urile din `art/anim` incluse; cadrele separate, variantele `__x`, video-urile și sursele excluse.
 - Procesarea video: nu ține toate cadrele în memorie (s-a închis procesul); mediane pe ~24 de cadre.

@@ -18,6 +18,7 @@ var _sparks := 0.0
 var _done := false
 var _shocks := 0
 var _art := false
+var _over: Node2D   # firele se desenează peste fundal (desenul nodului scenei rămâne sub fundal)
 
 
 func _ready() -> void:
@@ -39,6 +40,9 @@ func _ready() -> void:
 		_from.append(Vector2(p[0], p[1]))
 	for p in t:
 		_to.append(Vector2(p[0], p[1]))
+	_over = Node2D.new()
+	_over.draw.connect(_draw_over)
+	add_child(_over)
 
 
 func enter() -> void:
@@ -55,21 +59,25 @@ func _input(e: InputEvent) -> void:
 		var p: Vector2 = get_global_mouse_position()
 		if e.pressed:
 			for i in _from.size():
-				if p.distance_to(_from[i]) < 18:
+				if p.distance_to(_from[i]) < 14:
 					_drag = i
 					_links.erase(i)
 					_mouse = p
 		elif _drag >= 0:
-			for j in 3:   # borna de la stâlp n-o legi tu; o leagă Romică singur, la final
-				if p.distance_to(_to[j]) < 18 and not _links.values().has(j):
-					_links[_drag] = j
+			# cea mai apropiată bornă liberă (borna de la stâlp n-o legi tu; o leagă Romică singur, la final)
+			var best := -1
+			for j in 3:
+				if not _links.values().has(j) and p.distance_to(_to[j]) < 12 and (best < 0 or p.distance_to(_to[j]) < p.distance_to(_to[best])):
+					best = j
+			if best >= 0:
+				_links[_drag] = best
 			_drag = -1
-			queue_redraw()
+			_over.queue_redraw()
 			if _links.size() == WIRES.size():
 				Game.interact(_check)
 	elif e is InputEventMouseMotion and _drag >= 0:
 		_mouse = get_global_mouse_position()
-		queue_redraw()
+		_over.queue_redraw()
 
 
 func _check() -> void:
@@ -89,7 +97,7 @@ func _check() -> void:
 		var l: Array = lines[(_shocks - 1) % lines.size()]
 		await say(l[0], l[1])
 		_links.clear()
-		queue_redraw()
+		_over.queue_redraw()
 		return
 	_done = true
 	await say("Romică", "Fază la fază, nul la nul, pământ la pământ. Ca la carte, mă!")
@@ -97,7 +105,7 @@ func _check() -> void:
 	await say("Romică", "Orice ucenic, ziseși? Da' ca să răcească ca-n Germania... mai trag un fir. Direct de la stâlp.")
 	await say("Marius", "Unchiule, nu! Ăla-i...")
 	_links[3] = 3
-	queue_redraw()
+	_over.queue_redraw()
 	set_process(true)
 	_sparks = 2.2
 	await Game.shake(4.0, 1.2)
@@ -109,22 +117,24 @@ func _check() -> void:
 func _process(d: float) -> void:
 	if _sparks > 0.0:
 		_sparks -= d
-		queue_redraw()
+		_over.queue_redraw()
 
 
-func _draw() -> void:
-	super._draw()
+func _draw_over() -> void:
 	if not _art:
-		draw_rect(Rect2(250, 140, 70, 140), Color("#b8c0c4"))
-		draw_rect(Rect2(420, 90, 90, 210), Color("#4a4a48"))
-	for i in _from.size():
-		draw_circle(_from[i], 5, WIRES[i][1])
-		draw_circle(_from[i], 5, Color(0, 0, 0, 0.6), false, 1.0)
+		_over.draw_rect(Rect2(250, 140, 70, 140), Color("#b8c0c4"))
+		_over.draw_rect(Rect2(420, 90, 90, 210), Color("#4a4a48"))
+	if not _art:
+		for i in _from.size():
+			_over.draw_circle(_from[i], 5, WIRES[i][1])
 	for j in _to.size():
-		draw_circle(_to[j], 4, Color("#c8a040") if j < 3 else Color("#8a6a4a"))
-		draw_string(Game.font, _to[j] + Vector2(9, 5), LABELS[j], HORIZONTAL_ALIGNMENT_LEFT, 60, Game.FS, Color(1, 1, 1, 0.8))
+		if not _art:
+			_over.draw_circle(_to[j], 4, Color("#c8a040") if j < 3 else Color("#8a6a4a"))
+		# literele bornelor, mici, sub fiecare șurub (ca ștanțate pe placă)
+		var lab: String = LABELS[j] if j < 3 else ""
+		_over.draw_string(Game.font, _to[j] + Vector2(-8, 22), lab, HORIZONTAL_ALIGNMENT_CENTER, 16, 14, Color(1, 0.95, 0.8, 0.85))
 	for i in _links:
-		var start: Vector2 = _from[i] if i < _from.size() else Vector2(_to[3].x + 60, 0)
+		var start: Vector2 = _from[i] if i < _from.size() else Vector2(_to[3].x + 16, 0)
 		var col: Color = WIRES[i][1] if i < WIRES.size() else Color("#b07a3a")
 		_wire(start, _to[_links[i]], col)
 	if _drag >= 0:
@@ -132,7 +142,7 @@ func _draw() -> void:
 	if _sparks > 0.0:
 		for k in 24:
 			var c: Vector2 = _to[randi() % _to.size()] + Vector2(randf_range(-30, 30), randf_range(-30, 30))
-			draw_rect(Rect2(c.round(), Vector2(2, 2)), Color(1, 0.95, 0.6))
+			_over.draw_rect(Rect2(c.round(), Vector2(2, 2)), Color(1, 0.95, 0.6))
 
 
 func _wire(a: Vector2, b: Vector2, c: Color) -> void:
@@ -141,5 +151,5 @@ func _wire(a: Vector2, b: Vector2, c: Color) -> void:
 	for t in 17:
 		var u := t / 16.0
 		pts.append(a.lerp(mid, u).lerp(mid.lerp(b, u), u).round())
-	draw_polyline(pts, c.darkened(0.4), 4.0)
-	draw_polyline(pts, c, 2.0)
+	_over.draw_polyline(pts, c.darkened(0.4), 4.0)
+	_over.draw_polyline(pts, c, 2.0)

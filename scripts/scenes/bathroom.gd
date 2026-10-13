@@ -18,11 +18,11 @@ func _ready() -> void:
 			[Rect2(240, 200, 160, 60), Color("#c8c8c0"), "chiuveta crăpată"],
 			[Rect2(20, 40, 110, 230), Color("#3a3028"), "ușa"],
 		]
-	hotspot("Ușa", Rect2(0, 0, 125, 360), _door)
-	hotspot("Hârtia", Rect2(138, 126, 44, 70), _paper)
-	hotspot("Mopul și găleata", Rect2(476, 120, 96, 240), _mop)
-	hotspot("Oglinda", Rect2(262, 52, 130, 125), _mirror)
-	hotspot("Chiuveta", Rect2(248, 205, 155, 60), _sink)
+	hotspot("Ușa", Rect2(0, 0, 115, 360), _door)
+	hotspot("Hârtia", Rect2(585, 135, 50, 80), _paper)
+	hotspot("Mopul și găleata", Rect2(500, 120, 85, 240), _mop)
+	hotspot("Oglinda", Rect2(205, 25, 230, 170), _mirror)
+	hotspot("Chiuveta", Rect2(230, 212, 180, 70), _sink)
 
 
 func enter() -> void:
