@@ -1,11 +1,20 @@
 {
-  "frames": 1,
+  "frames": 36,
   "fps": 12,
   "size": [
-    320,
-    220
+    323,
+    224
   ],
-  "cols": 1,
-  "static": true,
-  "note": "portret static p\u00e2n\u0103 facem anima\u021bia Veo"
+  "cols": 12,
+  "feet": [
+    160,
+    224
+  ],
+  "source_video": "ilie_vorbit.mp4",
+  "loop_from_to": [
+    67,
+    103
+  ],
+  "pingpong": false,
+  "loop_error": 1.72
 }
