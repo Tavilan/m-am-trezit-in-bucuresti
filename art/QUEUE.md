@@ -63,7 +63,8 @@
 - [x] televizor_perete
   - Referință folosită: art/raw/birt_fundal__respins.png (cea mai bună variantă generată în această rundă; art/raw/birt_fundal.png nu există încă). Prim-planul nu include casa de marcat cu inscripții.
 - [x] antena_camera
-- [ ] tv_ecran
+- [x] tv_ecran
+  - Format 4:3, conform cerinței specifice din prompt pentru conținutul ecranului CRT.
 - [ ] baie_fundal
 
 ## Birtul, fundalul v2 (editare: fără masa înaltă, casa de marcat goală)
