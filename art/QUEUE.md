@@ -84,5 +84,5 @@
 - [x] nelu_portret
 - [x] gelu_portret
 - [x] costel_foc
-- [ ] mioara_ulei
+- [x] mioara_ulei
 - [ ] mana_cleste
