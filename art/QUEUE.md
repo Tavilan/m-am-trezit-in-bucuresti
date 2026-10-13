@@ -58,6 +58,7 @@
 
 ## Birtul Unirea (fundal, gemenii la masă, televizorul și antena pentru minijoc, baia)
 - [ ] birt_fundal
+  - Respins după două generări: prima are etichete/inscripții pe rafturi și casa de marcat; a doua păstrează cifre pe afișajul casei de marcat și un mic însemn, contrar cerinței fără text, numere sau logo-uri. A doua variantă, cea mai bună, este păstrată nemodificată în art/inbox/birt_fundal__respins.png pentru evaluarea lui Tavi. Rândul rămâne nebifat; coada continuă conform docs/CODEX_ARTA.md, punctul 5.
 - [ ] gemeni_masa
 - [ ] televizor_perete
 - [ ] antena_camera
