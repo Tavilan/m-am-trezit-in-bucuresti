@@ -89,9 +89,17 @@ func _ready() -> void:
 	_blip.volume_db = -8.0
 	_blip.max_polyphony = 3
 	add_child(_blip)
+	if OS.has_feature("web"):
+		_test_hooks = str(JavaScriptBridge.eval("location.search")).contains("test")
+
+
+var _scene_name := ""
+var _test_hooks := false   # ?test în adresă: testele automate citesc starea jocului din window.game
 
 
 func _process(_d: float) -> void:
+	if _test_hooks:
+		JavaScriptBridge.eval("window.game={busy:%s,dlg:%s,choice:%s,scene:'%s'}" % [str(busy).to_lower(), str(_dlg.visible).to_lower(), str(_choices.visible).to_lower(), _scene_name])
 	var s := DisplayServer.window_get_size()
 	_rotate.visible = s.y > s.x
 	# sunetul de derulare: un „blip” la fiecare a doua literă care apare
@@ -444,6 +452,12 @@ func set_audio(music: String, ambience: String, radio := false, music_db := -10.
 	_crossfade(_amb, ambience, "_amb_path", amb_db, "Master")
 
 
+## Volumul muzicii și al ambianței, pe loc (ex. televizorul cu purici: manelele urcă pe măsură ce prinde).
+func mix(music_db: float, amb_db: float) -> void:
+	_music.volume_db = music_db
+	_amb.volume_db = amb_db
+
+
 func _crossfade(pl: AudioStreamPlayer, path: String, key: String, db: float, bus: String) -> void:
 	if get(key) == path:
 		pl.bus = bus
@@ -484,6 +498,7 @@ func goto(scene: String, fade_seconds := 0.45) -> void:
 		c.queue_free()
 	var s: Node = load("res://scripts/scenes/%s.gd" % scene).new()
 	s.name = scene
+	_scene_name = scene
 	world.add_child(s)
 	hud_on = s.get("show_hud") != false
 	var g = s.get("grade")

@@ -6,14 +6,18 @@ var _portrait := false
 
 func _ready() -> void:
 	title = "Baia birtului"
-	bg_color = Color("#1e2420")
-	sketch = [
-		[Rect2(0, 270, 640, 90), Color("#2a302a"), "gresie spartă"],
-		[Rect2(250, 40, 140, 150), Color("#8a9a9a"), "oglinda pătată"],
-		[Rect2(240, 200, 160, 60), Color("#c8c8c0"), "chiuveta crăpată"],
-		[Rect2(310, 0, 4, 30), Color("#aaaaaa"), ""],
-		[Rect2(20, 40, 110, 230), Color("#3a3028"), "ușa"],
-	]
+	music = "res://audio/manele_tv.ogg"   # se aude prin ușă, înfundat
+	radio = true
+	if ResourceLoader.exists("res://art/final/baie_fundal.png"):
+		background("res://art/final/baie_fundal.png")
+	else:
+		bg_color = Color("#1e2420")
+		sketch = [
+			[Rect2(0, 270, 640, 90), Color("#2a302a"), "gresie spartă"],
+			[Rect2(250, 40, 140, 150), Color("#8a9a9a"), "oglinda pătată"],
+			[Rect2(240, 200, 160, 60), Color("#c8c8c0"), "chiuveta crăpată"],
+			[Rect2(20, 40, 110, 230), Color("#3a3028"), "ușa"],
+		]
 	hotspot("Oglinda", Rect2(250, 40, 140, 150), _mirror)
 	hotspot("Chiuveta", Rect2(240, 200, 160, 60), _sink)
 	hotspot("Ușa", Rect2(20, 40, 110, 230), _door)
@@ -24,7 +28,10 @@ func enter() -> void:
 
 
 func _sink() -> void:
-	await say("Romică", "Apa curge numai rece. Sau numai caldă. Depinde de zi.")
+	await cycle("sink", [
+		"Curge numa' rece. Sau numa' cald. După cum îi vine.",
+		"Săpunu' ăsta l-a adus Costel de la Turcia în '96. Încă nu s-a terminat, că nu-l folosește nimeni.",
+	])
 
 
 func _door() -> void:
@@ -35,6 +42,12 @@ func _door() -> void:
 
 
 func _mirror() -> void:
+	if Game.flags.get("mirror_done", false):
+		await cycle("mirror_again", [
+			"Tot ăla e.",
+			"Nu mă mai uit. O dată pe seară ajunge.",
+		])
+		return
 	await say("Romică", "Ia să mă spăl pe față...")
 	_portrait = true
 	Game.set_hud(false)
@@ -43,17 +56,20 @@ func _mirror() -> void:
 	await Game.wait(2.5)               # tăcere: privirea fixă, fără nicio replică
 	await say("Romică", "...")
 	await Game.wait(0.8)
-	await say("Romică", "Ia te uită ce bărbat frumos.")
+	await say("Romică", "Ia uite ce bărbat frumos.")
 	_portrait = false
 	Game.set_hud(true)
 	queue_redraw()
 	Game.flags["mirror_done"] = true
-	await say("Romică", "Gata. Acum pot să mă întorc printre oameni.")
+	await say("Romică", "Gata. Acu' pot să mă-ntorc printre oameni. Și la neamț.")
 
 
 func _draw() -> void:
 	if not _portrait:
 		super._draw()
+		return
+	if ResourceLoader.exists("res://art/final/romica_oglinda.png"):
+		draw_texture(load("res://art/final/romica_oglinda.png"), Vector2.ZERO)
 		return
 	# PORTRET PROVIZORIU: Romică în oglindă, color, aproape tot ecranul, privire fixă.
 	# Se înlocuiește cu ilustrația finală (pipeline hibrid).

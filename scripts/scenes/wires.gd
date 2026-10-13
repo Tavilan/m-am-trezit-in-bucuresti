@@ -25,7 +25,7 @@ func _ready() -> void:
 
 
 func enter() -> void:
-	await say("Romică", "Ia să vedem... Trei fire. Patru borne. Floare la ureche.")
+	await say("Romică", "Ia să vedem... Trei fire, patru borne. Floare la ureche.")
 	await say("", "Trage cu degetul de la fiecare fir al frigiderului la o bornă.")
 
 
@@ -56,10 +56,10 @@ func _input(e: InputEvent) -> void:
 func _finish() -> void:
 	var correct: bool = _links.get(0) == 0 and _links.get(1) == 1 and _links.get(2) == 2
 	if correct:
-		await say("Romică", "Fază la fază, nul la nul, pământ la pământ. Ca la carte!")
-		await say("Romică", "Da' ca să răcească ca-n Germania... mai pun un fir. La stâlp.")
+		await say("Romică", "Fază la fază, nul la nul, pământ la pământ. Ca la carte, mă!")
+		await say("Romică", "Da' ca să răcească ca-n Germania... mai trag un fir. Direct de la stâlp.")
 	else:
-		await say("Romică", "Hmm. Nu știu dacă așa se leagă... Da' merge și-așa. Mai pun un fir la stâlp, de siguranță.")
+		await say("Romică", "Nu știu dacă așa se leagă... Da' merge și-așa. Mai trag un fir de la stâlp, de siguranță.")
 	_links[3] = 3
 	set_process(true)
 	_sparks = 2.2

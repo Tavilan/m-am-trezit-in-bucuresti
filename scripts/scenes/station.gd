@@ -18,14 +18,14 @@ func _ready() -> void:
 
 
 func enter() -> void:
-	await say("Marius", "Primul tren care vine. Te duce să te răcorești și te întorci mâine.")
-	await say("Romică", "Unde... unde mă duceți, mă?")
+	await say("Marius", "Ăsta-i primu' tren. Te urci, te răcorești, și mâine te-ntorci.")
+	await say("Romică", "Unde... unde mă duceți, bă?")
 	await say("Nelu", "La răcoare, Romică!")
 	await say("Gelu", "La răcoare!")
 	set_process(true)
 	await Game.wait(1.6)
-	await say("Romică", "Bine, bine. Da' zacusca... zacusca rămâne cu mine.")
-	await say("Marius", "Rămâne, unchiule. Rămâne.")
+	await say("Romică", "Bine, mă, bine. Da' zacusca... zacusca rămâne la mine.")
+	await say("Marius", "Rămâne, unchiule. Rămâne. Hai, sus.")
 	Game.goto("night_train", 1.2)
 
 
