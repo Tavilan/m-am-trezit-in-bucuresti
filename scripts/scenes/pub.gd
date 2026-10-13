@@ -7,6 +7,8 @@ var _fire := false
 
 func _ready() -> void:
 	title = "Birtul Unirea"
+	music = "res://audio/manele_tv.ogg"   # la televizorul de pe raft, cu difuzor prost
+	radio = true
 	bg_color = Color("#241c14")
 	sketch = [
 		[Rect2(0, 260, 640, 100), Color("#33281c"), ""],
