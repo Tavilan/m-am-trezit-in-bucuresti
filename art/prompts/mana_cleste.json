@@ -1,0 +1,12 @@
+{
+  "id": "mana_cleste",
+  "versiune": 1,
+  "type": "object",
+  "height_cm": 30,
+  "manual_key": [
+    0,
+    255,
+    0
+  ],
+  "prompt": "OBJECT SPRITE, seen from the side, whole object visible with empty space around it. Background: one flat solid pure green colour (#00FF00) everywhere, no shadow. Detailed clean pixel art, larger flat colour areas. No text, no letters, no logos.\nThe rough, weathered right hand of a 55-year-old village handyman, coming from the RIGHT edge with the cuff of a worn dark-blue work jacket, firmly gripping a pair of old combination pliers with chipped red rubber handles; the pliers' jaws point to the LEFT and are slightly open, as if about to grip and twist two copper wires. Dirty fingernails, a small cut on one knuckle. Realistic."
+}

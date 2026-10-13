@@ -76,3 +76,13 @@
 ## Birtul: frigiderul pe dos (minijocul cu firele) și focul (după fundalul v2)
 - [x] frigider_spate
 - [x] birt_foc
+
+## După audit (13.10): portrete pentru birt, Costel speriat în foc, Mioara fără borcan, mâna cu cleștele (zăvorul)
+- [ ] costel_portret
+- [ ] marius_portret
+- [ ] mioara_portret
+- [ ] nelu_portret
+- [ ] gelu_portret
+- [ ] costel_foc
+- [ ] mioara_ulei
+- [ ] mana_cleste

@@ -1,0 +1,18 @@
+{
+  "type": "character",
+  "quality": "high",
+  "size": "1024x1536",
+  "background": "transparent",
+  "manual_key": [
+    0,
+    255,
+    0
+  ],
+  "versiune": 1,
+  "id": "costel_foc",
+  "prompt": "CHARACTER SPRITE, single full-body figure, front view, the whole figure visible from the top of the head to the shoes with empty space around it, realistic adult proportions, detailed clean pixel art with larger flat colour areas, warm orange light from the right as from a fire. Background: one flat solid pure green colour (#00FF00) everywhere, no shadow, no floor, no gradient. No text, no letters, no logos.\nExactly the same man as in the attached character sheet (same face, glasses, comb-over, blue shopkeeper's coat, pencil behind the ear): Costel, the pub owner, PANICKING because his pub is on fire: both hands raised to his head, mouth wide open shouting, eyes wide, the white cloth fallen from his shoulder, body leaning back. Comic but realistic.",
+  "height_cm": 182,
+  "refs": [
+    "art/raw/costel_foaie.png"
+  ]
+}

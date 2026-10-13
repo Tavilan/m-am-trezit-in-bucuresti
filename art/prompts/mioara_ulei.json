@@ -1,0 +1,18 @@
+{
+  "type": "character",
+  "quality": "high",
+  "size": "1024x1536",
+  "background": "transparent",
+  "manual_key": [
+    0,
+    255,
+    0
+  ],
+  "versiune": 1,
+  "id": "mioara_ulei",
+  "prompt": "CHARACTER SPRITE, single full-body figure, front view, standing, arms slightly away from the body, the whole figure visible from the top of the head to the shoes with empty space around it, realistic adult proportions (not cartoon, not chibi, normal-sized head), detailed clean pixel art with larger flat colour areas and little texture noise, soft light from the upper left. Background: one flat solid pure green colour (#00FF00) everywhere, no shadow, no floor, no gradient. No text, no letters, no logos.\nExactly the same woman as in the attached character sheet (same face, glasses, grey perm, beige cardigan, flowered dress, tights, shoes), in the same standing pose, BUT her hands do NOT hold the jar: in one hand she holds a small worn plastic shopping bag with a bottle of cooking oil inside (no labels, no text), the other hand rests on the bag. Curious, squinting, gossipy expression.",
+  "height_cm": 150,
+  "refs": [
+    "art/raw/mioara_foaie.png"
+  ]
+}
