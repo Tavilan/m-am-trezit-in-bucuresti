@@ -9,6 +9,8 @@ extends GameScene
 ## Gemenii, rafturile, televizorul, fereastra etc. au replici în plus pentru curioși.
 
 const ART := "res://art/final/birt_fundal.png"
+const ART_OLD := "res://art/final/birt_fundal_v1.png"   # până vine varianta 2 (fără masa înaltă)
+const LAYOUT := "res://art/final/birt_layout.json"
 var _fire := false
 var _art := false
 
@@ -21,7 +23,7 @@ func _ready() -> void:
 	if not Game.flags.get("antenna_done", false):
 		ambience = "res://audio/tv_purici.ogg"   # televizorul nu prinde: purici, manelele abia se aud
 		ambience_db = -10.0
-	_art = ResourceLoader.exists(ART)
+	_art = ResourceLoader.exists(ART) or ResourceLoader.exists(ART_OLD)
 	if _art:
 		_build_art()
 	else:
@@ -52,17 +54,17 @@ func _build_sketch() -> void:
 
 ## Cu arta: fundal + personaje așezate după perspectivă. Pozițiile se reglează după desen.
 func _build_art() -> void:
-	background(ART)
-	horizon = 112
+	background(ART if ResourceLoader.exists(ART) else ART_OLD)
+	horizon = 125   # ochii lui Romică (1,55 m): ușa de 2 m și frigiderul se potrivesc
 	lighting = {"ambient": Vector3(0.72, 0.74, 0.7), "saturation": 0.9,
 		"light1_pos": Vector2(320, 0), "light1_color": Vector3(0.85, 0.95, 0.9), "light1_radius": 360.0, "light1_strength": 0.45,
 		"light2_pos": Vector2(90, 60), "light2_color": Vector3(1.0, 0.8, 0.5), "light2_radius": 200.0, "light2_strength": 0.35}
 	grade = {"tint": Vector3(0.88, 0.92, 0.86), "saturation": 0.78}
 	var L: Dictionary = {}
-	var jp := ART.replace(".png", ".json")
-	if FileAccess.file_exists(jp):
-		L = JSON.parse_string(FileAccess.open(jp, FileAccess.READ).get_as_text())
-	for who in [["costel", "Costel"], ["mioara", "Tanti Mioara"], ["gemeni", "Nelu"], ["marius", "Marius"]]:
+	if FileAccess.file_exists(LAYOUT):
+		L = JSON.parse_string(FileAccess.open(LAYOUT, FileAccess.READ).get_as_text())
+	# de la spate în față: Marius (în picioare, în spatele mesei), gemenii la table, Mioara la tejghea
+	for who in [["costel", "Costel"], ["marius", "Marius"], ["gemeni", "Nelu"], ["mioara", "Tanti Mioara"]]:
 		var path := "res://art/final/%s_birt.png" % who[0]
 		if ResourceLoader.exists(path) and L.has(who[0]):
 			var s := layer(path, Vector2(L[who[0]][0], L[who[0]][1]))
@@ -77,19 +79,20 @@ func _build_art() -> void:
 	_hotspots(rects)
 
 
+## Întâi lucrurile din fundal, apoi oamenii (ultimele adăugate sunt deasupra și prind atingerea).
 func _hotspots(r: Dictionary) -> void:
-	hotspot("Costel, birtașul", r["costel"], _costel)
 	hotspot("Rafturile", r["shelves"], _shelves)
-	hotspot("Televizorul", r["tv"], _tv)
-	hotspot("Frigiderul de bere", r["fridge"], _fridge)
-	hotspot("Nelu și Gelu", r["twins"], _twins)
-	hotspot("Marius, nepotul", r["marius"], _marius)
-	hotspot("Tanti Mioara", r["mioara"], _mioara)
-	hotspot("Ușa de la baie", r["bathroom"], _bathroom)
 	if r.has("window"):
 		hotspot("Geamul", r["window"], _window)
 	if r.has("stove"):
 		hotspot("Soba", r["stove"], _stove)
+	hotspot("Televizorul", r["tv"], _tv)
+	hotspot("Frigiderul de bere", r["fridge"], _fridge)
+	hotspot("Ușa de la baie", r["bathroom"], _bathroom)
+	hotspot("Costel, birtașul", r["costel"], _costel)
+	hotspot("Marius, nepotul", r["marius"], _marius)
+	hotspot("Nelu și Gelu", r["twins"], _twins)
+	hotspot("Tanti Mioara", r["mioara"], _mioara)
 
 
 func enter() -> void:
