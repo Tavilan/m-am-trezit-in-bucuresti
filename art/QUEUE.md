@@ -82,7 +82,7 @@
 - [x] marius_portret
 - [x] mioara_portret
 - [x] nelu_portret
-- [ ] gelu_portret
+- [x] gelu_portret
 - [ ] costel_foc
 - [ ] mioara_ulei
 - [ ] mana_cleste
