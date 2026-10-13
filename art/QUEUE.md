@@ -69,3 +69,6 @@
 
 ## Birtul, fundalul v2 (editare: fără masa înaltă, casa de marcat goală)
 - [ ] birt_fundal
+
+## Baia birtului, din nou (să fie aceeași baie cu cea din oglinda lui Romică: faianță verde)
+- [ ] baie_fundal

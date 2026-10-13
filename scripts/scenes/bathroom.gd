@@ -18,9 +18,11 @@ func _ready() -> void:
 			[Rect2(240, 200, 160, 60), Color("#c8c8c0"), "chiuveta crăpată"],
 			[Rect2(20, 40, 110, 230), Color("#3a3028"), "ușa"],
 		]
-	hotspot("Oglinda", Rect2(250, 40, 140, 150), _mirror)
-	hotspot("Chiuveta", Rect2(240, 200, 160, 60), _sink)
-	hotspot("Ușa", Rect2(20, 40, 110, 230), _door)
+	hotspot("Ușa", Rect2(0, 0, 125, 360), _door)
+	hotspot("Hârtia", Rect2(138, 126, 44, 70), _paper)
+	hotspot("Mopul și găleata", Rect2(476, 120, 96, 240), _mop)
+	hotspot("Oglinda", Rect2(262, 52, 130, 125), _mirror)
+	hotspot("Chiuveta", Rect2(248, 205, 155, 60), _sink)
 
 
 func enter() -> void:
@@ -31,6 +33,20 @@ func _sink() -> void:
 	await cycle("sink", [
 		"Curge numa' rece. Sau numa' cald. După cum îi vine.",
 		"Săpunu' ăsta l-a adus Costel de la Turcia în '96. Încă nu s-a terminat, că nu-l folosește nimeni.",
+	])
+
+
+func _paper() -> void:
+	await cycle("paper", [
+		"Hârtie igienică adevărată. Costel s-a modernizat.",
+		"E un singur sul și-i lipit cu scotch de suport. Să nu-l fure cineva.",
+	])
+
+
+func _mop() -> void:
+	await cycle("mop", [
+		"Mopu' lu' Costel. Mai bătrân ca birtu'. Și mai curat ca el.",
+		"Găleata are apă de la Paști. Nu mă uit în ea.",
 	])
 
 
