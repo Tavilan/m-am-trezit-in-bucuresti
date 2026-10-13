@@ -1,0 +1,12 @@
+{
+  "id": "antena_camera",
+  "versiune": 1,
+  "type": "object",
+  "height_cm": 45,
+  "manual_key": [
+    0,
+    255,
+    0
+  ],
+  "prompt": "OBJECT SPRITE, single object, front view, whole object visible with empty space around it. Background: one flat solid pure green colour (#00FF00) everywhere, no shadow, no floor. Detailed clean pixel art, larger flat colour areas. No text, no letters, no logos.\nAn old indoor TV 'rabbit ears' antenna from the 1990s: a small round black plastic base, two long thin chrome telescopic rods open in a V shape, one rod slightly bent, a bit of electrical tape around one joint, and a short piece of flat brown antenna cable coming out of the base and cut off at the bottom."
+}

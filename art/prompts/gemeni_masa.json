@@ -1,0 +1,15 @@
+{
+  "id": "gemeni_masa",
+  "versiune": 1,
+  "type": "object",
+  "height_cm": 140,
+  "manual_key": [
+    0,
+    255,
+    0
+  ],
+  "refs": [
+    "art/raw/gemeni_foaie.png"
+  ],
+  "prompt": "OBJECT GROUP SPRITE, the whole group visible with empty space around it, seen from the front and slightly from above, as from a person standing a few metres away. Background: one flat solid pure green colour (#00FF00) everywhere, no shadow, no floor. Detailed clean pixel art, larger flat colour areas. No text, no letters, no numbers, no logos.\nExactly the same two men as in the attached character sheet (same faces, same bodies, same clothes): identical twin brothers, about 40, two giants with shaved heads, thick necks, clean-shaven, Nelu in a RED tracksuit, Gelu in a BLUE tracksuit. They sit on two white plastic garden chairs on the LEFT and RIGHT sides of a small square white plastic garden table (stained), turned three-quarters towards each other, playing backgammon ('table') on an open wooden backgammon board on the table, one of them about to throw the dice. Two beer bottles without labels and an ashtray on the table. Big men on small plastic chairs: funny but realistic, relaxed."
+}

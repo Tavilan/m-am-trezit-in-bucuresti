@@ -55,3 +55,11 @@
 
 ## Minijocul cu zăvorul lui Nea Ilie (prim-plan)
 - [x] zavor_prim_plan
+
+## Birtul Unirea (fundal, gemenii la masă, televizorul și antena pentru minijoc, baia)
+- [ ] birt_fundal
+- [ ] gemeni_masa
+- [ ] televizor_perete
+- [ ] antena_camera
+- [ ] tv_ecran
+- [ ] baie_fundal

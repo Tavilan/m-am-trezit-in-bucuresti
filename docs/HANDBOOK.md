@@ -8,7 +8,9 @@ Reguli scurte, adunate din toate corecturile de până acum (oct. 2026). Le cite
 3. **Decizii creative = întrebări cu variante** (carusel de alegeri), cu o variantă recomandată. Tavi decide, Claude propune idei. Dă-i chestionarul întreg, nu amesteca subiecte (o dată un răspuns s-a amestecat cu chestionarul).
 4. **Ce costă mult mai târziu se fixează acum** (mărimi, perspectivă, lumină, structura scenelor).
 5. **Fără bani în plus:** ChatGPT (Codex), Gemini (Nano Banana, Veo), **Suno Pro** (muzică) din abonamente. API-urile plătite rămân oprite. Cheile doar în secretele GitHub.
-6. **Pe Mac:** nu ștergem nimic (mutăm în `_to_delete/`); descărcările din Gemini în Downloads sunt permise.
+6. **Handbook-ul se actualizează singur:** după fiecare corectură sau observație a lui Tavi, regula care se poate generaliza se scrie aici în aceeași tură (și în documentul din proiect), fără să mai fie cerut.
+7. **Când Tavi e ocupat, mergi mai departe singur** la etapa următoare și raportezi la final ce să testeze.
+8. **Pe Mac:** nu ștergem nimic (mutăm în `_to_delete/`); descărcările din Gemini în Downloads sunt permise.
 
 ## 1. Calitate
 - **Ținta e Steam.** Web-ul e doar previzualizare; nu reducem calitatea pentru web.
@@ -50,9 +52,14 @@ Reguli scurte, adunate din toate corecturile de până acum (oct. 2026). Le cite
 ## 6. Atmosferă
 - **Ploaia se vede peste tot unde e logic:** stropi care cad în aer (straturi de adâncime, luminați de felinare), stropi sparți pe jos, cercuri în băltoace, **picături pe geamuri** (doar pe sticlă, cu mască).
 - **Sunet:** acasă lăutărească de la radio (înfundată) **și mașina de spălat** (la volum sugestiv, nu realist), **fără ploaie** în casă; după ce oprești mașina rămâne doar radioul. Afară ploaie și sunete de sat (câini în depărtare etc.), în birt manele la televizor. Muzica se schimbă lin între scene.
+- **Sunetele trebuie să se audă pe difuzorul telefonului:** acolo nu există bas. Orice zgomot important (mașina de spălat, motoare) are conținut în frecvențele medii (300 Hz–5 kHz: zornăit, clicuri, scârțâit), nu doar huruit jos. Verifică volumul măsurând peste 300 Hz, nu doar volumul total (mașina de spălat „nu se auzea deloc”).
 - **Sunetul promis trebuie să se audă:** nu anunța o muzică până nu e în joc și ai verificat-o (lăutăreasca lipsea, iar fișierul nu exista).
 
 ## 7. Text și dialog
+- **Limbajul e crud, needucat, de sat oltenesc**, nu de serial ieftin: propoziții scurte, „bă”, „fă”, „mă”, „io”, „acu'”, „numa'”, „lu'”, „trebe”, perfectul simplu („plecai”, „făcuși”, „ziseși”), înjurături firești când omul e nervos („fir-ar a dracu'”, „futu-i”), greșeli de vorbire normale. Fără glume „scrise” care sună a scenariu și fără explicații puse în gura personajelor.
+- **„Plecai.”** (singur, la ieșirea din casă) rămâne: e comic tocmai prin perfectul simplu.
+- **Relațiile sunt reale:** cearta din familie e despre lucruri adevărate (bani lăsați la birt, reparații făcute la alții și nu acasă, rușinea față de neamuri). Nimeni nu-l „trimite” pe Romică undeva ca să servească povestea (Gina nu-l trimite la birt ca la serviciu; el pleacă, ea îl lasă de nervi).
+- **Jucătorii curioși sunt răsplătiți:** fiecare obiect are 2–3 replici diferite la atingeri repetate (`cycle()` din `GameScene`), iar scenele au și obiecte puse doar pentru glume și detalii de viață (banca, băltoaca, luna).
 - Fontul **Jersey 15**, mărimea 20 (Pixelify era greu de citit). Verifică orice simbol nou în font (▼ lipsea → „>”).
 - Sunet la derularea textului, cu „voce” diferită pe personaj.
 - Replici scurte, oltenești unde e cazul („plecai”, „reparai”), satira pe situații și instituții, niciodată pe grupuri de oameni sau pe erou.
@@ -60,6 +67,8 @@ Reguli scurte, adunate din toate corecturile de până acum (oct. 2026). Le cite
 ## 8. Ritm și gameplay
 - **Prologul nu se termină în 2 minute.** Fiecare scenă are: ceva de găsit (obiecte/bani), un minijoc scurt, un dialog cu alegeri care contează puțin mai târziu, și câteva obiecte cu glume. Ieșirea din scenă se deblochează după ce le faci.
 - Minijocurile au echivalent tactil (tap/tragere) și eșecul e comic, nu pedepsitor (o iei de la capăt).
+- **Minijocurile nu se trec din greșeală din prima.** Dificultatea crește pe parcurs (sârma tot mai țeapănă), au momente care cer atenție la scenă (sârma se agață în rugină: te oprești), iar reflexul „fac la fel până merge” nu ajunge. Test: un robot care face mereu la fel trebuie să piardă, unul atent trebuie să câștige în ~20–40 s.
+- **Zonele de atins nu stau înghesuite:** două obiecte apropiate se confundă pe telefon (priza de lângă cizme a fost mutată în dreapta mașinii).
 - **Minijocurile vin din meseria și viața lui Romică** (scos ștecherul mașinii, legat zăvorul cu sârmă), nu sunt jocuri lipite peste scenă.
 - **Fără chenare/evidențieri peste lume** care să-ți arate pașii (chenarul de pe pietre a fost respins); ce ai de făcut se înțelege din scenă și din replici. O scurtă indicație de control („trage în cerc”) e acceptată.
 - Indiciile vin din dialog (Gina îți spune unde ascunzi banii; Nea Ilie îți spune pe unde treci băltoaca).

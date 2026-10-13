@@ -1,0 +1,9 @@
+{
+  "id": "televizor_perete",
+  "versiune": 1,
+  "type": "scene",
+  "refs": [
+    "art/raw/birt_fundal.png"
+  ],
+  "prompt": "CLOSER SHOT, wide 16:9, inside the same village pub as in the attached image (same walls, same fluorescent light, same style): we look at the corner of the back wall where the old CRT television hangs on its high metal wall bracket. The television is on the LEFT HALF of the image, big and clear, its screen a FLAT EMPTY DARK GREY rectangle (the game draws the picture), with NO antenna on top (an antenna will be added separately). Its thin flat antenna cable hangs down from the back and loops loosely along the wall to the right. The RIGHT HALF of the image is bare wall: dirty white plaster with cracks, a few old nails, a bent wire, a faded patch where a calendar used to hang, keep it clear and readable. At the bottom right, the top of the glass-door beer fridge with its metal door handle. No people, no hands, no text, no logos."
+}
