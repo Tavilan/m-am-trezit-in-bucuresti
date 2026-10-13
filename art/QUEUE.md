@@ -78,7 +78,7 @@
 - [x] birt_foc
 
 ## După audit (13.10): portrete pentru birt, Costel speriat în foc, Mioara fără borcan, mâna cu cleștele (zăvorul)
-- [ ] costel_portret
+- [x] costel_portret
 - [ ] marius_portret
 - [ ] mioara_portret
 - [ ] nelu_portret
