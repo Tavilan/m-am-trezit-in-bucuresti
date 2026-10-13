@@ -90,8 +90,7 @@ func _build_art() -> void:
 		if ResourceLoader.exists(path) and L.has(who[0]):
 			var s := layer(path, Vector2(L[who[0]][0], L[who[0]][1]))
 			_spr[who[0]] = s
-			if who[0] != "gemeni":
-				figure(s, who[1])
+			figure(s, "Nelu,Gelu" if who[0] == "gemeni" else who[1])   # gemenii sunt un singur desen
 	var R: Dictionary = L.get("hotspots", {})
 	if R.is_empty():
 		return

@@ -316,7 +316,7 @@ func _show_portrait(who: String) -> void:
 	_portrait_root.visible = true
 	# același om nu poate fi în două locuri: îl scoatem din scenă cât timp e în prim-plan
 	for f in get_tree().get_nodes_in_group("figures"):
-		if f.get_meta("who", "") == who and f.visible:
+		if who in str(f.get_meta("who", "")).split(",") and f.visible:
 			f.visible = false
 			_hidden_figures.append(f)
 

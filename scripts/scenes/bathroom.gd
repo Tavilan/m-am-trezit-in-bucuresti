@@ -2,6 +2,7 @@ extends GameScene
 ## 4. Baia birtului. Oglinda: prima dată când jucătorul își vede fața.
 
 var _portrait := false
+var _mirror_spr: Sprite2D
 var _over: Node2D   # portretul din oglindă se desenează peste fundal (desenul scenei e sub fundal)
 
 
@@ -19,6 +20,13 @@ func _ready() -> void:
 			[Rect2(240, 200, 160, 60), Color("#c8c8c0"), "chiuveta crăpată"],
 			[Rect2(20, 40, 110, 230), Color("#3a3028"), "ușa"],
 		]
+	if ResourceLoader.exists("res://art/final/romica_oglinda.png"):
+		_mirror_spr = Sprite2D.new()
+		_mirror_spr.texture = load("res://art/final/romica_oglinda.png")
+		_mirror_spr.centered = false
+		_mirror_spr.z_index = 2
+		_mirror_spr.visible = false
+		add_child(_mirror_spr)
 	_over = Node2D.new()
 	_over.z_index = 1
 	_over.draw.connect(_draw_mirror)
@@ -71,6 +79,8 @@ func _mirror() -> void:
 		return
 	await say("Romică", "Ia să mă spăl pe față...")
 	_portrait = true
+	if _mirror_spr:
+		_mirror_spr.visible = true
 	Game.set_hud(false)
 	_over.queue_redraw()
 	await Game.flash(Color.BLACK, 0.8)
@@ -79,6 +89,8 @@ func _mirror() -> void:
 	await Game.wait(0.8)
 	await say("Romică", "Ia uite ce bărbat frumos.")
 	_portrait = false
+	if _mirror_spr:
+		_mirror_spr.visible = false
 	Game.set_hud(true)
 	_over.queue_redraw()
 	Game.flags["mirror_done"] = true
@@ -88,9 +100,8 @@ func _mirror() -> void:
 func _draw_mirror() -> void:
 	if not _portrait:
 		return
-	if ResourceLoader.exists("res://art/final/romica_oglinda.png"):
-		_over.draw_texture(load("res://art/final/romica_oglinda.png"), Vector2.ZERO)
-		return
+	if _mirror_spr:
+		return   # portretul desenat e un sprite separat (vezi _ready)
 	# PORTRET PROVIZORIU: Romică în oglindă, color, aproape tot ecranul, privire fixă.
 	# Se înlocuiește cu ilustrația finală (pipeline hibrid).
 	_over.draw_rect(Rect2(0, 0, 640, 360), Color("#3c4a46"))

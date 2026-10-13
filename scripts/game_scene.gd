@@ -45,7 +45,7 @@ func lit(s: CanvasItem) -> void:
 
 ## Marchează un sprite ca fiind personajul `who`: dispare din scenă cât timp apare portretul lui la dialog.
 func figure(s: CanvasItem, who: String) -> void:
-	s.set_meta("who", who)
+	s.set_meta("who", who)   # mai mulți oameni într-un singur sprite: „Nelu,Gelu”
 	s.add_to_group("figures")
 
 
