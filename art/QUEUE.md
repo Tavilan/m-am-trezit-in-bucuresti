@@ -74,5 +74,5 @@
 - [x] baie_fundal
 
 ## Birtul: frigiderul pe dos (minijocul cu firele) și focul (după fundalul v2)
-- [ ] frigider_spate
+- [x] frigider_spate
 - [ ] birt_foc
