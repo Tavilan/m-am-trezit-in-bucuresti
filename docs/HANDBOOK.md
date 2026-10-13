@@ -35,6 +35,10 @@ Reguli scurte, adunate din toate corecturile de până acum (oct. 2026). Le cite
 - **Perspectivă:** fiecare fundal are `horizon` (ochii lui Romică la 1,55 m). Înălțime pe ecran = `(y_tălpi − horizon) × cm / 155`. Verifică cu uși, mese, scaune din fundal.
 - **Lumina locului se aplică pe tot ce e pus peste fundal** (`lighting`, `shaders/scene_light.gdshader`): personajele trebuie să pară luminate ca obiectele din jur (Gina era prea roșie și saturată față de mașina de spălat → saturație și ambient pe figură).
 - **Portretele și prim-planurile iau tonul scenei** (`grade`): cald și stins în casă, albăstrui noaptea.
+- **Un personaj nu ține în mână ce îți dă mai târziu** (Mioara ținea zacusca de la început); ce apare în dialog trebuie să se vadă în scenă abia atunci.
+- **Reacția din scenă se potrivește cu replica**: cine urlă că-i arde birtul nu stă liniștit cu prosopul în mână.
+- **Obiectele mobile nu acoperă alte lucruri de atins** (mașina de spălat ascundea cizmele).
+- **Animațiile de fundal acoperă tot cadrul**: o zonă animată decupată dintr-un fundal static „sare în ochi” la margini (focul din birt).
 - **Prim-planurile** (ex. câinele) sunt discrete: mai mici, nu stridente, cu fundalul puțin întunecat.
 - **Obiecte care apar în scenă** (unelte, obiecte de joc) se desenează ca artă (ChatGPT, fundal verde), la perspectiva corectă; nu forme din cod.
 - **Nimic care n-ar avea sens în viața reală.** Respinse: pietre care urcă și coboară alternativ în băltoacă; un vecin chemat „să-mi arate drumul până la birt”. Înainte de orice mecanică întreabă: „s-ar putea întâmpla așa, într-un sat, la 10 seara?”.
@@ -72,11 +76,14 @@ Reguli scurte, adunate din toate corecturile de până acum (oct. 2026). Le cite
 - **Zonele de atins nu stau înghesuite:** două obiecte apropiate se confundă pe telefon (priza de lângă cizme a fost mutată în dreapta mașinii).
 - **Minijocurile vin din meseria și viața lui Romică** (scos ștecherul mașinii, legat zăvorul cu sârmă), nu sunt jocuri lipite peste scenă.
 - **Fără chenare/evidențieri peste lume** care să-ți arate pașii (chenarul de pe pietre a fost respins); ce ai de făcut se înțelege din scenă și din replici. O scurtă indicație de control („trage în cerc”) e acceptată.
+- **Evidențierea obiectelor (hover, butonul „?”) urmează forma obiectului**, niciodată un dreptunghi: personajele și obiectele puse peste fundal primesc contur din marginea lor (shader), iar obiectele desenate în fundal un contur din `<fundal>_contur.json` (`tools/art/outlines.py`: segmentare automată, `|rect` pentru obiecte dreptunghiulare, `poly:` dat de mână când modelul greșește). Verifică fiecare contur pe captură.
+- **Indicațiile de control sunt neutre** („Trage în cerc...”), nu „cu degetul”: ținta e PC-ul.
 - Indiciile vin din dialog (Gina îți spune unde ascunzi banii; Nea Ilie îți spune pe unde treci băltoaca).
 
 ## 9. Lecții tehnice
 - Tap pe telefon: tratează doar `InputEventMouseButton`.
 - Testele automate: deschide jocul cu `?test` în adresă (`index.html?test#pub`); `window.game` spune dacă e dialog/alegere și scena curentă, minijocurile își pun starea în `window.latch` / `window.ant`. Pe web jocul e la scară 1 (640×360) în viewportul de test 844×390, cu colțul la (102, 15).
+- Când apare o alegere, caseta cu ultima replică rămâne pe ecran (altfel portretul pare tăiat în aer).
 - Ce desenezi din cod peste un fundal desenat merge pe un nod copil (`_over`), nu în `_draw()` al scenei: fundalul e copil și acoperă desenul scenei (firele de la frigider nu se vedeau).
 - Texturile web: max **4096 px** (sheet-urile de animație sunt grile).
 - Exportul web: JSON-urile din `art/anim` incluse; cadrele separate, variantele `__x`, video-urile și sursele excluse.

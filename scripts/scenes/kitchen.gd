@@ -47,10 +47,11 @@ func _ready() -> void:
 	gm.set_shader_parameter("saturation", 0.55)
 	gm.set_shader_parameter("ambient", Vector3(0.64, 0.57, 0.52))
 	gm.set_shader_parameter("light1_strength", 0.42)
-	var h := hotspot("Mașina de spălat", Rect2(Vector2.ZERO, _washer.texture.get_size()), _washer_talk)
+	var h := hotspot_on("Mașina de spălat", _washer, _washer_talk)
 	remove_child(h)
-	_washer.add_child(h)
-	hotspot("Gina", Rect2(_gina.position + Vector2(24, 0), Vector2(56, _gina.texture.get_height())), _gina_talk)   # doar corpul, nu marginile goale
+	_washer.add_child(h)   # zona merge odată cu mașina
+	h.position = Vector2.ZERO
+	hotspot_on("Gina", _gina, _gina_talk, Rect2(24, 0, 56, _gina.texture.get_height()))   # doar corpul, nu marginile goale
 	hotspot("Icoana", Rect2(540, 10, 46, 56), _icon)
 	hotspot("Geaca de pe cuier", Rect2(102, 42, 50, 165), _coat)
 	hotspot("Cizmele", Rect2(120, 222, 52, 50), _boots)

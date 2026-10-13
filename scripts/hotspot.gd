@@ -3,6 +3,10 @@ extends Control
 
 var label := ""
 var action: Callable
+## Evidențierea urmează forma lucrului, nu un chenar: fie conturul desenat pe fundal (poligon în
+## coordonatele scenei, din <fundal>_contur.json), fie marginea unui sprite (personaj, mașina de spălat).
+var shape := PackedVector2Array()
+var target: CanvasItem
 var _hover := false
 var _flash := 0.0
 
@@ -45,7 +49,23 @@ func _process(d: float) -> void:
 		set_process(false)
 
 
+const OUTLINE := Color(1.0, 0.86, 0.55)
+
+
 func _draw() -> void:
+	var a := 0.0
 	if (_hover and not Game.busy) or _flash > 0.0:
-		var a: float = 1.0 if _hover else clampf(_flash, 0.0, 1.0)
-		draw_rect(Rect2(Vector2.ZERO, size), Color(1, 0.82, 0.48, 0.9 * a), false, 1.0)
+		a = 0.85 if _hover else clampf(_flash, 0.0, 1.0) * 0.85
+	if target and is_instance_valid(target):
+		var m := target.material as ShaderMaterial
+		if m and m.shader and m.shader.resource_path.ends_with("scene_light.gdshader"):
+			m.set_shader_parameter("outline", a)
+		return
+	if a <= 0.0 or shape.is_empty():
+		return   # fără contur cunoscut nu desenăm nimic (niciodată chenar)
+	var pts := PackedVector2Array()
+	for p in shape:
+		pts.append(p - global_position)
+	pts.append(pts[0])
+	draw_polyline(pts, Color(0, 0, 0, 0.35 * a), 3.0)
+	draw_polyline(pts, Color(OUTLINE, a), 1.0)

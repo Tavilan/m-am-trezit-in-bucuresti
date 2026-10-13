@@ -49,7 +49,21 @@ func figure(s: CanvasItem, who: String) -> void:
 	s.add_to_group("figures")
 
 
+## Conturul obiectelor de pe fundal (tools/art/outlines.py): eticheta -> poligon. Hotspot-urile cu aceeași
+## etichetă se evidențiază pe forma obiectului.
+var outlines := {}
+
+
 func background(path: String) -> void:
+	var cp := path.replace(".png", "_contur.json")
+	if FileAccess.file_exists(cp):
+		var j = JSON.parse_string(FileAccess.open(cp, FileAccess.READ).get_as_text())
+		if j is Dictionary:
+			for k in j:
+				var pts := PackedVector2Array()
+				for q in j[k]:
+					pts.append(Vector2(q[0], q[1]))
+				outlines[k] = pts
 	_bg = Sprite2D.new()
 	_bg.texture = load(path)
 	_bg.centered = false
@@ -89,7 +103,23 @@ func hotspot(label: String, rect: Rect2, action: Callable) -> Control:
 	h.action = action
 	h.position = rect.position
 	h.size = rect.size
+	if outlines.has(label):
+		h.shape = outlines[label]
 	add_child(h)
+	return h
+
+
+## Hotspot pe un sprite (personaj, obiect pus peste fundal): zona e sprite-ul, conturul e marginea lui.
+func hotspot_on(label: String, s: Sprite2D, action: Callable, inset := Rect2()) -> Control:
+	if not s.material:
+		var m := ShaderMaterial.new()
+		m.shader = LIGHT_SHADER
+		s.material = m
+	var r := Rect2(s.position, s.get_rect().size * s.scale)
+	if inset.size != Vector2.ZERO:
+		r = Rect2(s.position + inset.position, inset.size)
+	var h := hotspot(label, r, action)
+	h.target = s
 	return h
 
 

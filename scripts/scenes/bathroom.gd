@@ -24,7 +24,7 @@ func _ready() -> void:
 	_over.draw.connect(_draw_mirror)
 	add_child(_over)
 	hotspot("Ușa", Rect2(0, 0, 115, 360), _door)
-	hotspot("Hârtia", Rect2(585, 135, 50, 80), _paper)
+	hotspot("Hârtia", Rect2(586, 72, 48, 70), _paper)
 	hotspot("Mopul și găleata", Rect2(500, 120, 85, 240), _mop)
 	hotspot("Oglinda", Rect2(205, 25, 230, 170), _mirror)
 	hotspot("Chiuveta", Rect2(230, 212, 180, 70), _sink)

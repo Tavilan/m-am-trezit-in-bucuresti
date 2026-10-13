@@ -17,6 +17,9 @@ uniform float saturation = 1.0;
 uniform float ground_shade = 0.22;
 // cât din obiect e sub apă, de jos în sus (0 = nimic); folosit la pietrele din băltoacă
 uniform float water_level = 0.0;
+// conturul de evidențiere (hover / butonul „?”): o linie de un pixel pe marginea formei, nu un chenar
+uniform float outline = 0.0;
+uniform vec4 outline_color : source_color = vec4(1.0, 0.86, 0.55, 1.0);
 
 varying vec2 world_pos;
 
@@ -43,5 +46,14 @@ void fragment() {
 		if (UV.y > line) { a = 0.0; }
 		else if (UV.y > line - 0.06) { rgb = mix(rgb, vec3(0.75, 0.8, 0.95), 0.5); }
 	}
-	COLOR = vec4(rgb, a) * vec4(COLOR.rgb, 1.0);
+	vec4 res = vec4(rgb, a) * vec4(COLOR.rgb, 1.0);
+	if (outline > 0.0 && a < 0.5) {
+		vec2 px = TEXTURE_PIXEL_SIZE;
+		float n = texture(TEXTURE, UV + vec2(px.x, 0.0)).a + texture(TEXTURE, UV - vec2(px.x, 0.0)).a
+			+ texture(TEXTURE, UV + vec2(0.0, px.y)).a + texture(TEXTURE, UV - vec2(0.0, px.y)).a;
+		if (n > 0.5) {
+			res = vec4(outline_color.rgb, outline_color.a * outline);
+		}
+	}
+	COLOR = res;
 }

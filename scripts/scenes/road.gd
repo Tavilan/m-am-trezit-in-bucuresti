@@ -66,12 +66,13 @@ func _ready() -> void:
 		for i in RAIN_LAYERS[li]["n"]:
 			_rain.append(_new_drop(li, randf_range(-20, Game.H)))
 	hotspot("Felinarul", Rect2(104, 0, 40, 265), _lamp)
-	hotspot("Câinele lui Ilie", Rect2(46, 214, 76, 52), _dog)
+	var hd := hotspot("Câinele lui Ilie", Rect2(46, 224, 76, 42), _dog)
+	hd.target = dog
 	hotspot("Birtul Unirea", Rect2(412, 120, 140, 92), _pub)
 	hotspot("Poarta lui Nea Ilie", Rect2(137, 165, 60, 85), _gate)
-	hotspot("Banca", Rect2(36, 182, 70, 30), _bench)
-	hotspot("Băltoaca", Rect2(240, 300, 220, 58), _puddle)
-	hotspot("Luna", Rect2(420, 26, 30, 30), _moon)
+	hotspot("Banca", Rect2(48, 196, 66, 28), _bench)
+	hotspot("Băltoaca", Rect2(212, 300, 125, 46), _puddle)
+	hotspot("Luna", Rect2(455, 30, 30, 30), _moon)
 	# Nea Ilie apare la poartă după ce îl strigi (dacă arta lui e gata)
 	if ResourceLoader.exists("res://art/final/ilie_drum.png"):
 		_ilie = layer("res://art/final/ilie_drum.png", Vector2(168, 252))

@@ -66,7 +66,7 @@ func _ready() -> void:
 	_draw.draw.connect(_on_draw)
 	_root.add_child(_draw)
 	var tip := Label.new()
-	tip.text = "Trage cu degetul în cerc, în jurul zăvorului"
+	tip.text = "Trage în cerc, în jurul zăvorului"
 	tip.position = Vector2(0, 8)
 	tip.size = Vector2(Game.W, 24)
 	tip.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER

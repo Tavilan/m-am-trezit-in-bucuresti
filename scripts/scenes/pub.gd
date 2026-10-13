@@ -14,6 +14,7 @@ const LAYOUT := "res://art/final/birt_layout.json"
 var _fire := false
 var _art := false
 var _fire_art := false
+var _spr := {}   # personajele puse în scenă (pentru conturul de evidențiere)
 
 
 func _ready() -> void:
@@ -88,6 +89,7 @@ func _build_art() -> void:
 			continue
 		if ResourceLoader.exists(path) and L.has(who[0]):
 			var s := layer(path, Vector2(L[who[0]][0], L[who[0]][1]))
+			_spr[who[0]] = s
 			if who[0] != "gemeni":
 				figure(s, who[1])
 	var R: Dictionary = L.get("hotspots", {})
@@ -109,10 +111,12 @@ func _hotspots(r: Dictionary) -> void:
 	hotspot("Televizorul", r["tv"], _tv)
 	hotspot("Frigiderul de bere", r["fridge"], _fridge)
 	hotspot("Ușa de la baie", r["bathroom"], _bathroom)
-	hotspot("Costel, birtașul", r["costel"], _costel)
-	hotspot("Marius, nepotul", r["marius"], _marius)
-	hotspot("Nelu și Gelu", r["twins"], _twins)
-	hotspot("Tanti Mioara", r["mioara"], _mioara)
+	for it in [["Costel, birtașul", "costel", _costel], ["Marius, nepotul", "marius", _marius],
+			["Nelu și Gelu", "twins", _twins], ["Tanti Mioara", "mioara", _mioara]]:
+		var h := hotspot(it[0], r[it[1]], it[2])
+		var key: String = "gemeni" if it[1] == "twins" else it[1]
+		if _spr.has(key):
+			h.target = _spr[key]
 
 
 func enter() -> void:
