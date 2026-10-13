@@ -60,7 +60,8 @@
 - [ ] birt_fundal
   - Respins după două generări: prima are etichete/inscripții pe rafturi și casa de marcat; a doua păstrează cifre pe afișajul casei de marcat și un mic însemn, contrar cerinței fără text, numere sau logo-uri. A doua variantă, cea mai bună, este păstrată nemodificată în art/inbox/birt_fundal__respins.png pentru evaluarea lui Tavi. Rândul rămâne nebifat; coada continuă conform docs/CODEX_ARTA.md, punctul 5.
 - [x] gemeni_masa
-- [ ] televizor_perete
+- [x] televizor_perete
+  - Referință folosită: art/raw/birt_fundal__respins.png (cea mai bună variantă generată în această rundă; art/raw/birt_fundal.png nu există încă). Prim-planul nu include casa de marcat cu inscripții.
 - [ ] antena_camera
 - [ ] tv_ecran
 - [ ] baie_fundal
