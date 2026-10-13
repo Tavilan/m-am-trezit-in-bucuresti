@@ -65,7 +65,7 @@
 - [x] antena_camera
 - [x] tv_ecran
   - Format 4:3, conform cerinței specifice din prompt pentru conținutul ecranului CRT.
-- [ ] baie_fundal
+- [x] baie_fundal
 
 ## Birtul, fundalul v2 (editare: fără masa înaltă, casa de marcat goală)
 - [ ] birt_fundal
