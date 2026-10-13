@@ -55,3 +55,4 @@
 | 2026-10-13 19:28 UTC | marius_portret | chatgpt | import manual | 0 |
 | 2026-10-13 19:29 UTC | mioara_portret | chatgpt | import manual | 0 |
 | 2026-10-13 19:31 UTC | nelu_portret | chatgpt | import manual | 0 |
+| 2026-10-13 19:32 UTC | gelu_portret | chatgpt | import manual | 0 |
