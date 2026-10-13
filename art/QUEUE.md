@@ -54,4 +54,4 @@
 - [x] piatra_balta
 
 ## Minijocul cu zăvorul lui Nea Ilie (prim-plan)
-- [ ] zavor_prim_plan
+- [x] zavor_prim_plan
