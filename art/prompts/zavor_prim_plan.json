@@ -1,0 +1,9 @@
+{
+  "id": "zavor_prim_plan",
+  "type": "scene",
+  "versiune": 1,
+  "refs": [
+    "art/raw/drum_fundal.png"
+  ],
+  "prompt": "CLOSE-UP SHOT, wide 16:9, of the same red metal village gate from the attached image (same colours, same night, same orange street-lamp light from the upper left, light rain): we look straight at the gate's old sliding door bolt (zăvor) at chest height. The bolt bar is rusty and loose: one of its two little brackets is broken and hangs from a single screw, so the bolt cannot stay in place. Around it: the worn red paint of the gate, rust streaks, raindrops running down, a wooden gate post on the right. Leave the area around the bolt clear and readable (a copper wire will be drawn around it later). Detailed clean pixel art, realistic, no people, no hands, no text, no logos."
+}

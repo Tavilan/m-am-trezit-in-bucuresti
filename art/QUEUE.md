@@ -52,3 +52,6 @@
 
 ## Piatra de trecut băltoaca (minijocul de pe drum)
 - [x] piatra_balta
+
+## Minijocul cu zăvorul lui Nea Ilie (prim-plan)
+- [ ] zavor_prim_plan
