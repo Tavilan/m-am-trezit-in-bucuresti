@@ -62,7 +62,7 @@
 - [x] gemeni_masa
 - [x] televizor_perete
   - Referință folosită: art/raw/birt_fundal__respins.png (cea mai bună variantă generată în această rundă; art/raw/birt_fundal.png nu există încă). Prim-planul nu include casa de marcat cu inscripții.
-- [ ] antena_camera
+- [x] antena_camera
 - [ ] tv_ecran
 - [ ] baie_fundal
 
