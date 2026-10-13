@@ -75,4 +75,4 @@
 
 ## Birtul: frigiderul pe dos (minijocul cu firele) și focul (după fundalul v2)
 - [x] frigider_spate
-- [ ] birt_foc
+- [x] birt_foc
