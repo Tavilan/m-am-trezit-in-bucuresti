@@ -97,6 +97,21 @@ func say(who: String, text: String) -> void:
 	await Game.say(who, text)
 
 
+## Replici pentru jucătorii curioși: la fiecare atingere a aceluiași lucru vine următoarea replică;
+## ultima se repetă. Un element e fie un text (îl zice Romică), fie o listă de [cine, text].
+## Ține minte și după ce ieși din scenă (Game.flags).
+func cycle(key: String, lines: Array) -> void:
+	var k := "seen_" + key
+	var i: int = Game.flags.get(k, 0)
+	Game.flags[k] = i + 1
+	var item = lines[mini(i, lines.size() - 1)]
+	if item is String:
+		await say("Romică", item)
+	else:
+		for l in item:
+			await say(l[0], l[1])
+
+
 func _draw() -> void:
 	if _bg:
 		return

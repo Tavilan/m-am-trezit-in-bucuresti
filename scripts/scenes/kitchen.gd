@@ -17,7 +17,7 @@ var _shake := 1.0
 var _walk_amp := 26.0
 var _stopped := false        # mașina oprită (minijocul cu ștecherul)
 var _plug_game := false      # minijocul e pornit
-const SOCKET := Rect2(171, 243, 8, 10)   # priza de pe perete, în spatele mașinii
+const SOCKET := Rect2(262, 218, 8, 10)   # priza de pe perete, în dreapta mașinii (departe de cizme)
 var _under: Node2D   # umbrele, sub personaje
 var _over: Node2D    # ploaia, lumina, peste fundal
 
@@ -32,7 +32,7 @@ func _ready() -> void:
 	grade = {"tint": Vector3(0.9, 0.82, 0.74), "saturation": 0.72}
 	music = "res://audio/lautareasca_radio.ogg"   # vine de la radioul de pe raft
 	radio = true
-	ambience_db = -16.0
+	ambience_db = -10.0
 	ambience = "res://audio/masina_spalat.ogg"   # mașina se aude peste radio (sugestiv, nu realist); ploaia nu
 	background("res://art/final/bucatarie_fundal.png")
 	_under = Node2D.new()
@@ -58,7 +58,7 @@ func _ready() -> void:
 	hotspot("Radioul", Rect2(224, 46, 56, 30), _radio)
 	hotspot("Calendarul", Rect2(152, 64, 48, 72), _calendar)
 	hotspot("Ușa", Rect2(14, 4, 86, 320), _door)
-	hotspot("Priza", SOCKET.grow(6), _socket)
+	hotspot("Priza", SOCKET.grow(8), _socket)
 	_over = Node2D.new()
 	_over.draw.connect(_draw_over)
 	add_child(_over)
@@ -70,9 +70,10 @@ func _ready() -> void:
 
 
 func enter() -> void:
-	await say("Gina", "Romicăăă! Ce-ai făcut, mă, la mașina de spălat?!")
-	await say("Romică", "O reparai. Merge, nu?")
-	await say("Gina", "Merge! Merge prin toată bucătăria! Uite-o că vine spre mine! Oprește-o, până nu-mi rupe linoleumul!")
+	await say("Gina", "Romicăăă! Vino-ncoa' să vezi ce făcuși, bă!")
+	await say("Romică", "Ce făcui, fă? O reparai.")
+	await say("Gina", "O reparași... Uite-o, mă, cum umblă prin casă ca vaca! Mi-a rupt linoleumu'!")
+	await say("Gina", "Oprește-o, că dacă iese pe ușă, după ea pleci!")
 
 
 func _process(d: float) -> void:
@@ -124,12 +125,12 @@ func _draw_under() -> void:
 	_under.draw_rect(Rect2(SOCKET.position + Vector2(2, 4), Vector2(1, 2)), Color(0.15, 0.12, 0.1))
 	_under.draw_rect(Rect2(SOCKET.position + Vector2(5, 4), Vector2(1, 2)), Color(0.15, 0.12, 0.1))
 	if not _stopped:
-		var back := _washer.position + Vector2(_washer.texture.get_width() * 0.3, _washer.texture.get_height() * 0.55)
+		var back := _washer.position + Vector2(_washer.texture.get_width() * 0.85, _washer.texture.get_height() * 0.5)
 		var plug := SOCKET.get_center()
 		var mid := (plug + back) / 2.0 + Vector2(0, 14)
 		_under.draw_polyline(PackedVector2Array([plug, mid, back]), Color(0.12, 0.1, 0.1), 2.0)
 	else:
-		_under.draw_line(Vector2(SOCKET.position.x, SOCKET.end.y + 6), Vector2(SOCKET.position.x + 10, SOCKET.end.y + 12), Color(0.12, 0.1, 0.1), 2.0)
+		_under.draw_line(Vector2(SOCKET.position.x - 2, SOCKET.end.y + 4), Vector2(SOCKET.position.x - 14, SOCKET.end.y + 14), Color(0.12, 0.1, 0.1), 2.0)
 	# umbre de contact sub Gina și sub mașină
 	if _gina.visible:
 		_under.draw_set_transform(GINA_FEET, 0, Vector2(1, 0.25))
@@ -167,72 +168,99 @@ func _draw_over() -> void:
 
 func _gina_talk() -> void:
 	if Game.flags.get("gina_done", false):
-		await say("Gina", "Ce mai stai? Du-te!")
+		await cycle("gina_after", [
+			[["Gina", "Ce mai stai? Ți-am zis tot ce-aveam de zis."]],
+			[["Gina", "Nu mă lua cu «Gino». Du-te."]],
+			[["Gina", "Romică, nu mă scoate din sărite, că pun mâna pe făcăleț."]],
+			[["Gina", "..."]],
+		])
 		return
 	if not _stopped:
-		await say("Gina", "Nu vorbesc cu tine până nu oprești drăcia aia!")
+		await cycle("gina_busy", [
+			[["Gina", "N-auzi, bă? Oprește-o odată!"]],
+			[["Gina", "Io nu vorbesc cu tine până nu tace drăcia aia."]],
+			[["Gina", "Mă bagi în mormânt cu sârmele tale, Romică. În mormânt!"]],
+		])
 		return
-	await say("Gina", "Treizeci de ani, Romică. Treizeci de ani de sârmă și bandă izolatoare.")
-	var a := await Game.choose(["„Bandă izolatoare de calitate, fă! Nemțească!”", "„Gino, mâine chem un meșter adevărat.”", "„Ce vrei, să dau bani pe una nouă?”"])
+	await say("Gina", "Gata. Acu' stai locului și ascultă la mine.")
+	await say("Gina", "Treizeci de ani, Romică. Treizeci de ani de sârmă și de bandă.")
+	await say("Gina", "La toată lumea repari. La Ilie, la Costel, la popa. Pe gratis, pe-o țuică.")
+	await say("Gina", "Și-n casa mea? Robinetu' curge de la Paști. Ușa de la cotineț o țin cu cărămida.")
+	var a := await Game.choose(["„Las', fă, că le fac mâine.”", "„Da' ce, io stau degeaba? Muncesc toată ziua!”", "„Ce vrei, să iau una nouă? Cu ce bani?”"])
 	match a:
 		0:
-			await say("Romică", "Bandă izolatoare de calitate, fă! Nemțească!")
-			await say("Gina", "Nemțească... Și Marius e de-acum nemțesc. Măcar el, când strică ceva, cheamă pe altul.")
+			await say("Romică", "Las', fă, că le fac mâine.")
+			await say("Gina", "Mâine. De când te știu, mâine. Pe cruce o să-ți scrie: «Le face mâine».")
 		1:
-			await say("Romică", "Gino, mâine chem un meșter adevărat.")
-			await say("Gina", "Meșter adevărat? Tu EȘTI meșterul satului, Romică! De-aia nu merge nimic în sat.")
+			await say("Romică", "Da' ce, io stau degeaba? Muncesc toată ziua!")
+			await say("Gina", "Muncești pe țuică, Romică. Țuica n-o pun în oală.")
 		2:
-			await say("Romică", "Ce vrei, să dau bani pe una nouă?")
-			await say("Gina", "Da! Ca oamenii! Marius are în Germania una care vorbește!")
-			await say("Romică", "Și ce zice?")
-			await say("Gina", "Zice că-s gata rufele! Nu ca tine, care știi să zici doar „merge”.")
-	await say("Gina", "Și unde te duci la ora asta, pe ploaia asta?")
-	var b := await Game.choose(["„La birt. Să mă sfătuiesc cu oamenii.”", "„Nicăieri. Stau aici, cu tine.”"])
+			await say("Romică", "Ce vrei, fă, să iau una nouă? Cu ce bani?")
+			await say("Gina", "Cu ăia pe care-i lași la Costel. Socotește de la Crăciun încoace. Luam două mașini.")
+	await say("Gina", "Și-a venit și Marius al lu' soră-ta din Germania. De la prânz stă la birt și se laudă.")
+	await say("Gina", "Mi-a zis soră-ta că-i e rușine să vină pe la noi. Rușine, auzi? Cu noi!")
+	var b := await Game.choose(["„Lasă-l, fă. L-am învățat io tot ce știe.”", "„Mă duc până la birt. Un sfert de oră.”"])
 	if b == 0:
-		await say("Romică", "La birt. Să mă sfătuiesc cu oamenii.")
-		await say("Gina", "Cu Costel? Ăla și-a reparat frigiderul cu tine și acum ține berea în fântână.")
+		await say("Romică", "Lasă-l, fă. L-am învățat io tot ce știe.")
+		await say("Gina", "Asta-i problema, Romică. Asta-i problema.")
+		await say("Romică", "Mă duc până la birt. Să-l văd și io pe neamțu' ăsta.")
 	else:
-		await say("Romică", "Nicăieri. Stau aici, cu tine.")
-		await say("Gina", "Cu mine? Să-mi repari și mie ceva? Nu, mersi. Du-te la birt!")
-	await say("Gina", "Și să nu cumva să dai banii pe țuică!")
-	var c := await Game.choose(["„Care bani? Eu n-am bani.”", "„Promit. Doar o bere.”", "„Ți-i dau ție, să mi-i păstrezi.”"])
+		await say("Romică", "Mă duc până la birt. Un sfert de oră.")
+		await say("Gina", "Un sfert de oră. Ca la nunta lu' Fănel, când te-am cules din șanț la patru dimineața.")
+	await say("Gina", "Du-te. Du-te, că nu te mai pot vedea în ochi în seara asta.")
+	await say("Gina", "Și să nu-mi umbli la bani! Ăia de pe dulap îs de lemne.")
+	var c := await Game.choose(["„Care bani, fă? N-am un leu.”", "„O bere și viu.”", "„Ține-i tu, să nu-i beau.”"])
 	match c:
 		0:
-			await say("Romică", "Care bani? Eu n-am bani.")
-			await say("Gina", "Lasă, că știu eu unde-i ascunzi. În geacă, sub mușama, în cizmă... Treizeci de ani, Romică!")
+			await say("Romică", "Care bani, fă? N-am un leu.")
+			await say("Gina", "Las' că știu io. Prin geacă, prin cizmă, sub mușama... Șoarecii din casa asta-s mai bogați ca mine.")
 		1:
-			await say("Romică", "Promit. Doar o bere.")
-			await say("Gina", "O bere. Ca data trecută, când ai venit acasă cu poarta lu' Ilie în spate.")
+			await say("Romică", "O bere și viu.")
+			await say("Gina", "O bere. Ultima oară când ziseși «o bere» veniși cu poarta lu' Ilie-n spate.")
 		2:
-			await say("Romică", "Ți-i dau ție, să mi-i păstrezi.")
-			await say("Gina", "Păstrează-i tu. Că dacă ți-i țin eu, mâine mi-i ceri înapoi cu dobândă.")
+			await say("Romică", "Ține-i tu, să nu-i beau.")
+			await say("Gina", "Să-i țin io? Ca mâine să mi-i ceri înapoi plângând? Ține-i tu, că-s ai tăi. Ce mai e din ei.")
 			Game.flags["gina_soft"] = true
-	await say("Gina", "Du-te, du-te! Și să nu te mai întorci până nu te trezești!")
+	await say("Gina", "Și nu mă trezi când vii, că nu-ți deschid.")
 	Game.flags["gina_done"] = true
 
 
 func _washer_talk() -> void:
 	if _stopped:
-		await say("Romică", "Stă cuminte. Mâine o leg și de calorifer, să nu mai plece.")
+		await cycle("washer_off", [
+			"Stă. Mâine o leg de calorifer, să nu mai umble.",
+			"Știu ce are. Tamburu' e prea vesel.",
+			"N-o mai ating azi. Jur pe icoană.",
+		])
 		return
 	_shake = 3.0
-	await say("Romică", "Sârmă de doi milimetri, legată ca la carte. Problema e la centrifugă, nu la mine.")
-	_shake = 1.0
 	if not _plug_game:
-		await say("Romică", "Ștecherul e în priza din spatele ei. Trebuie să-l prind când pleacă de lângă perete.")
+		await say("Romică", "Sârmă de doi milimetri, strânsă ca la carte. Nu-i de la sârmă, e de la centrifugă.")
+		_shake = 1.0
+		await say("Romică", "Ștecheru' e-n priza din dreapta ei. Trebe să-l smulg când pleacă de lângă perete.")
 		_plug_game = true
 		_walk_amp = 46.0
+		return
+	await cycle("washer_on", [
+		"Merge, fă! Ziceai că nu merge. Uite cum merge.",
+		"Dacă-i pun și roți, se duce singură la târg.",
+		"Priza, Romică. Priza din dreapta.",
+	])
+	_shake = 1.0
 
 
 ## Minijocul: scoți ștecherul doar când mașina s-a îndepărtat de priză; altfel te lovește.
 func _socket() -> void:
 	if _stopped:
-		await say("Romică", "Priza. Am pus-o eu în '94. Încă ține.")
+		await cycle("socket_off", [
+			"Priza. O pusei io în '94. Ține și-acum.",
+			"Are și împământare. Adică are o sârmă la țeava de la chiuvetă.",
+		])
 		return
 	var covered := _washer.position.x < SOCKET.end.x + 4 and _washer.position.x + _washer.texture.get_width() > SOCKET.position.x - 4
 	if covered:
 		Game.shake(4.0, 0.35)
-		await say("Romică", ["Au! M-a lovit cu centrifuga!", "Stai, fă, că nu te fur!", "Îi ia pe toți la rând... Încă o dată."].pick_random())
+		await say("Romică", ["Au! Mă pocni-n deget, fir-ar a dracu' de mașină!", "Stai, fă, că nu-ți fur nimic!", "Futu-i... Așteaptă să plece de lângă perete, Romică."].pick_random())
 		_plug_game = true
 		_walk_amp = 46.0
 		return
@@ -240,33 +268,42 @@ func _socket() -> void:
 	_shake = 0.0
 	Game.set_audio(music, "", true)   # mașina tace, rămâne radioul
 	Game.shake(2.0, 0.2)
-	await say("Romică", "Gata! Am oprit-o.")
-	await say("Gina", "Ai oprit-o scoțând-o din priză. Asta face și Mioara, și ea n-a făcut școală de electrician.")
-	await say("Romică", "Ai văzut? Merge și oprită.")
+	await say("Romică", "Gata! Tăcu.")
+	await say("Gina", "Bravo. Ai tras de fir. Asta știe și Mioara, și ea n-a făcut nici patru clase.")
+	await say("Romică", "Las', fă, că merge și oprită.")
 
 
 func _coat() -> void:
-	if Game.flags.get("lei_geaca", false):
-		await say("Romică", "Geaca de ploaie. O iau pe mine.")
+	if not Game.flags.get("lei_geaca", false):
+		Game.flags["lei_geaca"] = true
+		await _money(2, "În buzunaru' de la geacă: doi lei, un șurub și-un bon de la Costel din 2019.")
 		return
-	Game.flags["lei_geaca"] = true
-	await _money(2, "În buzunarul gecii: doi lei, un șurub și un bon de la birt din 2019.")
+	await cycle("coat", [
+		"Geaca de ploaie. Pute a motorină, da' ține de ploaie.",
+		"În celălalt buzunar e o bomboană lipită de căptușeală. O las acolo, e de rezervă.",
+	])
 
 
 func _boots() -> void:
-	if Game.flags.get("lei_cizma", false):
-		await say("Romică", "Cizmele de cauciuc. Le iau, că afară e noroi până la genunchi.")
+	if not Game.flags.get("lei_cizma", false):
+		Game.flags["lei_cizma"] = true
+		await _money(2, "În cizma stângă: doi lei, cam umezi. Banii de urgență.")
 		return
-	Game.flags["lei_cizma"] = true
-	await _money(2, "În cizma stângă: doi lei, puțin umezi. Banii de urgență.")
+	await cycle("boots", [
+		"Cizmele de cauciuc. Afară e glod până la genunchi.",
+		"Dreapta are o gaură. O peticii cu cameră de bicicletă. Ține.",
+	])
 
 
 func _oilcloth() -> void:
-	if Game.flags.get("lei_musama", false):
-		await say("Romică", "Mușamaua cu mere. Mai veche decât căsnicia noastră.")
+	if not Game.flags.get("lei_musama", false):
+		Game.flags["lei_musama"] = true
+		await _money(3, "Sub mușama, sub farfuria cu mere: trei lei. Gina nu mișcă farfuria niciodată, că-i de la mă-sa.")
 		return
-	Game.flags["lei_musama"] = true
-	await _money(3, "Sub mușama, sub farfuria cu mere: trei lei. Gina nu ridică niciodată farfuria.")
+	await cycle("oilcloth", [
+		"Mușamaua cu mere. E mai bătrână ca însurătoarea noastră.",
+		"Arsura de-aici e de la ciocanu' de lipit. Nu zic nimic, că nu m-a întrebat nimeni.",
+	])
 
 
 func _money(n: int, line: String) -> void:
@@ -274,30 +311,42 @@ func _money(n: int, line: String) -> void:
 	Game.money += n
 	Game.update_hud()
 	if Game.money >= 7:
-		await say("Romică", "Șapte lei. Ajunge de-o bere și de-un mic. Sau de două beri.")
+		await say("Romică", "Șapte lei. O bere și-un mic. Sau două beri și niciun mic.")
 
 
 func _radio() -> void:
-	await say("Romică", "Radioul Gloria. Prinde doar Radio Oltenia și, când plouă, și poliția.")
+	await cycle("radio", [
+		"Radioul Gloria. Prinde numa' Radio Oltenia și, când plouă, și stația de la poliție.",
+		"Lăutarii ăștia cântă de când eram io copil. Tot aceeași cântare, da' tot frumoasă.",
+		"Dacă-i dai una în partea stângă, prinde și Craiova.",
+	])
 
 
 func _calendar() -> void:
-	await say("Romică", "Calendarul de la cooperativă. E din 2011, dar zilele se potrivesc din nou în 2022. Și în 2033.")
+	await cycle("calendar", [
+		"Calendaru' de la cooperativă, din 2011. Zilele cad ca-n 2022. Și ca-n 2033, deci mai ține.",
+		"Pe noiembrie scrisei cu pixu': «Ilie, 20 lei». Nu mai știu dacă-i dau io lui sau el mie.",
+		"Gina a încercuit ziua de 14. Nu știu ce-i pe 14. Mai bine nu întreb.",
+	])
 
 
 func _icon() -> void:
-	await say("Romică", "Doamne, ajută-mă să nu mai repar nimic azi.")
+	await cycle("icon", [
+		"Doamne, ajută-mă să nu mai repar nimic azi.",
+		"Candela o umplui cu ulei de la mașină. Arde mai frumos.",
+		"Sfântu' Nicolae, de la mama Ginei. Tot ce-i frumos în casa asta e de la mama Ginei. Zice Gina.",
+	])
 
 
 func _door() -> void:
 	if not _stopped:
-		await say("Romică", "Întâi s-o opresc. Altfel, când mă întorc, o găsesc în curte.")
+		await say("Romică", "Întâi o opresc. Altfel, când mă-ntorc, o găsesc la Ilie-n curte.")
 		return
 	if not Game.flags.get("gina_done", false):
-		await say("Romică", "Întâi să-i zic ceva Ginei. Să nu zică că plecai ca un hoț.")
+		await say("Romică", "Stai, că trebe să-i zic ceva Ginei. Să nu zică c-o tulii ca hoții.")
 		return
 	if Game.money < 7:
-		await say("Romică", "Fără bani la birt? Mai bine stau acasă. Am eu pe undeva vreo șapte lei ascunși...")
+		await say("Romică", "La birt fără bani? Mai bine stau acasă să mă certe. Șapte lei am pe undeva ascunși, numa' să-i găsesc...")
 		return
 	await say("Romică", "Plecai.")
 	Game.goto("road")

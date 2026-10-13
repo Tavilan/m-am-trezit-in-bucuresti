@@ -69,6 +69,9 @@ func _ready() -> void:
 	hotspot("Câinele lui Ilie", Rect2(46, 214, 76, 52), _dog)
 	hotspot("Birtul Unirea", Rect2(412, 120, 140, 92), _pub)
 	hotspot("Poarta lui Nea Ilie", Rect2(137, 165, 60, 85), _gate)
+	hotspot("Banca", Rect2(36, 182, 70, 30), _bench)
+	hotspot("Băltoaca", Rect2(240, 300, 220, 58), _puddle)
+	hotspot("Luna", Rect2(420, 26, 30, 30), _moon)
 	# Nea Ilie apare la poartă după ce îl strigi (dacă arta lui e gata)
 	if ResourceLoader.exists("res://art/final/ilie_drum.png"):
 		_ilie = layer("res://art/final/ilie_drum.png", Vector2(168, 252))
@@ -78,7 +81,7 @@ func _ready() -> void:
 
 
 func enter() -> void:
-	await say("Romică", "Ce noapte frumoasă... Și ce ceartă urâtă.")
+	await say("Romică", "Toarnă cu găleata. Și Gina tot mai rea ca ploaia.")
 
 
 func _process(d: float) -> void:
@@ -174,44 +177,82 @@ func _light_at(p: Vector2) -> float:
 
 
 func _lamp() -> void:
-	await say("Romică", "Pe ăsta l-am reparat eu acum trei ani. Ține de atunci! Mă rog... pâlpâie, dar ține.")
+	await cycle("lamp", [
+		"Stâlpu' ăsta l-am reparat io acum trei ani. Ține de-atunci! Mă rog... clipește, da' ține.",
+		"Primăria zice că-l schimbă. Zice de două mandate.",
+		"Dacă-i dai un picior în stâlp, se aprinde mai tare. Nu-i dau, că plouă.",
+	])
 
 
 func _dog() -> void:
 	Game.show_closeup("caine_tremura")
-	await say("Romică", "Câinele lui Ilie. S-a băgat sub bancă, la uscat, și tremură ca varga.")
-	await say("Romică", "Ne înțelegem noi doi: amândoi suntem dați afară din casă pe ploaie.")
+	await cycle("dog", [
+		"Cățelu' lu' Ilie. S-a băgat sub bancă la uscat și tremură ca varga.",
+		"Ne-nțelegem noi doi: amândoi dați afară din casă pe ploaie.",
+		"Cuțu, cuțu... Nu, n-am nimic de mâncare. Am șapte lei, și ăia-s numărați.",
+	])
 
 
 func _gate() -> void:
 	if Game.flags.get("ilie_done", false):
-		await say("Romică", "Zăvorul lui nea Ilie. Ține. Până la primăvară.")
+		await cycle("gate_done", [
+			"Zăvoru' lu' nea Ilie. Ține. Până la primăvară, cel puțin.",
+			"Dacă iese câinele acu', iese pe gard. Pe-acolo nu mai răspund io.",
+		])
 		return
-	await say("Romică", "Poarta lui nea Ilie. A pus streașină, să nu-i plouă câinele.")
+	await cycle("gate", [
+		"Poarta lu' nea Ilie. A pus streașină, să nu-i plouă câinele.",
+		"Poarta asta am mai adus-o o dată acasă la mine. Pe spate. Nu mai țiu de ce.",
+	])
+
+
+func _bench() -> void:
+	await cycle("bench", [
+		"Banca de la poartă. Aici stă Ilie vara și numără mașinile. Două pe zi, cu tot cu-a poștei.",
+		"E udă leoarcă. Nu mă așez, că mă duc la birt cu curu' ud și râde Costel.",
+	])
+
+
+func _puddle() -> void:
+	await cycle("puddle", [
+		"Băltoaca asta e aici din '89. A văzut mai multe guverne decât mine.",
+		"Când a venit asfaltu' în comună, s-a oprit fix la poarta lu' Ilie. De-aici încolo e glod.",
+	])
+
+
+func _moon() -> void:
+	await cycle("moon", [
+		"Plouă și se vede luna. Ăsta-i semn. Nu știu de ce, da' semn e.",
+		"Pe lună au ajuns americanii. La noi n-a ajuns canalizarea.",
+	])
 
 
 ## Nea Ilie te strigă de la poartă când pornești spre birt (nu-l chemi tu).
 func _ilie_calls() -> void:
 	if _ilie:
 		_ilie.visible = true
-	await say("Nea Ilie", "Romică! Romicăăă! Stai un pic!")
-	await say("Nea Ilie", "Tu ești? La ora asta, pe ploaia asta? Te-a dat afară Gina?")
-	var a := await Game.choose(["„Nu m-a dat afară. Am ieșit eu, demn.”", "„M-a dat. Din cauza mașinii de spălat.”"])
+	await say("Nea Ilie", "Romică! Băi Romică! Stai, mă, un pic!")
+	await say("Nea Ilie", "Unde-mi umbli pe potopu' ăsta? Te-a dat Gina afară?")
+	var a := await Game.choose(["„Nu m-a dat nimeni. Plecai io.”", "„M-a dat. Pentru mașina de spălat.”"])
 	if a == 0:
-		await say("Romică", "Nu m-a dat afară. Am ieșit eu, demn.")
-		await say("Nea Ilie", "Demn, în cizme de cauciuc, la zece seara, pe ploaie. Ca toți bărbații demni din sat.")
+		await say("Romică", "Nu m-a dat nimeni. Plecai io.")
+		await say("Nea Ilie", "Plecași tu. În cizme, la zece noaptea, pe ploaie. Ca tot omu' care pleacă de bunăvoie.")
 	else:
-		await say("Romică", "M-a dat. Din cauza mașinii de spălat.")
-		await say("Nea Ilie", "Aia pe care ai legat-o cu sârmă? Am auzit-o de aici. Credeam că aterizează un elicopter.")
-	await say("Nea Ilie", "Bine că treci pe-aici. Mi s-a rupt zăvorul de la poartă și câinele iese la drum. Mâine dimineață e la birt înaintea ta.")
-	var b := await Game.choose(["„Dă-mi zăvorul, că-l leg acum.”", "„Mâine, nea Ilie, că acum mă grăbesc.”"])
+		await say("Romică", "M-a dat. Pentru mașina de spălat.")
+		await say("Nea Ilie", "Aia legată cu sârmă? O aud de la mine. Ziceam că aterizează elicopteru' de la SMURD.")
+	await say("Nea Ilie", "Bine că treci. Mi s-a rupt zăvoru' de la poartă, și javra iese la drum.")
+	await say("Nea Ilie", "Dacă iese, mâine-i la birt înaintea ta. Și nu plătește.")
+	var b := await Game.choose(["„Dă-l încoa', că-l leg acu'.”", "„Mâine, nea Ilie. Acu' mă grăbesc.”"])
 	if b == 1:
-		await say("Romică", "Mâine, nea Ilie, că acum mă grăbesc.")
+		await say("Romică", "Mâine, nea Ilie. Acu' mă grăbesc.")
 		await say("Nea Ilie", "Mâine? La noapte pleacă după cățelele din Dăneasa și nu-l mai văd o săptămână. Două minute, Romică!")
-	await say("Romică", "Bine, bine. Sârmă am la mine. Întotdeauna am.")
+	await say("Romică", "Bine, mă, bine. Sârmă am la mine. Am mereu.")
 	await _latch_game()
 	Game.flags["ilie_done"] = true
-	await say("Nea Ilie", "Ține? Ține! Dumnezeu să te țină, Romică. Hai, du-te la birt, că te așteaptă oamenii.")
+	await say("Nea Ilie", "Ține? Ține! Să-ți dea Dumnezeu sănătate, Romică.")
+	await say("Nea Ilie", "Du-te la birt, că-i acolo nepotu-tău, neamțu'. Zice la toată lumea că tu-l învățași meserie și că-i pare rău.")
+	await say("Romică", "Îi pare rău? De ce?")
+	await say("Nea Ilie", "Nu știu, mă. Așa zice. Și râd toți.")
 	if _ilie:
 		_ilie.set_meta("gone", true)   # a intrat în curte; nu-l mai readuce portretul
 		_ilie.visible = false
@@ -222,7 +263,7 @@ func _ilie_calls() -> void:
 func _latch_game() -> void:
 	_latch = preload("res://scripts/scenes/latch_game.gd").new()
 	Game.world.get_parent().add_child(_latch)
-	await say("Romică", "Răsucesc sârma în jurul zăvorului: ture rotunde, liniștite. Nici prea tare, că se rupe, nici prea moale, că se desface.")
+	await say("Romică", "Răsucesc sârma pe zăvor. Rotund și cu răbdare: dacă trag tare, se rupe; dacă mă opresc, se desface.")
 	var res: String = await _latch.finished
 	_latch.queue_free()
 	_latch = null
@@ -232,5 +273,5 @@ func _pub() -> void:
 	if not Game.flags.get("ilie_done", false):
 		await _ilie_calls()
 		return
-	await say("Romică", "Birtul Unirea. Lumină caldă, oameni calzi, bere rece. Hai.")
+	await say("Romică", "Birtul Unirea. Hai să vedem ce zice neamțu'.")
 	Game.goto("pub")

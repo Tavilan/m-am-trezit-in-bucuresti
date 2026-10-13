@@ -2,13 +2,16 @@ extends CanvasLayer
 ## Minijocul cu zăvorul lui Nea Ilie (prim-plan peste drum).
 ## Tragi cu degetul (sau mouse-ul) în cerc în jurul zăvorului, ca să răsucești sârma de cupru.
 ## - prea repede: sârma se întinde prea tare și se rupe (o iei de la capăt);
-## - dacă te oprești: sârma se desface încet;
-## - 4 ture bune și zăvorul ține.
+##   cu cât e mai strânsă, cu atât trebuie răsucită mai încet;
+## - prea încet sau oprit: sârma alunecă și se desface;
+## - în rugină se agață: când se agață, stai o clipă cu degetul pe loc, altfel se rupe;
+## - învârtitul se numără doar în jurul zăvorului (nu prea aproape, nu prea departe);
+## - 5 ture și zăvorul ține.
 ## Fundalul e un prim-plan desenat (art/final/zavor_prim_plan.png); sârma se desenează pixel cu pixel.
 
 signal finished(result: String)
 
-const TURNS := 4.0  # 8 jumătăți de tură pe lățimea barei
+const TURNS := 5.0
 ## zăvorul în prim-plan (de reglat după desen): centrul în jurul căruia răsucești și bara pe care se strânge sârma
 var center := Vector2(320, 175)
 var bar := Rect2(286, 168, 70, 14)
@@ -27,6 +30,12 @@ var _idle := 0.0
 var _snap_flash := 0.0
 var _done := false
 var _speed := 0.0
+var _ang_v := 0.0
+var _snags: Array = []      # la ce tură se agață sârma în rugină
+var _snag := false          # acum e agățată
+var _snag_still := 0.0      # cât a stat degetul pe loc de când s-a agățat
+var _moved := false         # s-a mișcat degetul în cadrul ăsta
+var _hint: Label
 
 
 func _ready() -> void:
@@ -66,7 +75,21 @@ func _ready() -> void:
 	tip.add_theme_constant_override("shadow_offset_y", 1)
 	tip.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_root.add_child(tip)
+	_hint = Label.new()
+	_hint.position = Vector2(0, Game.H - 34)
+	_hint.size = Vector2(Game.W, 24)
+	_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_hint.add_theme_color_override("font_color", Color(1, 0.9, 0.7, 0.9))
+	_hint.add_theme_color_override("font_shadow_color", Color.BLACK)
+	_hint.add_theme_constant_override("shadow_offset_y", 1)
+	_hint.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_root.add_child(_hint)
 	_finger = center + Vector2(40, 30)
+	_new_snags()
+
+
+func _new_snags() -> void:
+	_snags = [randf_range(1.0, 2.0), randf_range(2.6, 3.6), randf_range(4.0, 4.7)]
 
 
 func _on_input(e: InputEvent) -> void:
@@ -82,32 +105,60 @@ func _on_input(e: InputEvent) -> void:
 		var ang: float = (e.position - center).angle()
 		var dlt := wrapf(ang - _last_ang, -PI, PI)
 		_last_ang = ang
-		if (e.position - center).length() > 14.0:    # prea aproape de centru nu se numără
-			_progress += absf(dlt) / TAU
+		var r: float = (e.position - center).length()
+		if r > 22.0 and r < 110.0:    # doar în jurul zăvorului se strânge sârma
+			if not _snag:             # agățată în rugină nu mai înaintează
+				_progress += absf(dlt) / TAU
 			_speed += absf(dlt)
 			_idle = 0.0
+			if absf(dlt) > 0.004:
+				_moved = true
 
 
 func _process(d: float) -> void:
 	if _done:
 		return
-	# tensiunea urmează viteza de răsucire (rad/s), netezită
-	var rad_s: float = _speed / maxf(d, 0.001)
+	# viteza unghiulară netezită (evenimentele de atingere nu vin în fiecare cadru)
+	_ang_v = lerpf(_ang_v, _speed / maxf(d, 0.001), clampf(d * 8.0, 0.0, 1.0))
+	var rad_s := _ang_v
 	_speed = 0.0
-	_tension = lerpf(_tension, clampf(rad_s / 10.0, 0.0, 1.6), clampf(d * 6.0, 0.0, 1.0))
+	# cu cât sunt mai multe ture pe zăvor, cu atât sârma e mai țeapănă: se rupe la viteze tot mai mici
+	var limit := lerpf(8.0, 2.8, clampf(_progress / TURNS, 0.0, 1.0))
+	var target := rad_s / limit
+	# agățată în rugină: orice mișcare o întinde de trei ori mai tare; stai pe loc și se desprinde
+	if not _snags.is_empty() and _progress >= _snags[0] and not _snag:
+		_snag = true
+		_snag_still = 0.0
+		_hint.text = "S-a agățat în rugină... stai o clipă."
+	if _snag:
+		if _ang_v > 0.5:   # tragi de ea agățată: se întinde repede
+			target = 0.6 + _ang_v / limit * 3.0
+			_snag_still = 0.0
+		else:
+			_snag_still += d
+			if _snag_still > 0.5:
+				_snag = false
+				_snags.pop_front()
+				_hint.text = ""
+	_moved = false
+	if OS.has_feature("web"):   # pentru testele automate din browser
+		JavaScriptBridge.eval("window.latch={p:%f,snag:%s}" % [_progress, "true" if _snag else "false"])
+	_tension = lerpf(_tension, clampf(target, 0.0, 1.6), clampf(d * 10.0, 0.0, 1.0))
 	if _tension > 1.0:
 		_over_t += d
-		if _over_t > 0.3:
+		if _over_t > (0.55 if _snag else 0.18):   # agățată: lași o clipă de reacție
 			_snap()
 	else:
 		_over_t = 0.0
 	_idle += d
-	if _idle > 0.7 and _progress > 0.0:
-		_progress = maxf(0.0, _progress - d * 0.6)   # sârma lăsată se desface
+	# prea încet sau oprit (și nu e agățată): sârma alunecă înapoi
+	if not _snag and _progress > 0.0 and (_idle > 0.35 or (_dragging and rad_s < 1.0)):
+		_progress = maxf(0.0, _progress - d * (0.9 if _idle > 0.35 else 0.35))
 		_tension = maxf(0.0, _tension - d)
 	_snap_flash = maxf(0.0, _snap_flash - d)
 	if _progress >= TURNS:
 		_done = true
+		_hint.text = ""
 		_draw.queue_redraw()
 		await get_tree().create_timer(0.6).timeout
 		finished.emit("ok")
@@ -120,9 +171,12 @@ func _snap() -> void:
 	_tension = 0.0
 	_over_t = 0.0
 	_dragging = false
+	_snag = false
+	_hint.text = ""
+	_new_snags()
 	_snap_flash = 0.4
 	Game.shake(3.0, 0.25)
-	var lines := ["Pac! S-a rupt. Prea tare.", "Iar s-a rupt... Mai domol, Romică.", "Sârma vrea răbdare, nu forță."]
+	var lines := ["Pac! Se rupse. Fir-ar mama ei de sârmă.", "Iar se rupse... Mai domol, Romică, că nu-i frâna de la tractor.", "Sârma vrea răbdare, nu putere.", "Futu-i... De la capăt."]
 	await Game.say("Romică", lines.pick_random())
 
 
@@ -152,6 +206,10 @@ func _on_draw() -> void:
 		pts.append(((1 - t) * (1 - t) * start + 2 * (1 - t) * t * mid + t * t * _finger).round())
 	_draw.draw_polyline(pts, col, 3.0)
 	_draw.draw_polyline(pts, Color(col.lightened(0.3), 0.6), 1.0)
+	if _snag:   # agățată în rugină: un cot strâmb lângă zăvor
+		var k1 := start + Vector2(4, -3)
+		var k2 := start + Vector2(7, 2)
+		_draw.draw_polyline(PackedVector2Array([start.round(), k1.round(), k2.round()]), COPPER.darkened(0.2), 3.0)
 	if _tension > 0.85:   # sârma „cântă” când e aproape să se rupă
 		_draw.draw_circle(start, 2.0 + randf() * 1.5, Color(1, 1, 0.8, 0.5))
 	if _snap_flash > 0.0:
